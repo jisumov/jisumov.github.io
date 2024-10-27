@@ -10,7 +10,7 @@ Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 year
 ## Home Lab
 | A | B |
 |:-------------|:------------------|
-| ![home-lab-01](projects/home-lab/images/home-lab-01.png)| Established a foundational home lab environment utilizing VirtualBox to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk. |
+| ![home-lab-01](projects/home-lab/images/home-lab-01.png) | Established a foundational home lab environment utilizing VirtualBox to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk. |
 *   [Check it out!](projects/home-lab/home-lab.md)
 
 * * *
