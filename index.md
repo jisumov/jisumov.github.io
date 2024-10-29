@@ -9,7 +9,7 @@ Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 year
 
 ## Home Lab
 | A            | B                 |
-|:-------------|:------------------|
+|-------------|------------------|
 | Test         | Established a     |
 
 <table>
