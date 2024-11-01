@@ -33,6 +33,43 @@ VirtualBox is a general-purpose virtualization software which serves to isolate 
 
     Go to: [https://aka.ms/vs/17/release/vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe) and install it by clicking next in every step.
 
-5. Install VirtualBox and make sure to mark `Register file associations` in order to open specific VirtualBox file types within the application.
+5. Install VirtualBox and make sure to mark `Create start menu entries` and `Register file associations` in order to find the executable and open specific VirtualBox file types within the application.
 
     ![VBox Types](./images/home-lab-05.png)
+
+## Windows Setup
+Windows is the most recent Operating System developed by Microsoft. This is the host machine which will be targeted by Kali Linux.
+
+1. Download the Windows Installation Media found at: [https://www.microsoft.com/en-us/software-download/windows11](https://www.microsoft.com/en-us/software-download/windows11).
+
+2. During the install process, at the `Choose which media to use` section, select `ISO file`.
+
+    ![VBox Types](./images/home-lab-06.png)
+
+3. In VirtualBox, click on New and select the `Windows.iso` image.
+
+    ![VBox Types](./images/home-lab-07.png)
+
+4. At the Hardware section, follow the minimum system requirements from Microsoft: [https://www.microsoft.com/en-us/windows/windows-11-specifications](https://www.microsoft.com/en-us/windows/windows-11-specifications).
+
+    ![VBox Types](./images/home-lab-08.png)
+
+    Also, set the recommended storage in the Virtual Hard Disk section.
+
+    ![VBox Types](./images/home-lab-09.png)
+
+    **Note:** In this case, we want that the 64 GB of storage is consumed over the time, so uncheck `Pre-allocate Full Size`.
+
+5. Check the summary and proceed to finish the creation.
+
+    ![VBox Types](./images/home-lab-10.png)
+
+6. The machine is ready to run, so click on `Start`.
+
+7. During the configuration process, make sure to select `I don't have a product key`.
+
+    ![VBox Types](./images/home-lab-11.png)
+
+    In addition, select Windows 11 Pro, because of the `RDP` feature explained here: [https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config).
+
+    ![VBox Types](./images/home-lab-12.png)
