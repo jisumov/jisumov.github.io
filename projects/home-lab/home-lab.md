@@ -29,11 +29,11 @@ VMware is a type 2 hypervisor which serves to isolate and create a dedicated com
 
 5. Install VMware and mark `Install Windows Hypervisor Platform (WHP) automatically` to avoid conflicts in virtualization when Hyper-V or Device/Credential Guard are enabled.
 
-    ![VBox Types](./images/home-lab-04.png)
+    ![Windows Hypervisor Platform](./images/home-lab-04.png)
 
     In addition, select `Use VMware Workstation 17 for Personal Use` to execute VMware without a license.
 
-    ![VBox Types](./images/home-lab-05.png)
+    ![VMware for Personal Use](./images/home-lab-05.png)
 
 ## Windows Setup
 Windows 11 is the most recent Operating System developed by Microsoft. This is the host machine which will be targeted by Kali Linux.
@@ -42,42 +42,62 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
 2. During the install process, at the `Choose which media to use` section, select `ISO file`.
 
-    ![VBox Types](./images/home-lab-06.png)
+    ![ISO File](./images/home-lab-06.png)
 
 3. In VMware, click on `Create a New Virtual Machine`, then the `Typical` configuration and load the `Windows.iso` image.
 
-    ![VBox Types](./images/home-lab-07.png)
+    ![Windows.iso](./images/home-lab-07.png)
 
 4. At the `Encryption Information` section, choose to encrypt all the files and set a password that you store in a safe place, such a password manager, in the host machine.
 
-    ![VBox Types](./images/home-lab-08.png)
+    ![Encryption Type](./images/home-lab-08.png)
 
     Also, select `Store virtual disk as a single file` in the Specify Disk Capacity section.
 
-    ![VBox Types](./images/home-lab-09.png)
+    ![Disk Capacity](./images/home-lab-09.png)
 
     **Note:** By default, the 64 GB of storage is not pre-allocated.
 
-5. The summary will show the recommended hardware settings. Then, proceed to finish the creation.
+5. The summary will show the recommended hardware settings, except for one which must be configured manually, then click on `Customize Hardware...`
 
-    ![VBox Types](./images/home-lab-10.png)
+    ![Customize Hardware](./images/home-lab-10.png)
 
-6. The machine is ready to run, so click on `Power on this virtual machine`.
+    The network adapter is set as `NAT` to share the host's internet connection, and so it will eventually require a Windows Account. Therefore, select `Host-only`, which will be helpful to bypass the remaining setup.
+
+    ![Host-only Network Connection](./images/home-lab-11.png)
+
+6. Finish the machine creation and click on `Power on this virtual machine`.
 
 7. During the configuration process, make sure to select `I don't have a product key`.
 
-    ![VBox Types](./images/home-lab-11.png)
+    ![Product Key](./images/home-lab-12.png)
 
     In addition, select Windows 11 Pro, because of the `RDP` feature explained here: [https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config).
 
-    ![VBox Types](./images/home-lab-12.png)
+    ![Windows 11 Pro](./images/home-lab-13.png)
 
-8. During the setup, it will try to download the latest Windows updates. Since network settings were not configured manually, it is using `NAT` to share the host's internet connection, and so it will eventually require a Windows Account to finish the process.
+8. During the setup, it will ask to connect to a network. To bypass this step, do `Shift+F10` to open the `CMD` and execute the following command:
 
-    Therefore, power off the machine, go to `edit the VM settings` and at the `Network Adapter` section select `Host-only`, which will be helpful to bypass the remaining setup.
+    ```bash
+    oobe\bypassnro
+    ```
 
-    ![VBox Types](./images/home-lab-13.png)
+    It will restart the machine and enable the `I don't have internet` option, select it and finish the setup.
 
-9. At the Network section, select the `I don't have internet` option and finish the setup.
+    ![Network Connection](./images/home-lab-14.png)
 
-    ![VBox Types](./images/home-lab-14.png)
+9. After the Windows setup, ensure a smoother virtualization experience by going to the `VM` tab and select `Install VMware Tools`.
+
+    ![VMware Tools Plug-in](./images/home-lab-15.png)
+
+    It will load the drive and ask to execute the `Run setup64.exe`, click on it and follow the default options.
+
+    ![VMware Tools Executable](./images/home-lab-16.png)
+
+10. Finally, to have internet in the VM, go to the left bar, right click on the machine name and select `Settings...`
+
+    ![VM Settings](./images/home-lab-17.png)
+
+    And, in the `Network Adapter` section choose `NAT` to ensure the VM is not alongside the host network, but has its own through the host `IP`.
+
+    ![NAT Network Connection](./images/home-lab-18.png)
