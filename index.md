@@ -3,7 +3,7 @@ layout: default
 ---
 
 # Who Am I
-Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 years** of experience in IT. My projects speak louder than words—take a look below!
+Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 years** of experience in IT. Actions speak louder than words—take a look below!
 
 # Projects
 
@@ -12,7 +12,7 @@ Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 year
   <tbody>
     <tr>
       <td><img src="projects/home-lab/images/home-lab-01.png" /></td>
-      <td>Established a foundational home lab environment utilizing VirtualBox to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk.</td>
+      <td>Established a foundational home lab environment utilizing VMware to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk.</td>
     </tr>
   </tbody>
 </table>
