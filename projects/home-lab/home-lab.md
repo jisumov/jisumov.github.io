@@ -101,3 +101,41 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
     And, in the `Network Adapter` section choose `NAT` to ensure the VM is not alongside the host network, but has its own through the host `IP`.
 
     ![NAT Network Connection](./images/home-lab-18.png)
+
+## Splunk Setup
+Splunk is a SIEM to search, monitor and analyze machines' data. This tool will be working on the Windows VM.
+
+1. In the local machine go to: [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html). It requires an account to try the tool for 60 days.
+    
+    In this case, use a temporary email with: [https://temp-mail.org/](https://temp-mail.org/), which will serve as a workaround everytime Splunk is tested out, and activate the account.
+
+    ![Splunk Account](./images/home-lab-19.png)
+
+2. Now, click on `Download Now` to get the Splunk installer.
+
+    ![Splunk Download Button](./images/home-lab-20.png)
+
+    Also, the integrity of the executable can be checked in the same way as the third step of the VMware Setup. Retrieve the hash by clicking on `More` and then on `Download SHA512 to verify your bits`.
+
+    ![Splunk SHA512](./images/home-lab-21.png)
+
+    It will download a file which can be opened with Notepad, and since the hash algorithm is SHA512, specify that in the PowerShell as follows:
+
+    ```bash
+    Get-FileHash <file-name> -Algorithm SHA512
+    ```
+
+    ![Splunk SHA512](./images/home-lab-22.png)
+
+3. Execute the Splunk installer and follow the default settings. It will setup Splunk in a `Local System Account`, which is the Windows VM. 
+
+    In case, Splunk needs to oversee data across multiple machines within an Active Directory domain, change to `Domain Account`.
+
+    ![Splunk SHA512](./images/home-lab-23.png)
+
+4. Splunk is now installed and running on `http://127.0.0.1:8000/`.
+
+    ![Splunk SHA512](./images/home-lab-24.png)
+
+## Sysmon Setup
+
