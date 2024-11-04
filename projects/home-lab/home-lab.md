@@ -166,4 +166,10 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
 
     Then, proceed with the default installation process.
 
-5. 
+5. To check if Sysmon is up and running, press the Windows button to search `Services`, open it and then look for `Sysmon64`.
+
+    ![Sysmon Service](./images/home-lab-30.png)
+
+    Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`.
+
+    ![Sysmon Event Viewer](./images/home-lab-31.png)
