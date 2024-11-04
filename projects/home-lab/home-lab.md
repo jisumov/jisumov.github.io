@@ -125,17 +125,45 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
     Get-FileHash <file-name> -Algorithm SHA512
     ```
 
-    ![Splunk SHA512](./images/home-lab-22.png)
+    ![Splunk Integrity](./images/home-lab-22.png)
 
 3. Execute the Splunk installer and follow the default settings. It will setup Splunk in a `Local System Account`, which is the Windows VM. 
 
     In case, Splunk needs to oversee data across multiple machines within an Active Directory domain, change to `Domain Account`.
 
-    ![Splunk SHA512](./images/home-lab-23.png)
+    ![Splunk Local System Account](./images/home-lab-23.png)
 
 4. Splunk is now installed and running on `http://127.0.0.1:8000/`.
 
-    ![Splunk SHA512](./images/home-lab-24.png)
+    ![Splunk Run](./images/home-lab-24.png)
 
 ## Sysmon Setup
+Sysmon is a service that monitors and logs system activity. This tool will be working on the Windows VM.
 
+1. In the local machine, go to: [https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon). Then, click on `Download Sysmon`
+
+    ![Sysmon Download Button](./images/home-lab-25.png)
+
+2. Sysmon can be installed with a configuration file. The one used for future reference is found at: [https://raw.githubusercontent.com/olafhartong/sysmon-modular/refs/heads/master/sysmonconfig.xml](https://raw.githubusercontent.com/olafhartong/sysmon-modular/refs/heads/master/sysmonconfig.xml). Right click and select `Save as`, then keep it on a memorable location.
+
+    ![Sysmon Configuration File](./images/home-lab-26.png)
+
+3. Open the `Downloads` folder and extract the `Sysmon.zip` as follows:
+
+    ![Sysmon Extraction](./images/home-lab-27.png)
+
+    Then, drag and drop the `sysmonconfig.xml` into the generated `sysmon` folder. The content should look like this:
+
+    ![Sysmon Drag and Drop](./images/home-lab-28.png)
+
+4. Open a PowerShell as an administrator within the same folder location and execute the following command to install Sysmon with the configuration file:
+
+    ```json
+    .\Sysmon64.exe -i .\sysmonconfig.xml
+    ```
+
+    ![Sysmon PowerShell](./images/home-lab-29.png)
+
+    Then, proceed with the default installation process.
+
+5. 
