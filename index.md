@@ -12,7 +12,7 @@ Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 year
   <tbody>
     <tr>
       <td><img src="projects/home-lab/images/home-lab-01.png" /></td>
-      <td>Established a foundational home lab environment utilizing VMware to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential optimization and hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk.</td>
+      <td>Established a foundational home lab environment utilizing VMware to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk and Sysmon.</td>
     </tr>
   </tbody>
 </table>

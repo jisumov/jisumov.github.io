@@ -5,7 +5,7 @@ layout: default
 # Home Lab
 
 ## Description
-Established a foundational home lab environment utilizing VMware to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential optimization and hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk.
+Established a foundational home lab environment utilizing VMware to simulate a hypothetical attack scenario between 2 VMs: Kali Linux and Windows. This setup demonstrates essential hardening techniques, custom script implementation within Metasploit, and real-time incident monitoring through Splunk and Sysmon.
 
 ## Pre-requisites
 
@@ -173,3 +173,18 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
     Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`.
 
     ![Sysmon Event Viewer](./images/home-lab-31.png)
+
+## Kali Linux Setup
+Kali Linux is a Debian-based Linux distribution which is commonly used for penetration testing. Since this scenario is more focused on defense, the VM will be taken from a pre-built configuration.
+
+1. Download the Kali Linux pre-built VM found at: [https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines).
+
+    ![Kali Linux Pre-built VM](./images/home-lab-32.png)
+
+2. Then, extract the `.7z` into the VMWare folder that hosts all the VMs.
+
+    ![Kali Linux Pre-built VM](./images/home-lab-33.png)
+
+3. Power on the VM and login with the default credentials `kali/kali`.
+
+    ![Kali Linux Pre-built VM](./images/home-lab-34.png)
