@@ -187,4 +187,4 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
 3. Power on the VM and login with the default credentials `kali/kali`.
 
-    ![Kali Linux Pre-built VM](./images/home-lab-34.png)
+    ![Kali Linux Login](./images/home-lab-34.png)
