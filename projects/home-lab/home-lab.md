@@ -183,7 +183,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
 2. Then, extract the `.7z` into the VMWare folder that hosts all the VMs.
 
-    ![Kali Linux Pre-built VM](./images/home-lab-33.png)
+    ![Kali Linux Extraction](./images/home-lab-33.png)
 
 3. Power on the VM and login with the default credentials `kali/kali`.
 
