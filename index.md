@@ -3,7 +3,7 @@ layout: default
 ---
 
 # Who Am I
-Hey there! I'm José Ignacio Suárez Montiel, a Security Engineer with **+2 years** of experience in IT. Actions speak louder than words—take a look below!
+Hey there! I'm José Ignacio Suárez Montiel, a Computer Systems Engineer with **+3 years** of experience in IT. Actions speak louder than words—take a look below!
 
 # Projects
 
