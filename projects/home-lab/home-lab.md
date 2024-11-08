@@ -94,13 +94,21 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![VMware Tools Executable](./images/home-lab-16.png)
 
-10. Finally, to have internet in the VM, go to the left bar, right click on the machine name and select `Settings...`
+10. To have internet in the VM, go to the left bar, right click on the machine name and select `Settings...`
 
     ![VM Settings](./images/home-lab-17.png)
 
     And, in the `Network Adapter` section choose `NAT` to ensure the VM is not alongside the host network, but has its own through the host `IP`.
 
     ![NAT Network Connection](./images/home-lab-18.png)
+
+11. Finally, for future recovery of the fresh install, go to the `VM` tab, then click on `Snapshot` and `Take Snapshot...`.
+
+    ![Snapshot Walkthrough](./images/home-lab-19.png)
+
+    Assign a name like "Fresh Install" and click `Take Snapshot`
+
+    ![Snapshot Name](./images/home-lab-20.png)
 
 ## Splunk Setup
 Splunk is a SIEM to search, monitor and analyze machines' data. This tool will be working on the Windows VM.
@@ -109,15 +117,15 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
     
     In this case, use a temporary email with: [https://temp-mail.org/](https://temp-mail.org/), which will serve as a workaround everytime Splunk is tested out, and activate the account.
 
-    ![Splunk Account](./images/home-lab-19.png)
+    ![Splunk Account](./images/home-lab-21.png)
 
 2. Now, click on `Download Now` to get the Splunk installer.
 
-    ![Splunk Download Button](./images/home-lab-20.png)
+    ![Splunk Download Button](./images/home-lab-22.png)
 
     Also, the integrity of the executable can be checked in the same way as the third step of the VMware Setup. Retrieve the hash by clicking on `More` and then on `Download SHA512 to verify your bits`.
 
-    ![Splunk SHA512](./images/home-lab-21.png)
+    ![Splunk SHA512](./images/home-lab-23.png)
 
     It will download a file which can be opened with Notepad, and since the hash algorithm is SHA512, specify that in the PowerShell as follows:
 
@@ -125,36 +133,36 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
     Get-FileHash <file-name> -Algorithm SHA512
     ```
 
-    ![Splunk Integrity](./images/home-lab-22.png)
+    ![Splunk Integrity](./images/home-lab-24.png)
 
 3. Execute the Splunk installer and follow the default settings. It will setup Splunk in a `Local System Account`, which is the Windows VM. 
 
     In case, Splunk needs to oversee data across multiple machines within an Active Directory domain, change to `Domain Account`.
 
-    ![Splunk Local System Account](./images/home-lab-23.png)
+    ![Splunk Local System Account](./images/home-lab-25.png)
 
 4. Splunk is now installed and running on `http://127.0.0.1:8000/`.
 
-    ![Splunk Run](./images/home-lab-24.png)
+    ![Splunk Run](./images/home-lab-26.png)
 
 ## Sysmon Setup
 Sysmon is a service that monitors and logs system activity. This tool will be working on the Windows VM.
 
 1. In the local machine, go to: [https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon). Then, click on `Download Sysmon`
 
-    ![Sysmon Download Button](./images/home-lab-25.png)
+    ![Sysmon Download Button](./images/home-lab-27.png)
 
 2. Sysmon can be installed with a configuration file. The one used for future reference is found at: [https://raw.githubusercontent.com/olafhartong/sysmon-modular/refs/heads/master/sysmonconfig.xml](https://raw.githubusercontent.com/olafhartong/sysmon-modular/refs/heads/master/sysmonconfig.xml). Right click and select `Save as`, then keep it on a memorable location.
 
-    ![Sysmon Configuration File](./images/home-lab-26.png)
+    ![Sysmon Configuration File](./images/home-lab-28.png)
 
 3. Open the `Downloads` folder and extract the `Sysmon.zip` as follows:
 
-    ![Sysmon Extraction](./images/home-lab-27.png)
+    ![Sysmon Extraction](./images/home-lab-29.png)
 
     Then, drag and drop the `sysmonconfig.xml` into the generated `sysmon` folder. The content should look like this:
 
-    ![Sysmon Drag and Drop](./images/home-lab-28.png)
+    ![Sysmon Drag and Drop](./images/home-lab-30.png)
 
 4. Open a PowerShell as an administrator within the same folder location and execute the following command to install Sysmon with the configuration file:
 
@@ -162,29 +170,29 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
     .\Sysmon64.exe -i .\sysmonconfig.xml
     ```
 
-    ![Sysmon PowerShell](./images/home-lab-29.png)
+    ![Sysmon PowerShell](./images/home-lab-31.png)
 
     Then, proceed with the default installation process.
 
 5. To check if Sysmon is up and running, press the Windows button to search `Services`, open it and then look for `Sysmon64`.
 
-    ![Sysmon Service](./images/home-lab-30.png)
+    ![Sysmon Service](./images/home-lab-32.png)
 
     Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`.
 
-    ![Sysmon Event Viewer](./images/home-lab-31.png)
+    ![Sysmon Event Viewer](./images/home-lab-33.png)
 
 ## Kali Linux Setup
 Kali Linux is a Debian-based Linux distribution which is commonly used for penetration testing. Since this scenario is more focused on defense, the VM will be taken from a pre-built configuration.
 
 1. Download the Kali Linux pre-built VM found at: [https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines).
 
-    ![Kali Linux Pre-built VM](./images/home-lab-32.png)
+    ![Kali Linux Pre-built VM](./images/home-lab-34.png)
 
 2. Then, extract the `.7z` into the VMWare folder that hosts all the VMs.
 
-    ![Kali Linux Extraction](./images/home-lab-33.png)
+    ![Kali Linux Extraction](./images/home-lab-35.png)
 
 3. Power on the VM and login with the default credentials `kali/kali`.
 
-    ![Kali Linux Login](./images/home-lab-34.png)
+    ![Kali Linux Login](./images/home-lab-36.png)
