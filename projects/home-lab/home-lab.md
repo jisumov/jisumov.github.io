@@ -102,7 +102,7 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![NAT Network Connection](./images/home-lab-18.png)
 
-11. Finally, for future recovery of the fresh install, go to the `VM` tab, then click on `Snapshot` and `Take Snapshot...`.
+11. Finally, for future recovery of the fresh install, go to the `VM` tab, then click on `Snapshot` and `Take Snapshot...`
 
     ![Snapshot Walkthrough](./images/home-lab-19.png)
 
@@ -141,7 +141,7 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
 
     ![Splunk Local System Account](./images/home-lab-25.png)
 
-4. Splunk is now installed and running on `http://127.0.0.1:8000/`.
+4. Splunk is now installed and running on `http://127.0.0.1:8000/`
 
     ![Splunk Run](./images/home-lab-26.png)
 
@@ -166,7 +166,7 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
 
 4. Open a PowerShell as an administrator within the same folder location and execute the following command to install Sysmon with the configuration file:
 
-    ```json
+    ```bash
     .\Sysmon64.exe -i .\sysmonconfig.xml
     ```
 
@@ -193,6 +193,22 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux Extraction](./images/home-lab-35.png)
 
-3. Power on the VM and login with the default credentials `kali/kali`.
+3. Before powering up the VM, ensure that it is compatible with the actual VMware version. Therefore, click on the VM, and then on `Upgrade this virtual machine`.
 
-    ![Kali Linux Login](./images/home-lab-36.png)
+    ![Kali Linux Upgrade](./images/home-lab-36.png)
+
+4. In this case, the hardware compatibility must align with the VMware `Workstation 17.5 or later` version, let the default configuration and click on next.
+
+    ![Kali Linux Compatibility](./images/home-lab-37.png)
+
+5. Select `Alter this virtual machine`, so the resources usage is optimized, as it is not creating a new VM for this particular use case.
+
+    ![Kali Linux Alteration](./images/home-lab-38.png)
+
+6. Review the changes and click on `Finish`.
+
+    ![Kali Linux Review](./images/home-lab-39.png)
+
+7. Power on the VM and login with the default credentials `kali/kali`.
+
+    ![Kali Linux Login](./images/home-lab-40.png)
