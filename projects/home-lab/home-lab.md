@@ -212,3 +212,46 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 7. Power on the VM and login with the default credentials `kali/kali`.
 
     ![Kali Linux Login](./images/home-lab-40.png)
+
+## Network Configuration
+In order to avoid any VM escaping, the network must be segmented and isolated from the exterior, so the involved machines in this educational attack/defense scenario can communicate between them and not outside of the environment.
+
+1. Go to any VM Settings, then on Network Adapter find the option `LAN Segments...`
+    
+    This is where the `Test` LAN segment should be added.
+
+    ![Network Test Segment](./images/home-lab-41.png)
+
+    The new `Test` LAN segment should be selected, instead of any other network connection.
+
+    ![Network Test Selected](./images/home-lab-42.png)
+
+2. The following are the steps for the Windows Host network setup:
+
+    2.1. Right click on the Internet icon and select `Network and Internet settings`.
+
+    ![Windows Internet Icon](./images/home-lab-43.png)
+
+    2.2. Then, click on `Advanced network settings`.
+
+    ![Windows Advanced Network Settings](./images/home-lab-44.png)
+
+    2.3. Now, click on the accordion called `Ethernet0` and then on the edit button of `More adapter options`.
+
+    ![Windows More Adapter Options](./images/home-lab-45.png)
+
+    2.4. Find `Internet Protocol Version 4 (TCP/IPv4)` and double click it.
+
+    ![Windows IPv4](./images/home-lab-46.png)
+
+    2.5. Below the section `Use the following IP address`, establish an IPv4 address. 
+    
+    In this case, the IP address `10.0.0.1` mimics the way workloads might be setup in any cloud provider, as it is a class A within the private IP range.
+
+    The number of hosts is limited by the subnet mask, that is `255.255.255.252`. Consequently, a total of 2 hosts is allowed for this lab.
+
+    ![Windows IP and Subnet Mask](./images/home-lab-47.png)
+
+    2.6. Save the changes and open a CMD, where the command `ipconfig` is executed to display the network layout. It should contain the recently saved configuration.
+
+    ![Windows ipconfig](./images/home-lab-48.png)
