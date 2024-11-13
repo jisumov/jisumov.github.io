@@ -255,3 +255,45 @@ In order to avoid any VM escaping, the network must be segmented and isolated fr
     2.6. Save the changes and open a CMD, where the command `ipconfig` is executed to display the network layout. It should contain the recently saved configuration.
 
     ![Windows ipconfig](./images/home-lab-48.png)
+
+3. This is the network guide for the Kali Linux Host:
+
+    3.1. Right click on the Internet icon and select `Edit Connections...`
+
+    ![Kali Linux Internet Icon](./images/home-lab-49.png)
+
+    3.2. Click on `Wired connection 1` and then on the configuration wheel.
+
+    ![Kali Linux Wired Connection](./images/home-lab-50.png)
+
+    3.3. Go to the `IPv4 Settings` tab, choose the `Manual` method and add the IPv4 address.
+
+    In this case, the IP address `10.0.0.2` is the next available address for being used by a host, due to the 10.0.0.0 is considered as the network address and 10.0.0.3 is the broadcast address, used for communication with all devices in the subnet.
+
+    The Netmask can be represented as `30`, which means 30 bits are allocated for the network portion, leaving 2 bits for host addresses. This results in a total of 4 IP addresses: 1 network address, 2 usable host addresses, and 1 broadcast address.
+
+    ![Kali Linux IP and Netmask](./images/home-lab-51.png)
+
+    3.4. Open the terminal with the shortcut `Ctrl + Alt + T` and execute `ifconfig`, which displays the newly saved network setup.
+
+    ![Kali Linux ifconfig](./images/home-lab-52.png)
+
+    3.5. Trying to `ping` the host `10.0.0.1` would fail, because of the Firewall configuration in the Windows machine.
+
+    ![Kali Linux ping](./images/home-lab-53.png)
+
+4. As mentioned in step 3.5, the Kali Linux machine cannot ping the Windows host, due to the Firewall blocks the ICMP requests by default.
+
+    However, the communication can be checked through the opposite direction, from the Windows host to the Kali Linux machine, by executing `ping 10.0.0.2`
+
+    ![Ping Pong](./images/home-lab-54.png)
+
+5. Also, the Remote Desktop Protocol must be enabled in the Windows host, as there must be reverse shell capabilities for the Kali Linux machine.
+
+    Go to the Windows settings, then on `System` and find `Remote Desktop`
+
+    ![Windows RDP Finding](./images/home-lab-55.png)
+
+    Turn on the switch and confirm the Remote Desktop enabling.
+
+    ![Windows RDP Enabling](./images/home-lab-56.png)
