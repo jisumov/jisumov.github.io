@@ -35,7 +35,7 @@ VMware is a type 2 hypervisor which serves to isolate and create a dedicated com
 
     ![VMware for Personal Use](./images/home-lab-05.png)
 
-## Windows Setup
+### Windows Setup
 Windows 11 is the most recent Operating System developed by Microsoft. This is the host machine which will be targeted by Kali Linux.
 
 1. Download the Windows Installation Media found at: [https://www.microsoft.com/en-us/software-download/windows11](https://www.microsoft.com/en-us/software-download/windows11).
@@ -110,7 +110,7 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![Snapshot Name](./images/home-lab-20.png)
 
-## Splunk Setup
+### Splunk Setup
 Splunk is a SIEM to search, monitor and analyze machines' data. This tool will be working on the Windows VM.
 
 1. In the local machine go to: [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html). It requires an account to try the tool for 60 days.
@@ -129,7 +129,7 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
 
     It will download a file which can be opened with Notepad, and since the hash algorithm is SHA512, specify that in the PowerShell as follows:
 
-    ```bash
+    ```vim
     Get-FileHash <file-name> -Algorithm SHA512
     ```
 
@@ -145,7 +145,7 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
 
     ![Splunk Run](./images/home-lab-26.png)
 
-## Sysmon Setup
+### Sysmon Setup
 Sysmon is a service that monitors and logs system activity. This tool will be working on the Windows VM.
 
 1. In the local machine, go to: [https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon). Then, click on `Download Sysmon`
@@ -166,7 +166,7 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
 
 4. Open a PowerShell as an administrator within the same folder location and execute the following command to install Sysmon with the configuration file:
 
-    ```bash
+    ```vim
     .\Sysmon64.exe -i .\sysmonconfig.xml
     ```
 
@@ -182,7 +182,7 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
 
     ![Sysmon Event Viewer](./images/home-lab-33.png)
 
-## Kali Linux Setup
+### Kali Linux Setup
 Kali Linux is a Debian-based Linux distribution which is commonly used for penetration testing. Since this scenario is more focused on defense, the VM will be taken from a pre-built configuration.
 
 1. Download the Kali Linux pre-built VM found at: [https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines).
@@ -213,7 +213,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux Login](./images/home-lab-40.png)
 
-## Network Configuration
+### Network Setup
 In order to avoid any VM escaping, the network must be segmented and isolated from the exterior, so the involved machines in this educational attack/defense scenario can communicate between them and not outside of the environment.
 
 1. Go to any VM Settings, then on Network Adapter find the option `LAN Segments...`
@@ -248,7 +248,7 @@ In order to avoid any VM escaping, the network must be segmented and isolated fr
     
     In this case, the IP address `10.0.0.1` mimics the way workloads might be setup in any cloud provider, as it is a class A within the private IP range.
 
-    The number of hosts is limited by the subnet mask, that is `255.255.255.252`. Consequently, a total of 2 hosts is allowed for this lab.
+    The number of hosts is limited by the subnet mask, that is `255.255.255.252`. Consequently, a total of 2 hosts are allowed for this lab.
 
     ![Windows IP and Subnet Mask](./images/home-lab-47.png)
 
