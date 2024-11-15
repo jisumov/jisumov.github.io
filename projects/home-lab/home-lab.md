@@ -129,7 +129,7 @@ Splunk is a SIEM to search, monitor and analyze machines' data. This tool will b
 
     It will download a file which can be opened with Notepad, and since the hash algorithm is SHA512, specify that in the PowerShell as follows:
 
-    ```vim
+    ```bash
     Get-FileHash <file-name> -Algorithm SHA512
     ```
 
