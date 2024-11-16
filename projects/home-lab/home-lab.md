@@ -214,7 +214,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
     ![Kali Linux Login](./images/home-lab-40.png)
 
 ### Network Setup
-In order to avoid any VM escaping, the network must be segmented and isolated from the exterior, so the involved machines in this educational attack/defense scenario can communicate between them and not outside of the environment.
+To minimize security risks, the network must be segmented and isolated from the exterior, so the involved machines in this educational attack/defense scenario can communicate between them and not outside of the environment.
 
 1. Go to any VM Settings, then on Network Adapter find the option `LAN Segments...`
     
