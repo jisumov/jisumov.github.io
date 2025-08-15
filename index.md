@@ -17,7 +17,7 @@ Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of ex
   </tbody>
 </table>
 
-👉 [May enter this land, that is protected by polished labs](#)
+👉 [May enter this land, that is protected by polished labs](projects/40-2-labs/index.md)
 
 ## Diggy Diggy SOC
 <table>
