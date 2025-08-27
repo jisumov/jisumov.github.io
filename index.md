@@ -11,7 +11,7 @@ Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of ex
 <table>
   <tbody>
     <tr>
-      <td><img src="images/40-2-labs.png" /></td>
+      <td><img src="images/40-2-labs/cover.png" /></td>
       <td>40:2 Labs is an initiative to build and document cybersecurity environments from the ground up. Each lab focuses on deploying defensive infrastructure to simulate real-world security operations.</td>
     </tr>
   </tbody>
