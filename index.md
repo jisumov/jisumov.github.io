@@ -3,45 +3,36 @@ layout: default
 ---
 
 <style>
-.yt-play-btn {
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
+.yt-audio-btn {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  display: inline-block;
-  position: relative;
   background: #000;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-.yt-play-btn iframe {
-  width: 560px;
-  height: 315px;
-  border: 0;
-  margin-left: -240px;
-  margin-top: -117.5px;
-  display: block;
-  pointer-events: auto;
+.play-icon {
+  width: 0;
+  height: 0;
+  border-left: 15px solid white;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
 }
-
-.yt-play-btn::after {
-  content: "▶";
-  position: absolute;
-  top: 50%;
-  left: 52%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-  color: white;
-  pointer-events: none;
+.yt-audio-btn iframe {
+  display: none;
 }
 </style>
 
-<div class="yt-play-btn" title="Play">
-  <iframe
-    src="https://www.youtube.com/embed/0CNPR2qNzxk?autoplay=0&controls=0&modestbranding=1&rel=0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
+<div class="yt-audio-btn" onclick="this.querySelector('iframe').src+='&autoplay=1'; this.querySelector('iframe').style.display='block'; this.querySelector('.play-icon').style.display='none'">
+  <div class="play-icon"></div>
+  <iframe 
+    width="0" height="0" 
+    src="https://www.youtube.com/embed/0CNPR2qNzxk?controls=0&modestbranding=1&rel=0"
+    allow="autoplay; encrypted-media">
   </iframe>
 </div>
 
