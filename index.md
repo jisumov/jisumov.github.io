@@ -3,47 +3,101 @@ layout: default
 ---
 
 <style>
+#yt-player {
+  width: 250px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
 #yt-audio-btn {
-  width: 50px;    
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  color: white;
-  font-size: 22px;
-  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+#yt-song-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#yt-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+#yt-time {
+  font-size: 12px;
+  color: #bbb;
 }
 #yt-audio-iframe { display: none; }
 </style>
 
-<div id="yt-audio-btn">▶</div>
+<div id="yt-player">
+  <div id="yt-audio-btn">▶</div>
+  <div id="yt-song-info">
+    <div id="yt-title">Welcome To The Jungle</div>
+    <div id="yt-time">0:00 / 0:00</div>
+  </div>
+</div>
+
 <iframe 
   id="yt-audio-iframe"
   width="0" height="0"
-  src="https://www.youtube.com/embed/0CNPR2qNzxk?enablejsapi=1&controls=0&modestbranding=1&rel=0"
+  src="https://www.youtube.com/embed/o1tj2zJ2Wvg?enablejsapi=1&controls=0&modestbranding=1&rel=0"
   allow="autoplay; encrypted-media">
 </iframe>
 
 <script>
-let player;
+let player, duration = 0, interval;
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('yt-audio-iframe');
+  player = new YT.Player('yt-audio-iframe', {
+    events: {
+      'onReady': (e) => {
+        duration = player.getDuration();
+        document.getElementById("yt-time").textContent = `0:00 / ${formatTime(duration)}`;
+      }
+    }
+  });
 }
 
 const btn = document.getElementById('yt-audio-btn');
+const timeEl = document.getElementById('yt-time');
+
 btn.addEventListener('click', () => {
   if (player.getPlayerState() === YT.PlayerState.PLAYING) {
     player.pauseVideo();
     btn.textContent = '▶';
+    clearInterval(interval);
   } else {
     player.playVideo();
     btn.textContent = '⏸';
+    interval = setInterval(updateTime, 1000);
   }
 });
+
+function updateTime() {
+  let current = player.getCurrentTime();
+  timeEl.textContent = `${formatTime(current)} / ${formatTime(duration)}`;
+}
+
+function formatTime(sec) {
+  sec = Math.floor(sec);
+  let m = Math.floor(sec / 60);
+  let s = sec % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
 
 let tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
