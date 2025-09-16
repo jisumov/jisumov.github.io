@@ -3,8 +3,8 @@ layout: default
 ---
 
 <style>
-.yt-audio-btn {
-  width: 50px;
+#yt-audio-btn {
+  width: 50px;    
   height: 50px;
   border-radius: 50%;
   background: #000;
@@ -13,28 +13,42 @@ layout: default
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  color: white;
+  font-size: 22px;
+  font-family: Arial, sans-serif;
 }
-
-.play-icon {
-  width: 0;
-  height: 0;
-  border-left: 15px solid white;
-  border-top: 9px solid transparent;
-  border-bottom: 9px solid transparent;
-}
-.yt-audio-btn iframe {
-  display: none;
-}
+#yt-audio-iframe { display: none; }
 </style>
 
-<div class="yt-audio-btn" onclick="this.querySelector('iframe').src+='&autoplay=1'; this.querySelector('iframe').style.display='block'; this.querySelector('.play-icon').style.display='none'">
-  <div class="play-icon"></div>
-  <iframe 
-    width="0" height="0" 
-    src="https://www.youtube.com/embed/0CNPR2qNzxk?controls=0&modestbranding=1&rel=0"
-    allow="autoplay; encrypted-media">
-  </iframe>
-</div>
+<div id="yt-audio-btn">▶</div>
+<iframe 
+  id="yt-audio-iframe"
+  width="0" height="0"
+  src="https://www.youtube.com/embed/0CNPR2qNzxk?enablejsapi=1&controls=0&modestbranding=1&rel=0"
+  allow="autoplay; encrypted-media">
+</iframe>
+
+<script>
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('yt-audio-iframe');
+}
+
+const btn = document.getElementById('yt-audio-btn');
+btn.addEventListener('click', () => {
+  if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+    player.pauseVideo();
+    btn.textContent = '▶';
+  } else {
+    player.playVideo();
+    btn.textContent = '⏸';
+  }
+});
+
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+document.body.appendChild(tag);
+</script>
 
 # Who Am I
 Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of experience in Cybersecurity. Actions speak louder than words, take a look below!
