@@ -2,12 +2,12 @@
 layout: default
 ---
 
-<div style="width:100%; height:80px; overflow:hidden; border-radius:10px;">
+<div style="width:60px; height:60px; overflow:hidden; border-radius:50%;">
   <iframe 
-    width="100%" height="200"
+    width="200" height="200"
     src="https://www.youtube.com/embed/o1tj2zJ2Wvg?autoplay=0&controls=1&modestbranding=1&rel=0"
     frameborder="0"
-    style="margin-top:-120px;" 
+    style="margin-left:-70px; margin-top:-70px;" 
     allow="autoplay; encrypted-media">
   </iframe>
 </div>
