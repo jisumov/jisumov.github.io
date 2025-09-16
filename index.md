@@ -4,14 +4,14 @@ layout: default
 
 <style>
 .yt-play-btn {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 30px;
   overflow: hidden;
   border-radius: 50%;
   display: inline-block;
   position: relative;
   background: #000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   cursor: pointer;
 }
 
@@ -29,9 +29,9 @@ layout: default
   content: "▶";
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-45%, -50%);
-  font-size: 28px;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
   color: white;
   pointer-events: none;
 }
