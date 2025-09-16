@@ -4,13 +4,15 @@ layout: default
 
 <style>
 .yt-play-btn {
-  width: 20px;
-  height: 20px;
+  width: 60px;
+  height: 60px;
   overflow: hidden;
   border-radius: 50%;
   display: inline-block;
+  position: relative;
   background: #000;
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  cursor: pointer;
 }
 
 .yt-play-btn iframe {
@@ -18,8 +20,20 @@ layout: default
   height: 315px;
   border: 0;
   margin-left: -240px;
-  margin-top:  -117.5px;
+  margin-top: -117.5px;
   display: block;
+  pointer-events: auto;
+}
+
+.yt-play-btn::after {
+  content: "▶";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+  font-size: 28px;
+  color: white;
+  pointer-events: none;
 }
 </style>
 
