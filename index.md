@@ -2,13 +2,34 @@
 layout: default
 ---
 
-<div style="width:60px; height:60px; overflow:hidden; border-radius:50%;">
-  <iframe 
-    width="200" height="200"
-    src="https://www.youtube.com/embed/o1tj2zJ2Wvg?autoplay=0&controls=1&modestbranding=1&rel=0"
-    frameborder="0"
-    style="margin-left:-70px; margin-top:-70px;" 
-    allow="autoplay; encrypted-media">
+<style>
+/* circle play button (80x80) */
+.yt-play-btn {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+  display: inline-block;
+  background: #000; /* fallback background */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* iframe is standard 560x315 and moved so its CENTER is visible */
+.yt-play-btn iframe {
+  width: 560px;
+  height: 315px;
+  border: 0;
+  margin-left: -240px;   /* <- see math below */
+  margin-top:  -117.5px; /* <- see math below */
+  display: block;
+}
+</style>
+
+<div class="yt-play-btn" title="Play">
+  <iframe
+    src="https://www.youtube.com/embed/o1tj2zJ2Wvg?autoplay=0&controls=0&modestbranding=1&rel=0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
   </iframe>
 </div>
 
