@@ -2,10 +2,11 @@
 layout: default
 ---
 
-<iframe style="width:100%; height:90px;"
-  src="https://www.youtube.com/embed/o1tj2zJ2Wvg?si=gQNNf8zYpojS_Tdw?autoplay=0&controls=1&modestbranding=1"
+<iframe
+  width="0" height="0"
+  src="https://www.youtube.com/embed/o1tj2zJ2Wvg?si=gQNNf8zYpojS_Tdw?autoplay=1"
   frameborder="0"
-  allow="autoplay; encrypted-media">
+  allow="autoplay">
 </iframe>
 
 # Who Am I
