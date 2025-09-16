@@ -2,13 +2,11 @@
 layout: default
 ---
 
-<div style="width:0; height:0; overflow:hidden;">
-  <iframe src="https://www.youtube.com/embed/o1tj2zJ2Wvg?si=gQNNf8zYpojS_Tdw?autoplay=0" 
-          frameborder="0" 
-          allow="autoplay">
-  </iframe>
-</div>
-<a href="https://www.youtube.com/embed/o1tj2zJ2Wvg?si=gQNNf8zYpojS_Tdw" target="#">▶ Play Audio</a>
+<iframe style="width:100%; height:90px;"
+  src="https://www.youtube.com/embed/o1tj2zJ2Wvg?si=gQNNf8zYpojS_Tdw?autoplay=0&controls=1&modestbranding=1"
+  frameborder="0"
+  allow="autoplay; encrypted-media">
+</iframe>
 
 # Who Am I
 Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of experience in Cybersecurity. Actions speak louder than words, take a look below!
