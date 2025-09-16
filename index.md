@@ -3,31 +3,29 @@ layout: default
 ---
 
 <style>
-/* circle play button (80x80) */
 .yt-play-btn {
-  width: 80px;
-  height: 80px;
+  width: 20px;
+  height: 20px;
   overflow: hidden;
   border-radius: 50%;
   display: inline-block;
-  background: #000; /* fallback background */
+  background: #000;
   box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-/* iframe is standard 560x315 and moved so its CENTER is visible */
 .yt-play-btn iframe {
   width: 560px;
   height: 315px;
   border: 0;
-  margin-left: -240px;   /* <- see math below */
-  margin-top:  -117.5px; /* <- see math below */
+  margin-left: -240px;
+  margin-top:  -117.5px;
   display: block;
 }
 </style>
 
 <div class="yt-play-btn" title="Play">
   <iframe
-    src="https://www.youtube.com/embed/o1tj2zJ2Wvg?autoplay=0&controls=0&modestbranding=1&rel=0"
+    src="https://www.youtube.com/embed/0CNPR2qNzxk?autoplay=0&controls=0&modestbranding=1&rel=0"
     allow="autoplay; encrypted-media"
     allowfullscreen>
   </iframe>
