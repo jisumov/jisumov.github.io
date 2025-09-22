@@ -26,5 +26,23 @@
         {{ content }}
       </section>
     </div>
+
+    <div id="yt-player">
+      <div id="yt-audio-btn">▶</div>
+      <div id="yt-song-info">
+        <div id="yt-title">Welcome To The Jungle</div>
+        <div id="yt-time">0:00 / 0:00</div>
+      </div>
+    </div>
+
+    <iframe 
+      id="yt-audio-iframe"
+      width="0" height="0"
+      src="https://www.youtube.com/embed/0CNPR2qNzxk?enablejsapi=1&controls=0&modestbranding=1&rel=0"
+      allow="autoplay; encrypted-media">
+    </iframe>
+
+    <script src="{{ '/assets/js/player.js' | relative_url }}"></script>
+    
   </body>
 </html>
