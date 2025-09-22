@@ -25,7 +25,12 @@
   cursor: pointer;
   color: #b5e853;
   font-size: 18px;
-  padding: 4px 6px;
+  width: 24px;   /* fixed width */
+  height: 24px;  /* fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   transition: color 0.2s ease, transform 0.1s ease;
 }
 
