@@ -1,6 +1,7 @@
 ---
 layout: default
 youtube_id: rDayiYQNRV4
+music_title: "40:1"
 ---
 
 # 40:2 Labs

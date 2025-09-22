@@ -1,6 +1,7 @@
 ---
 layout: default
 youtube_id: 0CNPR2qNzxk
+music_title: "Welcome to the Jungle"
 ---
 
 # Who Am I
