@@ -3,8 +3,16 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('yt-audio-iframe', {
     events: {
       'onReady': (e) => {
+        player.setVolume(30);
         duration = player.getDuration();
         document.getElementById("yt-time").textContent = `0:00 / ${formatTime(duration)}`;
+      },
+      'onStateChange': (e) => {
+        if (e.data === YT.PlayerState.ENDED) {
+          btn.textContent = '▶';
+          clearInterval(interval);
+          timeEl.textContent = `0:00 / ${formatTime(duration)}`;
+        }
       }
     }
   });
@@ -20,7 +28,7 @@ btn.addEventListener('click', () => {
     clearInterval(interval);
   } else {
     player.playVideo();
-    btn.textContent = '⏸';
+    btn.textContent = '■';
     interval = setInterval(updateTime, 1000);
   }
 });
