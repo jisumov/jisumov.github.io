@@ -31,7 +31,7 @@ Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of ex
   </tbody>
 </table>
 
-👉 [Face them on the SIEM, you will meet the logs](#)
+👉 [Face them on the SIEM, you will meet the logs]({% link projects/diggy-diggy-soc/index.md %})
 
 ## KQLhauled
 <table>
@@ -43,7 +43,7 @@ Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of ex
   </tbody>
 </table>
 
-👉 [Make that alert walk the plank, with a bottle of queries](#)
+👉 [Make that alert walk the plank, with a bottle of queries]({% link projects/kqlhauled/index.md %})
 
 * * *
 _**Inspired by [Hacker Theme](https://github.com/pages-themes/hacker)**_
