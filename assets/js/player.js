@@ -9,7 +9,8 @@ function onYouTubeIframeAPIReady() {
       },
       'onStateChange': (e) => {
         if (e.data === YT.PlayerState.ENDED) {
-          btn.textContent = '▶';
+          const icon = btn.querySelector("i");
+          icon.className = "fa-solid fa-play";
           clearInterval(interval);
           timeEl.textContent = `0:00 / ${formatTime(duration)}`;
         }
@@ -22,13 +23,14 @@ const btn = document.getElementById('yt-audio-btn');
 const timeEl = document.getElementById('yt-time');
 
 btn.addEventListener('click', () => {
+  const icon = btn.querySelector("i");
   if (player.getPlayerState() === YT.PlayerState.PLAYING) {
     player.pauseVideo();
-    btn.textContent = '▶';
+    icon.className = "fa-solid fa-play";
     clearInterval(interval);
   } else {
     player.playVideo();
-    btn.textContent = '■';
+    icon.className = "fa-solid fa-stop";
     interval = setInterval(updateTime, 1000);
   }
 });

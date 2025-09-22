@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   {% include head-custom.html %}
 
   {% seo %}
@@ -21,12 +22,10 @@
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
       </a>
 
-      <div id="yt-player">
-        <div id="yt-audio-btn">▶</div>
-        <div id="yt-song-info">
-          <div id="yt-title">{{ page.music_title | default: "Welcome to the Jungle" }}</div>
-          <div id="yt-time">0:00 / 0:00</div>
-        </div>
+      <div id="yt-miniplayer">
+        <button id="yt-audio-btn"><i class="fa-solid fa-play"></i></button>
+        <span id="yt-track-title">{{ page.music_title | default: "Welcome to the Jungle" }}</span>
+        <span id="yt-timer">0:00 / 0:00</span>
       </div>
 
       <iframe id="yt-audio-iframe" width="0" height="0"
