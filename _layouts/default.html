@@ -20,7 +20,7 @@
       <a id="a-title" href="{{ '/' | relative_url }}">
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
       </a>
-      
+
       <div id="yt-player">
         <div id="yt-audio-btn">▶</div>
         <div id="yt-song-info">
@@ -30,7 +30,7 @@
       </div>
 
       <iframe id="yt-audio-iframe" width="0" height="0"
-        src="https://www.youtube.com/embed/0CNPR2qNzxk?enablejsapi=1&controls=0&modestbranding=1&rel=0"
+        src="https://www.youtube.com/embed/{{ page.youtube_id | default: '0CNPR2qNzxk' }}?enablejsapi=1&controls=0&modestbranding=1&rel=0"
         allow="autoplay; encrypted-media">
       </iframe>
 
