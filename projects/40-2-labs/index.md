@@ -1,6 +1,6 @@
 ---
 layout: default
-youtube_id: -c2ZzJthFak
+youtube_id: kzq0m6UGzRU
 music_title: "40:1 - Sabaton"
 ---
 
