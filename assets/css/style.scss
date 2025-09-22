@@ -25,8 +25,9 @@
   cursor: pointer;
   color: #b5e853;
   font-size: 18px;
-  width: 24px;   /* fixed width */
-  height: 24px;  /* fixed height */
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,6 +62,6 @@
 }
 
 #yt-audio-iframe {
-  display: none;   /* removes it from layout */
+  display: none;
   visibility: hidden;
 }

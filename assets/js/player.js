@@ -1,12 +1,12 @@
 let player, duration = 0, interval;
 const btn = document.getElementById('yt-audio-btn');
-const timeEl = document.getElementById('yt-time');
+const timeEl = document.getElementById('yt-timer');
 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('yt-audio-iframe', {
     events: {
       'onReady': (e) => {
-        player.setVolume(30);
+        player.setVolume(100);
         duration = player.getDuration();
         timeEl.textContent = `0:00 / ${formatTime(duration)}`;
       },
