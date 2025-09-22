@@ -1,7 +1,7 @@
 ---
 layout: default
-youtube_id: rDayiYQNRV4
-music_title: "40:1"
+youtube_id: 4_F6AIhWAiY
+music_title: "40:1 - Sabaton"
 ---
 
 # 40:2 Labs
