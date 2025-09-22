@@ -1,48 +1,50 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
+<html lang="{{ site.lang | default: " en-US" }}">
 
-{% seo %}
-  </head>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  {% include head-custom.html %}
 
-  <body>
+  {% seo %}
+</head>
 
-    <header>
-      <div class="container">
-        <a id="a-title" href="{{ '/' | relative_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        </a>
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-      </div>
-    </header>
+<body>
+
+  <header>
 
     <div class="container">
-      <section id="main_content">
-        {{ content }}
-      </section>
-    </div>
 
-    <div id="yt-player">
-      <div id="yt-audio-btn">▶</div>
-      <div id="yt-song-info">
-        <div id="yt-title">Welcome To The Jungle</div>
-        <div id="yt-time">0:00 / 0:00</div>
+      <a id="a-title" href="{{ '/' | relative_url }}">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+      </a>
+      
+      <div id="yt-player">
+        <div id="yt-audio-btn">▶</div>
+        <div id="yt-song-info">
+          <div id="yt-title">Welcome to the Jungle!</div>
+          <div id="yt-time">0:00 / 0:00</div>
+        </div>
       </div>
+
+      <iframe id="yt-audio-iframe" width="0" height="0"
+        src="https://www.youtube.com/embed/0CNPR2qNzxk?enablejsapi=1&controls=0&modestbranding=1&rel=0"
+        allow="autoplay; encrypted-media">
+      </iframe>
+
     </div>
+  </header>
 
-    <iframe 
-      id="yt-audio-iframe"
-      width="0" height="0"
-      src="https://www.youtube.com/embed/0CNPR2qNzxk?enablejsapi=1&controls=0&modestbranding=1&rel=0"
-      allow="autoplay; encrypted-media">
-    </iframe>
+  <div class="container">
+    <section id="main_content">
+      {{ content }}
+    </section>
+  </div>
 
-    <script src="{{ '/assets/js/player.js' | relative_url }}"></script>
-    
-  </body>
+  <script src="{{ '/assets/js/player.js' | relative_url }}"></script>
+
+</body>
+
 </html>
