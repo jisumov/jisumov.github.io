@@ -8,12 +8,6 @@ $blockquote-color: $silver-chalice !default;
 $blockquote-border: $dove-grey !default;
 $container-max-width: 1000px;
 
-@mixin media-max-width($max-width) {
-  @media (max-width: $max-width) {
-      @content;
-  }
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -24,12 +18,11 @@ body {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 }
 
-/* General & 'Reset' Stuff */
-
 .container {
   width: 90%;
   max-width: $container-max-width;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
 section {
@@ -37,26 +30,24 @@ section {
   margin: 0 0 20px 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,h2,h3,h4,h5,h6 {
   margin: 0 0 20px;
+  font-weight: normal;
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  color: $header;
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1),
+               0 0 5px rgba(181,232,83,0.1),
+               0 0 10px rgba(181,232,83,0.1);
 }
-
-li {
-  line-height: 1.4 ;
-}
-
-/* Header, <header>
-   header   - container
-   h1       - project name
-   h2       - project description
-*/
 
 header {
   background: rgba(0, 0, 0, 0.1);
   width: 100%;
-  border-bottom: 1px dashed $conifer; //header;
+  border-bottom: 1px dashed $conifer;
   padding: 20px 0;
   margin: 0 0 40px 0;
+  text-align: left;
 }
 
 header h1 {
@@ -64,18 +55,13 @@ header h1 {
   line-height: 1.5;
   margin: 0 0 0 -40px;
   font-weight: bold;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $conifer;//$header;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
-               0 0 5px rgba(181, 232, 83, 0.1),
-               0 0 10px rgba(181, 232, 83, 0.1);
+  color: $conifer;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1),
+               0 0 5px rgba(181,232,83,0.1),
+               0 0 10px rgba(181,232,83,0.1);
   letter-spacing: -1px;
   -webkit-font-smoothing: antialiased;
-  @include media-max-width($container-max-width) {
-    margin-left: 0;
-  }
 }
-
 
 header h1:before {
   content: "./ ";
@@ -88,181 +74,188 @@ header h2 {
   color: #666;
 }
 
-#downloads .btn {
+a {
+  color: #63c0f5;
+  text-decoration: none;
+  text-shadow: 0 0 5px rgba(104,182,255,0.5);
+}
+
+a:visited { color: #63c0f5; }
+a:hover {
+  color: $conifer;
+  text-decoration: none;
+  text-shadow: 0 0 8px rgba(181,232,83,0.7);
+}
+a:active { color: lighten($conifer, 10%); }
+
+#main_content .projects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 12px;
+}
+
+#main_content .project-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+  background: darken($cod-grey, 3%);
+  border: 1px dashed $conifer;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 0 10px rgba($conifer, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+#main_content .project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba($conifer, 0.12);
+}
+
+#main_content .project-card img.cover-square {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  border: 1px solid rgba(181,232,83,0.15);
+}
+
+#main_content .project-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+#main_content .project-content h3 {
+  margin: 0 0 8px 0;
+  color: $conifer;
+  font-size: 20px;
+}
+
+#main_content .project-content p {
+  margin: 0 0 12px 0;
+  color: $body-foreground;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+#main_content .project-content a.button-link {
   display: inline-block;
-  text-align: center;
-  margin: 0;
+  padding: 8px 14px;
+  background: transparent;
+  color: $conifer;
+  border: 1px solid $conifer;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+#main_content .project-content a.button-link:hover {
+  background: $conifer;
+  color: $cod-grey;
+  box-shadow: 0 0 10px rgba($conifer, 0.5);
 }
 
-/* Main Content
-*/
+#main_content h1 { font-size: 30px; }
+#main_content h2 { font-size: 24px; }
+#main_content h3 { font-size: 18px; }
 
-#main_content {
-  width: 100%;
-  -webkit-font-smoothing: antialiased;
-}
-section img {
-  max-width: 100%
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: normal;
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-  color: $header;
-  letter-spacing: -0.03em;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
-               0 0 5px rgba(181, 232, 83, 0.1),
-               0 0 10px rgba(181, 232, 83, 0.1);
-}
-
-#main_content h1 {
-  font-size: 30px;
-}
-
-#main_content h2 {
-  font-size: 24px;
-}
-
-#main_content h3 {
-  font-size: 18px;
-}
-
-#main_content h4 {
-  font-size: 14px;
-}
-
-#main_content h5 {
-  font-size: 12px;
-  text-transform: uppercase;
-  margin: 0 0 5px 0;
-}
-
-#main_content h6 {
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #999;
-  margin: 0 0 5px 0;
-}
-
-dt {
-  font-style: italic;
-  font-weight: bold;
-}
-
-ul li {
-  list-style-image:url('../images/bullet.png');
-}
-
-blockquote {
-  color: $blockquote-color;
-  padding-left: 10px;
-  border-left: 1px dotted $blockquote-border;
-}
+blockquote { color: $blockquote-color; padding-left: 10px; border-left: 1px dotted $blockquote-border; }
 
 pre {
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0,0,0,0.9);
+  border: 1px solid rgba(255,255,255,0.15);
   padding: 10px;
   font-size: 16px;
   color: #b5e853;
   border-radius: 2px;
-  word-wrap: normal;
   overflow: auto;
-  overflow-y: hidden;
 }
 
-code.highlighter-rouge {
-  background: rgba(0,0,0,0.9);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0px 3px;
-  margin: 0px -3px;
-  color: #aa759f;
-  border-radius: 2px;
+@media (max-width: 900px) {
+  #main_content .project-card {
+    grid-template-columns: 180px 1fr;
+  }
+  #main_content .project-card img.cover-square {
+    width: 180px;
+    height: 180px;
+  }
 }
 
-table {
+@media (max-width: 640px) {
+  #main_content .project-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #main_content .project-card img.cover-square {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 12px;
+  }
+
+  #main_content .project-content {
+    align-items: center;
+  }
+}
+
+#yt-miniplayer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: darken($cod-grey, 3%);
+  border: 1px dashed $conifer;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-top: 12px;
+  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+  color: $conifer;
+  font-size: 14px;
   width: 100%;
-  margin: 0 0 20px 0;
+  max-width: 520px;
+  box-shadow: 0 0 8px rgba($conifer, 0.2);
 }
 
-th {
-  text-align: left;
-  border-bottom: 1px dashed #b5e853;
-  padding: 5px 10px;
+#yt-audio-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $conifer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+#yt-audio-btn:hover { color: lighten($conifer, 12%); transform: scale(1.08); }
+#yt-audio-btn i { pointer-events: none; }
+
+#yt-track-title {
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 0 4px rgba($conifer, 0.6);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-td {
-  padding: 5px 10px;
+#yt-timer { font-size: 12px; color: $conifer; min-width: 60px; text-align: right; flex-shrink: 0; }
+
+#yt-audio-iframe { display: none; visibility: hidden; }
+
+@media (max-width: 640px) {
+  #yt-miniplayer { font-size: 13px; gap: 8px; padding: 6px 10px; max-width: 100%; }
+  #yt-track-title { font-size: 13px; }
+  #yt-timer { font-size: 11px; min-width: 50px; }
 }
-
-hr {
-  height: 0;
-  border: 0;
-  border-bottom: 1px dashed #b5e853;
-  color: #b5e853;
-}
-
-/* Buttons
-*/
-
-.btn {
-  display: inline-block;
-  background: -webkit-linear-gradient(top, rgba(40, 40, 40, 0.3), rgba(35, 35, 35, 0.3) 50%, rgba(10, 10, 10, 0.3) 50%, rgba(0, 0, 0, 0.3));
-  padding: 8px 18px;
-  border-radius: 50px;
-  border: 2px solid rgba(0, 0, 0, 0.7);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.7);
-  border-top: 2px solid rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 0.8);
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 13px;
-  text-decoration: none;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.btn:hover {
-  background: -webkit-linear-gradient(top, rgba(40, 40, 40, 0.6), rgba(35, 35, 35, 0.6) 50%, rgba(10, 10, 10, 0.8) 50%, rgba(0, 0, 0, 0.8));
-}
-
-.btn .icon {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin: 1px 8px 0 0;
-  float: left;
-}
-
-.btn-github .icon {
-  opacity: 0.6;
-  background: url("../images/blacktocat.png") 0 0 no-repeat;
-}
-
-/* Links
-   a, a:hover, a:visited
-*/
-
-a {
-  color: #63c0f5;
-  text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
-}
-
-/* Clearfix */
-
-.cf:before, .cf:after {
-  content:"";
-  display:table;
-}
-
-.cf:after {
-  clear:both;
-}
-
-.cf {
-  zoom:1;
-}
-
-#a-title {
-  text-decoration: none;
+@media (max-width: 480px) {
+  #yt-miniplayer { flex-direction: column; align-items: flex-start; text-align: left; gap: 6px; }
+  #yt-track-title { width: 100%; white-space: normal; text-overflow: unset; overflow: visible; }
+  #yt-timer { align-self: flex-end; text-align: right; width: 100%; }
 }
