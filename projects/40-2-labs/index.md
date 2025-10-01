@@ -16,7 +16,7 @@ music_title: "40:1 - Sabaton"
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/40-2-labs/you-give-hr-a-bad-pdf.md %}">Chains of Kill got an RCE on me</a>
+        <a class="button-link" href="{{ '/projects/40-2-labs/you-give-hr-a-bad-pdf' | relative_url }}">Chains of Kill got an RCE on me</a>
       </div>
     </div>
   </div>
