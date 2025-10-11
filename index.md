@@ -28,7 +28,7 @@ Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of ex
   </div>
 
   <div class="project-card">
-    <img src="{{ '/images/diggy-diggy-soc.png' | relative_url }}" alt="Diggy Diggy SOC" class="cover-square" />
+    <img src="{{ '/images/diggy-diggy-soc/cover.png' | relative_url }}" alt="Diggy Diggy SOC" class="cover-square" />
     <div class="project-content">
       <div>
         <h3>Diggy Diggy SOC</h3>
@@ -43,7 +43,7 @@ Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of ex
   </div>
 
   <div class="project-card">
-    <img src="{{ '/images/kqlhauled.png' | relative_url }}" alt="KQLhauled" class="cover-square" />
+    <img src="{{ '/images/kqlhauled/cover.png' | relative_url }}" alt="KQLhauled" class="cover-square" />
     <div class="project-content">
       <div>
         <h3>KQLhauled</h3>
