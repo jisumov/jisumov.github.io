@@ -11,17 +11,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".popup-img").forEach(img => {
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll(".popup-img");
+  let popupOpen = false;
+  images.forEach(img => {
     img.addEventListener("click", () => {
+      if (popupOpen) return;
       const overlay = document.createElement("div");
       overlay.classList.add("image-popup-overlay");
-      const fullImg = document.createElement("img");
-      fullImg.src = img.src;
-      overlay.appendChild(fullImg);
+      const largeImg = document.createElement("img");
+      largeImg.src = img.src;
+      largeImg.alt = img.alt || "";
+      overlay.appendChild(largeImg);
       document.body.appendChild(overlay);
+      popupOpen = true;
+      document.body.classList.add("no-scroll");
       overlay.addEventListener("click", () => {
         overlay.remove();
+        popupOpen = false;
+        document.body.classList.remove("no-scroll");
       });
     });
   });

@@ -18,6 +18,12 @@ body {
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 }
 
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100vh;
+  touch-action: none;
+}
+
 .container {
   width: 90%;
   max-width: $container-max-width;
@@ -87,6 +93,11 @@ a:hover {
   text-shadow: 0 0 8px rgba(181,232,83,0.7);
 }
 a:active { color: lighten($conifer, 10%); }
+
+a, p, li, code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 
 #main_content .projects-grid {
   display: flex;
@@ -172,6 +183,8 @@ pre {
   color: #b5e853;
   border-radius: 2px;
   overflow: auto;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
 }
 
 @media (max-width: 900px) {
@@ -237,7 +250,7 @@ ol {
 ol > li {
   counter-increment: custom-counter;
   position: relative;
-  padding-left: 28px;
+  padding-left: 10px;
 }
 
 ol > li::marker {
