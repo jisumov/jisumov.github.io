@@ -10,3 +10,19 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (e) { }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".popup-img").forEach(img => {
+    img.addEventListener("click", () => {
+      const overlay = document.createElement("div");
+      overlay.classList.add("image-popup-overlay");
+      const fullImg = document.createElement("img");
+      fullImg.src = img.src;
+      overlay.appendChild(fullImg);
+      document.body.appendChild(overlay);
+      overlay.addEventListener("click", () => {
+        overlay.remove();
+      });
+    });
+  });
+});
