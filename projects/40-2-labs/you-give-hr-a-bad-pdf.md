@@ -33,6 +33,17 @@ VMware Workstation Pro is a type 2 hypervisor which serves to isolate and create
 
     ![End-User License Agreement](../../images/40-2-labs/you-give-hr-a-bad-pdf/003.png)
 
-5. Note that there is a compatible setup, referring to Hyper-V or Device/Credential Guard being enabled. The virtual machines will be launched using the Windows Hypervisor Platform (WHP).
+5. Note that there is a compatible setup, referring to Hyper-V or Device/Credential Guard being enabled. Therefore, the virtual machines will be launched using the Windows Hypervisor Platform (WHP).
 
     ![Compatible Setup](../../images/40-2-labs/you-give-hr-a-bad-pdf/004.png)
+
+6. After setting the installation folder, tick the box `Check for product updates on startup`, to always ensure an up-to-date app version and mitigate risks like VM Escape. 
+
+    Joining the `VMware Customer Experience Improvement Program` is optional.
+
+    ![User Experience Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/005.png)
+
+7. Finally, choose whether to create the shortcuts, then click `Install`. The VMware Workstation Pro interface should look like this:
+
+    ![VMware Workstation Pro Interface](../../images/40-2-labs/you-give-hr-a-bad-pdf/006.png)
+
