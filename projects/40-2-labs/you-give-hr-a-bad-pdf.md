@@ -81,3 +81,45 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
     ![Host-only Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/012.png){: .popup-img }
 
 6. Finish the machine creation and click on `Power on this virtual machine`.
+
+7. During the configuration process, make sure to select `I don't have a product key`.
+
+    ![Product Key](../../images/40-2-labs/you-give-hr-a-bad-pdf/013.png){: .popup-img }
+
+    In addition, select Windows 11 Pro, because of the `RDP` feature explained here: [https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config).
+
+    ![Windows 11 Pro](../../images/40-2-labs/you-give-hr-a-bad-pdf/014.png){: .popup-img }
+
+8. During the setup, it will ask to connect to a network. To bypass this step, do `Shift+F10` to open the `CMD` and execute the following command:
+
+    ```powershell
+    oobe\bypassnro
+    ```
+
+    It will restart the machine and enable the `I don't have internet` option, select it and finish the setup.
+
+    ![Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/015.png){: .popup-img }
+
+9. After the Windows setup, ensure a smoother virtualization experience by going to the `VM` tab and select `Install VMware Tools`.
+
+    ![VMware Tools Plug-in](../../images/40-2-labs/you-give-hr-a-bad-pdf/016.png){: .popup-img }
+
+    It will load the drive and ask to execute the `Run setup64.exe`, click on it and follow the default options.
+
+    ![VMware Tools Executable](../../images/40-2-labs/you-give-hr-a-bad-pdf/017.png){: .popup-img }
+
+10. To have internet in the VM, go to the left bar, right click on the machine name and select `Settings...`
+
+    ![VM Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/018.png){: .popup-img }
+
+    And, in the `Network Adapter` section choose `NAT` to ensure the VM is not alongside the host network, but has its own through the host `IP`.
+
+    ![NAT Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/019.png){: .popup-img }
+
+11. Finally, for future recovery of the fresh install, go to the `VM` tab, then click on `Snapshot` and `Take Snapshot...`
+
+    ![Snapshot Walkthrough](../../images/40-2-labs/you-give-hr-a-bad-pdf/020.png){: .popup-img }
+
+    Assign a name like "Fresh Install" and click `Take Snapshot`
+
+    ![Snapshot Name](../../images/40-2-labs/you-give-hr-a-bad-pdf/021.png){: .popup-img }
