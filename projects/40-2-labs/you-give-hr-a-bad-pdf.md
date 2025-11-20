@@ -49,3 +49,35 @@ VMware Workstation Pro is a type 2 hypervisor which serves to isolate and create
 
     ![VMware Workstation Pro Interface](../../images/40-2-labs/you-give-hr-a-bad-pdf/006.png){: .popup-img }
 
+### Windows Setup
+Windows 11 is the most recent Operating System developed by Microsoft. This is the host machine which will be targeted by Kali Linux.
+
+1. Download the Windows Installation Media found at: [https://www.microsoft.com/en-us/software-download/windows11](https://www.microsoft.com/en-us/software-download/windows11).
+
+2. During the install process, at the `Choose which media to use` section, select `ISO file`.
+
+    ![ISO File](../../images/40-2-labs/you-give-hr-a-bad-pdf/007.png){: .popup-img }
+
+3. In VMware, click on `Create a New Virtual Machine`, then the `Typical` configuration and load the `Windows.iso` image.
+
+    ![Windows.iso](../../images/40-2-labs/you-give-hr-a-bad-pdf/008.png){: .popup-img }
+
+4. At the `Encryption Information` section, choose to encrypt all the files and set a password that you store in a safe place, such a password manager, in the host machine.
+
+    ![Encryption Type](../../images/40-2-labs/you-give-hr-a-bad-pdf/009.png){: .popup-img }
+
+    Also, select `Store virtual disk as a single file` in the Specify Disk Capacity section.
+
+    ![Disk Capacity](../../images/40-2-labs/you-give-hr-a-bad-pdf/010.png){: .popup-img }
+
+    **Note:** By default, the 64 GB of storage is not pre-allocated.
+
+5. The summary will show the recommended hardware settings, except for one which must be configured manually, then click on `Customize Hardware...`
+
+    ![Customize Hardware](../../images/40-2-labs/you-give-hr-a-bad-pdf/011.png){: .popup-img }
+
+    The network adapter is set as `NAT` to share the host's internet connection, and so it will eventually require a Windows Account. Therefore, select `Host-only`, which will be helpful to bypass the remaining setup.
+
+    ![Host-only Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/012.png){: .popup-img }
+
+6. Finish the machine creation and click on `Power on this virtual machine`.
