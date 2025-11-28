@@ -5,7 +5,7 @@ music_title: "Welcome to the Jungle - Guns N' Roses"
 ---
 
 # Who Am I
-Hey there! I'm José Suárez, a Computer Systems Engineer with **+1 year** of experience in Cybersecurity. Actions speak louder than words, take a look below!
+Hey there! I'm José Suárez, a Computer Systems Engineer with **1+ year** of experience in Cybersecurity. Actions speak louder than words, take a look below!
 
 # Projects
 
