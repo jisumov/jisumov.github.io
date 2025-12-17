@@ -123,3 +123,40 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
     Assign a name like "Fresh Install" and click `Take Snapshot`
 
     ![Snapshot Name](../../images/40-2-labs/you-give-hr-a-bad-pdf/021.png){: .popup-img }
+
+### Sysmon Setup
+Sysmon is a service that monitors and logs system activity. This tool will be working on the Windows VM.
+
+1. In the local machine, go to: [https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon). Then, click on `Download Sysmon`
+
+    ![Sysmon Download Button](../../images/40-2-labs/you-give-hr-a-bad-pdf/022.png){: .popup-img }
+
+2. Sysmon can be installed with a configuration file. The balanced approach is found at: [https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml](https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml). Right click and select `Save as`, then keep it on a memorable location.
+
+    ![Sysmon Configuration File](../../images/40-2-labs/you-give-hr-a-bad-pdf/023.png){: .popup-img }
+
+3. Open the `Downloads` folder and extract the `Sysmon.zip` as follows:
+
+    ![Sysmon Extraction](../../images/40-2-labs/you-give-hr-a-bad-pdf/024.png){: .popup-img }
+
+    Then, drag and drop the `sysmonconfig.xml` into the generated `sysmon` folder. The content should look like this:
+
+    ![Sysmon Drag and Drop](../../images/40-2-labs/you-give-hr-a-bad-pdf/025.png){: .popup-img }
+
+4. Open a PowerShell as an administrator within the same folder location and execute the following command to install Sysmon with the configuration file:
+
+    ```powershell
+    .\Sysmon64.exe -i .\sysmonconfig.xml
+    ```
+
+    Then, proceed with the default installation process.
+
+    ![Sysmon PowerShell](../../images/40-2-labs/you-give-hr-a-bad-pdf/026.png){: .popup-img }
+
+5. To check if Sysmon is up and running, press the Windows button to search `Services`, open it and then look for `Sysmon64`.
+
+    ![Sysmon Service](../../images/40-2-labs/you-give-hr-a-bad-pdf/027.png){: .popup-img }
+
+    Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`.
+
+    ![Sysmon Event Viewer](../../images/40-2-labs/you-give-hr-a-bad-pdf/028.png){: .popup-img }
