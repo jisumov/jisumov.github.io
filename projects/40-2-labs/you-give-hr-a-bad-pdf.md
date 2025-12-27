@@ -222,7 +222,11 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     ![Splunk Success Ingestion](../../images/40-2-labs/you-give-hr-a-bad-pdf/040.png){: .popup-img }
 
-    Now, the logs can be retrieved by querying the endpoint index.
+    Now, the logs can be retrieved by querying the endpoint index, for example:
+
+     ```powershell
+    source="WinEventLog:*" host="DESKTOP-I6QV43M" index="endpoint"
+    ```
 
     ![Splunk Endpoint Query](../../images/40-2-labs/you-give-hr-a-bad-pdf/041.png){: .popup-img }
 
