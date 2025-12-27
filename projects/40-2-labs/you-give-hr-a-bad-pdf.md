@@ -160,3 +160,138 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
     Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`.
 
     ![Sysmon Event Viewer](../../images/40-2-labs/you-give-hr-a-bad-pdf/028.png){: .popup-img }
+
+### Splunk Setup
+Splunk is a Security Information and Event Management (SIEM) tool for searching, monitoring and analyzing machines' data. This solution will be working on the Windows VM.
+
+1. In the local machine go to: [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html). It requires an account to try the tool for 60 days.
+    
+    In this case, you may use a temporary email with: [https://temp-mail.org/](https://temp-mail.org/), which could serve as a workaround everytime Splunk is tested out.
+
+    ![Splunk Account](../../images/40-2-labs/you-give-hr-a-bad-pdf/029.png){: .popup-img }
+
+2. Now, click on `Download Now` to get the Splunk installer.
+
+    ![Splunk Download Button](../../images/40-2-labs/you-give-hr-a-bad-pdf/030.png){: .popup-img }
+
+    Also, the integrity of the executable can be checked in the same way as the third step of the VMware Setup. Retrieve the hash by clicking on `More` and then on `Download SHA512 to verify your bits`.
+
+    ![Splunk SHA512](../../images/40-2-labs/you-give-hr-a-bad-pdf/031.png){: .popup-img }
+
+    It will download a file which can be opened with Notepad, and since the hash algorithm is SHA512, specify that in the PowerShell as follows:
+
+    ```powershell
+    Get-FileHash <file-name> -Algorithm SHA512
+    ```
+
+    ![Splunk Integrity](../../images/40-2-labs/you-give-hr-a-bad-pdf/032.png){: .popup-img }
+
+3. Execute the Splunk installer and follow the default settings. It will setup Splunk in a `Local System Account`, which is the Windows VM. 
+
+    In case, Splunk needs to oversee data across multiple machines within an Active Directory domain, change to `Domain Account`.
+
+    ![Splunk Local System Account](../../images/40-2-labs/you-give-hr-a-bad-pdf/033.png){: .popup-img }
+
+4. Splunk is now installed and running on `http://127.0.0.1:8000/`
+
+5. In order to log the system events data, below the `Common tasks` tab, click on `Add data`.
+
+    ![Splunk Run](../../images/40-2-labs/you-give-hr-a-bad-pdf/034.png){: .popup-img }
+
+    Then, click on `Monitor`.
+
+    ![Splunk Monitor](../../images/40-2-labs/you-give-hr-a-bad-pdf/035.png){: .popup-img }
+    
+    Select `Local Event Logs` and choose `Application`, `Security` and `System`, which are standard for monitoring endpoints.
+
+    ![Splunk Logs](../../images/40-2-labs/you-give-hr-a-bad-pdf/036.png){: .popup-img }
+
+    Leave the default host value and click on `Create a new index`.
+
+    ![Splunk Index](../../images/40-2-labs/you-give-hr-a-bad-pdf/037.png){: .popup-img }
+    
+    The index can be called `endpoint`, which will be the Windows host's searchable repository for ingested data.
+
+    ![Splunk Endpoint Index](../../images/40-2-labs/you-give-hr-a-bad-pdf/038.png){: .popup-img }
+
+    The Input Settings should look like the following.
+
+    ![Splunk Endpoint Input Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/039.png){: .popup-img }
+
+    After that, click on `Review` and then on `Submit`.
+
+    ![Splunk Success Ingestion](../../images/40-2-labs/you-give-hr-a-bad-pdf/040.png){: .popup-img }
+
+    Now, the logs can be retrieved by querying the endpoint index.
+
+    ![Splunk Endpoint Query](../../images/40-2-labs/you-give-hr-a-bad-pdf/041.png){: .popup-img }
+
+6. Install the `Splunk Add-on for Sysmon` by going to `Apps` -> `Find More Apps` -> Look for `Sysmon` -> Click on `Install`.
+
+    ![Splunk Sysmon Add-on](../../images/40-2-labs/you-give-hr-a-bad-pdf/042.png){: .popup-img }
+
+    Then, go to `C:\Program Files\Splunk\etc\system\local`
+
+7. To ensure that Sysmon logs are ingested into Splunk, go to `C:\Program Files\Splunk\etc\system\local`, and look for the file `inputs.conf`
+
+    If the file is not present, then go back to `system` folder, click on the `default` folder, and copy the `inputs.conf` file into the `local` folder, as shown in the following image.
+
+    ![Inputs Configuration File](../../images/40-2-labs/you-give-hr-a-bad-pdf/043.png){: .popup-img }
+
+    Now, open the `inputs.conf` file, go to the bottom and paste the following configuration:
+    
+    ```
+    [WinEventLog://Microsoft-Windows-Sysmon/Operational]
+    index = endpoint
+    disabled = false
+    renderXml = true
+    source = XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+
+    [WinEventLog://Microsoft-Windows-Windows Defender/Operational]
+    index = endpoint
+    disabled = false
+    source = Microsoft-Windows-Windows Defender/Operational
+    blacklist = 1000,1001,1002,1150,1151,2000
+
+    [WinEventLog://Microsoft-Windows-PowerShell/Operational]
+    index = endpoint
+    disabled = false
+    source = Microsoft-Windows-PowerShell/Operational
+    blacklist = 4105,4106,40961,40962
+
+    [WinEventLog://Application]
+    index = endpoint
+    disabled = false
+
+    [WinEventLog://Security]
+    index = endpoint
+    disabled = false
+
+    [WinEventLog://System]
+    index = endpoint
+    disabled = false
+    ```
+
+    There are blacklisted event IDs, which reduces the noise from routine scanning or operational information. The following are the details:
+
+    - **Windows Defender:** Based on the [Official Microsoft Defender Documentation](https://learn.microsoft.com/en-us/defender-endpoint/troubleshoot-microsoft-defender-antivirus).
+
+        - **1000**: An antimalware scan started.
+        - **1001**: An antimalware scan finished.
+        - **1002**: An antimalware scan was stopped before it finished.
+        - **1150**: The antimalware platform is running and in a healthy state.
+        - **1151**: Endpoint Protection client health report.
+        - **2000**: The antimalware definitions updated successfully.
+
+    - Powershell: Based on [S0cm0nkey’s Security Reference Guide](https://s0cm0nkey.gitbook.io/s0cm0nkeys-security-reference-guide/blue-defense/event-detection/detection-use-cases/windows-event-id-logging-list) and [MyEventLog](https://www.myeventlog.com/find).
+
+        - **4105**: Script Block Execution start.
+        - **4106**: Script Block Execution stop.
+        - **40961**: PowerShell console is starting up.
+        - **40962**: PowerShell console is ready for user input.
+    
+        **Note**: Event ID **4104** refers to Script Block Logging, which leverages the hunting of suspicious Powershell commands. This is a better approach than relying on events **4105** and **4106**, that may cause noisy logs. For further reference: [Malware Archeology](https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/5ba3dc87e79c703f9bfff29a/1537465479833/Windows+PowerShell+Logging+Cheat+Sheet+ver+Sept+2018+v2.2.pdf) and [Black Hills Information Security](https://www.blackhillsinfosec.com/powershell-logging-blue-team/).
+
+    After setting the mentioned configuration, restart the `Splunkd Service`, as shown in the image below.
+
+    ![Splunkd Service Restart](../../images/40-2-labs/you-give-hr-a-bad-pdf/044.png){: .popup-img }
