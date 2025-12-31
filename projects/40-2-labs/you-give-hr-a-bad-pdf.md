@@ -230,17 +230,19 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     ![Splunk Endpoint Query](../../images/40-2-labs/you-give-hr-a-bad-pdf/041.png){: .popup-img }
 
-6. Install the `Splunk Add-on for Sysmon` by going to `Apps` -> `Find More Apps` -> Look for `Sysmon` -> Click on `Install`.
+6. Install the `Splunk Add-on for Sysmon` by going to `Apps` -> `Find More Apps`.
 
-    ![Splunk Sysmon Add-on](../../images/40-2-labs/you-give-hr-a-bad-pdf/042.png){: .popup-img }
+    ![Splunk Find More Apps](../../images/40-2-labs/you-give-hr-a-bad-pdf/042.png){: .popup-img }
 
-    Then, go to `C:\Program Files\Splunk\etc\system\local`
+    Then, look for `Sysmon` -> Click on `Install`.
+
+    ![Splunk Sysmon Add-on](../../images/40-2-labs/you-give-hr-a-bad-pdf/043.png){: .popup-img }
 
 7. To ensure that Sysmon logs are ingested into Splunk, go to `C:\Program Files\Splunk\etc\system\local`, and look for the file `inputs.conf`
 
     If the file is not present, then go back to `system` folder, click on the `default` folder, and copy the `inputs.conf` file into the `local` folder, as shown in the following image.
 
-    ![Inputs Configuration File](../../images/40-2-labs/you-give-hr-a-bad-pdf/043.png){: .popup-img }
+    ![Inputs Configuration File](../../images/40-2-labs/you-give-hr-a-bad-pdf/044.png){: .popup-img }
 
     Now, open the `inputs.conf` file, go to the bottom and paste the following configuration:
     
@@ -287,7 +289,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
         - **1151**: Endpoint Protection client health report.
         - **2000**: The antimalware definitions updated successfully.
 
-    - Powershell: Based on [S0cm0nkey’s Security Reference Guide](https://s0cm0nkey.gitbook.io/s0cm0nkeys-security-reference-guide/blue-defense/event-detection/detection-use-cases/windows-event-id-logging-list) and [MyEventLog](https://www.myeventlog.com/find).
+    - **Powershell:** Based on [S0cm0nkey’s Security Reference Guide](https://s0cm0nkey.gitbook.io/s0cm0nkeys-security-reference-guide/blue-defense/event-detection/detection-use-cases/windows-event-id-logging-list) and [MyEventLog](https://www.myeventlog.com/find).
 
         - **4105**: Script Block Execution start.
         - **4106**: Script Block Execution stop.
@@ -298,4 +300,4 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     After setting the mentioned configuration, restart the `Splunkd Service`, as shown in the image below.
 
-    ![Splunkd Service Restart](../../images/40-2-labs/you-give-hr-a-bad-pdf/044.png){: .popup-img }
+    ![Splunkd Service Restart](../../images/40-2-labs/you-give-hr-a-bad-pdf/045.png){: .popup-img }
