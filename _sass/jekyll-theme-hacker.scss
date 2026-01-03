@@ -622,6 +622,7 @@ html {
   #left-menu {
     display: block;
   }
+
   body.page-index #left-menu {
     display: none;
   }
@@ -704,7 +705,7 @@ html {
     display: block;
     width: 200px;
   }
-  
+
   #post-menu a {
     white-space: normal;
     word-wrap: break-word;
@@ -713,43 +714,81 @@ html {
 }
 
 @media (min-width: 1250px) and (max-width: 1299px) {
-  .container { max-width: 665px; }
-  #post-menu { left: calc(50% + 350px + 15px); }
+  .container {
+    max-width: 665px;
+  }
+
+  #post-menu {
+    left: calc(50% + 350px + 15px);
+  }
 }
 
 @media (min-width: 1300px) and (max-width: 1365px) {
-  .container { max-width: 725px; }
-  #post-menu { left: calc(50% + 380px + 15px); }
+  .container {
+    max-width: 725px;
+  }
+
+  #post-menu {
+    left: calc(50% + 380px + 15px);
+  }
 }
 
 @media (min-width: 1366px) and (max-width: 1399px) {
-  .container { max-width: 765px; }
-  #post-menu { left: calc(50% + 400px + 15px); }
+  .container {
+    max-width: 765px;
+  }
+
+  #post-menu {
+    left: calc(50% + 400px + 15px);
+  }
 }
 
 @media (min-width: 1400px) and (max-width: 1449px) {
-  .container { max-width: 825px; }
-  #post-menu { left: calc(50% + 430px + 15px); }
+  .container {
+    max-width: 825px;
+  }
+
+  #post-menu {
+    left: calc(50% + 430px + 15px);
+  }
 }
 
 @media (min-width: 1450px) and (max-width: 1489px) {
-  .container { max-width: 865px; }
-  #post-menu { left: calc(50% + 450px + 15px); }
+  .container {
+    max-width: 865px;
+  }
+
+  #post-menu {
+    left: calc(50% + 450px + 15px);
+  }
 }
 
 @media (min-width: 1490px) and (max-width: 1549px) {
-  .container { max-width: 925px; }
-  #post-menu { left: calc(50% + 480px + 15px); }
+  .container {
+    max-width: 925px;
+  }
+
+  #post-menu {
+    left: calc(50% + 480px + 15px);
+  }
 }
 
 @media (min-width: 1550px) and (max-width: 1599px) {
-  .container { max-width: 965px; }
-  #post-menu { left: calc(50% + 500px + 15px); }
+  .container {
+    max-width: 965px;
+  }
+
+  #post-menu {
+    left: calc(50% + 500px + 15px);
+  }
 }
 
 @media (min-width: 1600px) and (max-width: 1699px) {
-  .container { max-width: 975px; }
-  #post-menu { 
+  .container {
+    max-width: 975px;
+  }
+
+  #post-menu {
     width: 220px;
     left: calc(50% + 500px + 20px);
   }
@@ -806,5 +845,23 @@ html {
 @media (min-width: 1600px) and (max-width: 1699px) {
   #left-menu {
     width: 220px;
+  }
+}
+
+@media (max-width: 1249px) {
+  header {
+    position: static;
+    padding-top: 20px;
+    border-bottom: 1px dashed $conifer;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  body header {
+    position: relative;
+    margin: 0 0 40px 0;
+    background: $body-background url("../images/bkg.png") 0 0;
   }
 }
