@@ -23,6 +23,12 @@ body.page-index {
   padding-top: 0;
 }
 
+body.page-index header {
+  position: relative;
+  margin: 0 0 40px 0;
+  background: $body-background url("../images/bkg.png") 0 0;
+}
+
 body.no-scroll {
   overflow: hidden !important;
   height: 100vh;
@@ -77,11 +83,6 @@ header {
   margin: 0;
   text-align: left;
   z-index: 100;
-}
-
-body.page-index header {
-  position: static;
-  margin: 0 0 40px 0;
 }
 
 header::before {
