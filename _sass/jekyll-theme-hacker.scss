@@ -711,7 +711,7 @@ html {
   }
 }
 
-@media (min-width: 1366px) and (max-width: 1699px) {
+@media (min-width: 1250px) and (max-width: 1699px) {
   #post-menu {
     display: block;
     width: 200px;
@@ -722,6 +722,16 @@ html {
     word-wrap: break-word;
     line-height: 1.4;
   }
+}
+
+@media (min-width: 1250px) and (max-width: 1299px) {
+  .container { max-width: 665px; }
+  #post-menu { left: calc(50% + 350px + 15px); }
+}
+
+@media (min-width: 1300px) and (max-width: 1365px) {
+  .container { max-width: 725px; }
+  #post-menu { left: calc(50% + 380px + 15px); }
 }
 
 @media (min-width: 1366px) and (max-width: 1399px) {
