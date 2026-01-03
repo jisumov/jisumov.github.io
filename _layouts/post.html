@@ -1,14 +1,62 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US" }}">
 
-<small>{{ page.date | date: "%-d %B %Y" }}</small>
-<h1>{{ page.title }}</h1>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  {% include head-custom.html %}
 
-<p class="view">by {{ page.author | default: site.author }}</p>
+  {% seo %}
+</head>
 
-{{content}}
+<body>
 
-{% if page.tags %}
-  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
-{% endif %}
+  <header>
+
+    <div class="container">
+
+      <a id="a-title" href="{{ '/' | relative_url }}">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+      </a>
+
+      <div id="yt-miniplayer">
+        <div class="btn-title-group">
+          <button id="yt-audio-btn"><i class="fa-solid fa-play"></i></button>
+          <span id="yt-track-title">{{ page.music_title | default: "Welcome to the Jungle" }}</span>
+        </div>
+        <span id="yt-timer">0:00 / 0:00</span>
+      </div>
+
+      <iframe id="yt-audio-iframe" width="0" height="0"
+        src="https://www.youtube.com/embed/{{ page.youtube_id | default: '0CNPR2qNzxk' }}?enablejsapi=1&controls=0&modestbranding=1&rel=0"
+        allow="autoplay; encrypted-media">
+      </iframe>
+
+    </div>
+  </header>
+
+   <aside id="left-menu">
+    <h2>Explore</h2>
+   </aside>
+
+  <div class="post-wrapper">
+    <div class="container">
+      <section id="main_content" class="post-content">
+        {{ content }}
+      </section>
+    </div>
+    <aside id="post-menu">
+      <h2>Contents</h2>
+      <ul id="toc"></ul>
+    </aside>
+  </div>
+
+  <script src="{{ '/assets/js/utils.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/player.js' | relative_url }}"></script>
+
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 youtube_id: Aqc3VTpz9HQ
 music_title: "You Give Love A Bad Name - Bon Jovi"
 ---

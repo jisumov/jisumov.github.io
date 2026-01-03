@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 youtube_id: wsHbHR3Os6U
 music_title: "Oops!...I Did It Again - Britney Spears"
 ---
