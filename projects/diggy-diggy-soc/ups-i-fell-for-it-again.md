@@ -503,8 +503,4 @@ Rtoeytdwwrw = Zlb0jg1k_ab_ij(Wm10y6557ayybsg8)
          uLTi3mt90 = CStr(55 + 241906489 / 87 / Rnd(NkgvUQNV5))
    End Select
 End Function
-
-Private Sub Cr4j95luy6__Click()
-
-End Sub
 ```
