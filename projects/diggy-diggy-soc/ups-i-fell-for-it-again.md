@@ -33,7 +33,9 @@ Before starting the analysis, information about the incoming email should be obt
 6. Are there any attachment?
     
     **Answer:** `Yes`, there is a password-protected .zip file that is hosted at hxxps[:]//download[.]cyberlearn[.]academy/download/download?url=hxxps[:]//files-ld[.]s3[.]us-east-2[.]amazonaws[.]com/21b3a9b03027779dc3070481a468b211[.]zip
-    
+
+# Notes
+
 ZIP Hash: 2abeaf4f1a0bea26a83fc03eeaabaf1c41c9e85115caaea0010ad07c363c2dc9
 File Hash: 7dc9821a27cbc29bddb4bb3c708aad0b24a82d9beb1a2df9caeabf7ea6bd8e06
 
