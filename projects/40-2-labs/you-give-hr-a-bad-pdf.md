@@ -301,3 +301,96 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
     After setting the mentioned configuration, restart the `Splunkd Service`, as shown in the image below.
 
     ![Splunkd Service Restart](../../images/40-2-labs/you-give-hr-a-bad-pdf/045.png){: .popup-img }
+
+### Kali Linux Setup
+Kali Linux is a Debian-based Linux distribution which is commonly used for penetration testing. Since this scenario is more focused on defense, the VM will be taken from a pre-built configuration.
+
+1. Download the Kali Linux pre-built VM found at: [https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines).
+
+    ![Kali Linux Pre-built VM](../../images/40-2-labs/you-give-hr-a-bad-pdf/046.png){: .popup-img }
+
+2. The SHA256sum can be retrieved by clicking on the `sum` tab within the VMware image.
+
+    ![Kali Linux Website Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/047.png){: .popup-img }
+
+    Then, in Powershell compare the previous hash with the local downloaded file.
+
+    ![Kali Linux Powershell Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/048.png){: .popup-img }
+
+3. Extract the `.7z` into the VMWare folder that hosts all the VMs.
+
+    ![Kali Linux Extraction](../../images/40-2-labs/you-give-hr-a-bad-pdf/049.png){: .popup-img }
+
+4. In order to load the pre-built VM, go to `File` -> `Open...`.
+
+    ![Kali Linux Loading](../../images/40-2-labs/you-give-hr-a-bad-pdf/050.png){: .popup-img }
+
+    Look for the `.vmx` file, which contains the VM's hardware settings definitions.
+
+    ![Kali Linux .vmx](../../images/40-2-labs/you-give-hr-a-bad-pdf/051.png){: .popup-img }
+
+5. Before powering up the VM, ensure that it is compatible with the actual VMware version. Therefore, click on the VM, and then on `Upgrade this virtual machine`.
+
+    ![Kali Linux Upgrade](../../images/40-2-labs/you-give-hr-a-bad-pdf/052.png){: .popup-img }
+
+6. In this case, the hardware compatibility must align with the VMware `Workstation 25H2` version, let the default configuration and click on next.
+
+    ![Kali Linux Compatibility](../../images/40-2-labs/you-give-hr-a-bad-pdf/053.png){: .popup-img }
+
+7. Select `Alter this virtual machine`, so the resources usage is optimized, as it is not creating a new VM for this particular use case.
+
+    ![Kali Linux Alteration](../../images/40-2-labs/you-give-hr-a-bad-pdf/054.png){: .popup-img }
+
+8. Review the changes and click on `Finish`.
+
+    ![Kali Linux Review](../../images/40-2-labs/you-give-hr-a-bad-pdf/055.png){: .popup-img }
+
+9. The VM settings need to be reviewed, as there are default options that should be disabled, hence go to `Edit virtual machine settings` -> `Options`
+
+    ![Kali Linux Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/056.png){: .popup-img }
+
+    In this view, go to the `Shared Folders` tab and disable `Folder sharing`, to mitigate the exposure of the host's directories to a potential compromised VM.
+
+    ![Kali Linux Shared Folders](../../images/40-2-labs/you-give-hr-a-bad-pdf/057.png){: .popup-img }
+
+    Also, at the `Guest Isolation` section, uncheck the boxes `Enable drag and drop` and `Enable copy and paste`.
+
+    ![Kali Linux Shared Folders](../../images/40-2-labs/you-give-hr-a-bad-pdf/058.png){: .popup-img }
+
+    To save the changes, click on `OK`.
+
+10. After that, power on the VM and login with the default credentials `kali/kali`.
+
+    ![Kali Linux Login](../../images/40-2-labs/you-give-hr-a-bad-pdf/059.png){: .popup-img }
+
+11. The Operating System can be updated and upgraded. Before that, open a terminal with `Ctrl+Alt+T` and execute the following command:
+
+    ```powershell
+    cat /etc/apt/sources.list
+    ```
+
+    The output shows the current sources, so this ensures that updates are retrieved from trusted repositories. 
+    
+    ![Kali Linux Sources List](../../images/40-2-labs/you-give-hr-a-bad-pdf/060.png){: .popup-img }
+    
+    In this case, it points to the official Kali repository at the `kali-rolling` branch, which is a continuous stable version. 
+    
+    If the latest fixed version is needed, may refer to the `kali-last-snapshot` branch at [Kali Branches](https://www.kali.org/docs/general-use/kali-branches).
+
+    Now, run the command below to check for available package updates:
+
+    ```powershell
+    sudo apt update
+    ```
+
+    ![Kali Linux Update](../../images/40-2-labs/you-give-hr-a-bad-pdf/061.png){: .popup-img }
+
+    Finally, to upgrade the Operating System with the latest packages, enter this command:
+
+    ```powershell
+    sudo apt dist-upgrade -y
+    ```
+
+    ![Kali Linux Upgrade](../../images/40-2-labs/you-give-hr-a-bad-pdf/062.png){: .popup-img }
+
+    **Note:** Make sure to take a snapshot after setting up Kali Linux, in case a rollback needs to be done due to any future system issue.
