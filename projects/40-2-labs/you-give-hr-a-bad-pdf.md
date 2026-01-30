@@ -394,3 +394,88 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
     ![Kali Linux Upgrade](../../images/40-2-labs/you-give-hr-a-bad-pdf/062.png){: .popup-img }
 
     **Note:** Make sure to take a snapshot after setting up Kali Linux, in case a rollback needs to be done due to any future system issue.
+
+### Network Setup
+To minimize security risks, the network must be segmented and isolated from the exterior, so the involved machines, in this educational attack/defense scenario, can communicate between them and not outside of the environment.
+
+1. Go to any VM Settings, then on Network Adapter find the option `LAN Segments...`
+    
+    This is where the `Test` LAN segment should be added.
+
+    ![Network Test Segment](../../images/40-2-labs/you-give-hr-a-bad-pdf/063.png){: .popup-img }
+
+    The new `Test` LAN segment should be selected, instead of any other network connection.
+
+    ![Network Test Selected](../../images/40-2-labs/you-give-hr-a-bad-pdf/064.png){: .popup-img }
+
+2. The following are the steps for the Windows Host network setup:
+
+    2.1. Right click on the Internet icon and select `Network and Internet settings`.
+
+    ![Windows Internet Icon](../../images/40-2-labs/you-give-hr-a-bad-pdf/065.png){: .popup-img }
+
+    2.2. Then, click on `Advanced network settings`.
+
+    ![Windows Advanced Network Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/066.png){: .popup-img }
+
+    2.3. Now, click on the accordion called `Ethernet0` and then on the edit button of `More adapter options`.
+
+    ![Windows More Adapter Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/067.png){: .popup-img }
+
+    2.4. Find `Internet Protocol Version 4 (TCP/IPv4)` and double click it.
+
+    ![Windows IPv4](../../images/40-2-labs/you-give-hr-a-bad-pdf/068.png){: .popup-img }
+
+    2.5. Below the section `Use the following IP address`, establish an IPv4 address. 
+    
+    In this case, the IP address `10.0.0.1` mimics the way workloads might be setup in any cloud provider, as it is a class A within the private IP range.
+
+    The number of hosts is limited by the subnet mask, that is `255.255.255.252`. Consequently, a total of 2 hosts are allowed for this lab.
+
+    ![Windows IP and Subnet Mask](../../images/40-2-labs/you-give-hr-a-bad-pdf/069.png){: .popup-img }
+
+    2.6. Save the changes and open a CMD, where the command `ipconfig` is executed to display the network layout. It should contain the recently saved configuration.
+
+    ![Windows ipconfig](../../images/40-2-labs/you-give-hr-a-bad-pdf/070.png){: .popup-img }
+
+3. This is the network guide for the Kali Linux Host:
+
+    **3.1.** Right click on the Internet icon and select `Edit Connections...`
+
+    ![Kali Linux Internet Icon](../../images/40-2-labs/you-give-hr-a-bad-pdf/071.png){: .popup-img }
+
+    **3.2.** Click on `Wired connection 1` and then on the configuration wheel.
+
+    ![Kali Linux Wired Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/072.png){: .popup-img }
+
+    **3.3.** Go to the `IPv4 Settings` tab, choose the `Manual` method and add the IPv4 address.
+
+    In this case, the IP address `10.0.0.2` is the next available address for being used by a host, due to the 10.0.0.0 is considered as the network address and 10.0.0.3 is the broadcast address, used for communication with all devices in the subnet.
+
+    The Netmask can be represented as `30`, which means 30 bits are allocated for the network portion, leaving 2 bits for host addresses. This results in a total of 4 IP addresses: 1 network address, 2 usable host addresses, and 1 broadcast address.
+
+    ![Kali Linux IP and Netmask](../../images/40-2-labs/you-give-hr-a-bad-pdf/073.png){: .popup-img }
+
+    **3.4.** Open the terminal with the shortcut `Ctrl + Alt + T` and execute `ifconfig`, which displays the newly saved network setup.
+
+    ![Kali Linux ifconfig](../../images/40-2-labs/you-give-hr-a-bad-pdf/074.png){: .popup-img }
+
+    **3.5.** Trying to `ping` the host `10.0.0.1` would fail, because of the Firewall configuration in the Windows machine.
+
+    ![Kali Linux ping](../../images/40-2-labs/you-give-hr-a-bad-pdf/075.png){: .popup-img }
+
+4. As mentioned in step **3.5**, the Kali Linux machine cannot ping the Windows host, due to the Firewall blocks the ICMP requests by default.
+
+    However, the communication can be checked through the opposite direction, from the Windows host to the Kali Linux machine, by executing `ping 10.0.0.2`
+
+    ![Ping Pong](../../images/40-2-labs/you-give-hr-a-bad-pdf/076.png){: .popup-img }
+
+5. Also, the Remote Desktop Protocol must be enabled in the Windows host, as there must be reverse shell capabilities for the Kali Linux machine.
+
+    Go to the Windows settings, then on `System` and find `Remote Desktop`.
+
+    ![Windows RDP Finding](../../images/40-2-labs/you-give-hr-a-bad-pdf/077.png){: .popup-img }
+
+    Turn on the switch and confirm the Remote Desktop enabling.
+
+    ![Windows RDP Enabling](../../images/40-2-labs/you-give-hr-a-bad-pdf/078.png){: .popup-img }
