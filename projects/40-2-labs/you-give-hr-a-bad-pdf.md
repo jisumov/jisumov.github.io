@@ -479,3 +479,6 @@ To minimize security risks, the network must be segmented and isolated from the 
     Turn on the switch and confirm the Remote Desktop enabling.
 
     ![Windows RDP Enabling](../../images/40-2-labs/you-give-hr-a-bad-pdf/078.png){: .popup-img }
+
+## Attack Execution
+A reverse shell on the Windows host will be setup, involving tools like Nmap, MSFvenom and Metasploit. This exercise follows the Cyber Kill Chain, which is a model that outlines the stages of a cyberattack.
