@@ -482,3 +482,6 @@ To minimize security risks, the network must be segmented and isolated from the 
 
 ## Attack Execution
 A reverse shell on the Windows host will be setup, involving tools like Nmap, MSFvenom and Metasploit. This exercise follows the Cyber Kill Chain, which is a model that outlines the stages of a cyberattack.
+
+### Reconnaissance
+Nmap is a free and open source utility for network mapping and security auditing. This tool is being used to scan the Windows host open ports. This helps to find gaps for allowing access and communication with the victim.
