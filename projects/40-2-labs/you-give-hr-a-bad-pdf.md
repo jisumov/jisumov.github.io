@@ -485,3 +485,7 @@ A reverse shell on the Windows host will be setup, involving tools like Nmap, MS
 
 ### Reconnaissance
 Nmap is a free and open source utility for network mapping and security auditing. This tool is being used to scan the Windows host open ports. This helps to find gaps for allowing access and communication with the victim.
+
+1. Nmap provides a manual to guide its use and capabilities. To show it, open a terminal in Kali Linux and execute `nmap -h`.
+
+    ![Nmap Help](./images/home-lab-56.png)
