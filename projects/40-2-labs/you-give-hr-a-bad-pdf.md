@@ -501,3 +501,5 @@ Nmap is a free and open source utility for network mapping and security auditing
     Also, `-Pn` disables host discovery, known as ping, and forcibly conducts the port scan.
 
     ![Nmap Port Scan](./images/home-lab-56.png)
+
+3. Nmap found port `3389` open, which corresponds to the Remote Desktop Protocol (RDP). This information will be used for the next stage.
