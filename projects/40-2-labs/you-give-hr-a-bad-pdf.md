@@ -489,3 +489,15 @@ Nmap is a free and open source utility for network mapping and security auditing
 1. Nmap provides a manual to guide its use and capabilities. To show it, open a terminal in Kali Linux and execute `nmap -h`.
 
     ![Nmap Help](./images/home-lab-56.png)
+
+2. Execute the following command:
+
+    ```bash
+    nmap -A 10.0.0.1 -Pn
+    ```
+
+    Where `-A` performs an aggressive scan with multiple techniques such as `-O` for OS detection, `-sV` for open ports version detection, `-sC` for default script scanning and `--traceroute` for mapping the hop path.
+
+    Also, `-Pn` disables host discovery, known as ping, and forcibly conducts the port scan.
+
+    ![Nmap Port Scan](./images/home-lab-56.png)
