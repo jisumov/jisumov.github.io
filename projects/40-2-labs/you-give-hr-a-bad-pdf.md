@@ -400,7 +400,7 @@ To minimize security risks, the network must be segmented and isolated from the 
 
 1. Go to any VM Settings, then on Network Adapter find the option `LAN Segments...`
     
-    This is where the `Test` LAN segment should be added.
+    Click on `Add` and set a name to the LAN segment, such as `Test`.
 
     ![Network Test Segment](../../images/40-2-labs/you-give-hr-a-bad-pdf/063.png){: .popup-img }
 
