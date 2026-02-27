@@ -90,7 +90,7 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![Windows 11 Pro](../../images/40-2-labs/you-give-hr-a-bad-pdf/014.png){: .popup-img }
 
-8. During the setup, it will ask to connect to a network. To bypass this step, do `Shift+F10` to open the `CMD` and execute the following command:
+8. During the setup, it will ask to connect to a network. To bypass this step, do `Shift + F10` to open the `CMD` and execute the following command:
 
     ```powershell
     oobe\bypassnro
@@ -363,7 +363,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux Login](../../images/40-2-labs/you-give-hr-a-bad-pdf/059.png){: .popup-img }
 
-11. The Operating System can be updated and upgraded. Before that, open a terminal with `Ctrl+Alt+T` and execute the following command:
+11. The Operating System can be updated and upgraded. Before that, open a terminal with `Ctrl + Alt + T` and execute the following command:
 
     ```powershell
     cat /etc/apt/sources.list
@@ -408,6 +408,8 @@ To minimize security risks, the network must be segmented and isolated from the 
 
     ![Network Test Selected](../../images/40-2-labs/you-give-hr-a-bad-pdf/064.png){: .popup-img }
 
+    **Note:** Please do this step for both machines.
+
 2. The following are the steps for the Windows Host network setup:
 
     2.1. Right click on the Internet icon and select `Network and Internet settings`.
@@ -448,37 +450,39 @@ To minimize security risks, the network must be segmented and isolated from the 
 
     ![Kali Linux Wired Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/072.png){: .popup-img }
 
-    **3.3.** Go to the `IPv4 Settings` tab, choose the `Manual` method and add the IPv4 address.
+    **3.3.** Go to the `IPv4 Settings` tab, choose the `Manual` method.
 
-    In this case, the IP address `10.0.0.2` is the next available address for being used by a host, due to the 10.0.0.0 is considered as the network address and 10.0.0.3 is the broadcast address, used for communication with all devices in the subnet.
+    ![Kali Linux Manual Method](../../images/40-2-labs/you-give-hr-a-bad-pdf/073.png){: .popup-img }
+
+    Then, add the IPv4 address. In this case, the IP address `10.0.0.2` is the next available address for being used by a host, due to the 10.0.0.0 is considered as the network address and 10.0.0.3 is the broadcast address, used for communication with all devices in the subnet.
 
     The Netmask can be represented as `30`, which means 30 bits are allocated for the network portion, leaving 2 bits for host addresses. This results in a total of 4 IP addresses: 1 network address, 2 usable host addresses, and 1 broadcast address.
 
-    ![Kali Linux IP and Netmask](../../images/40-2-labs/you-give-hr-a-bad-pdf/073.png){: .popup-img }
+    ![Kali Linux IP and Netmask](../../images/40-2-labs/you-give-hr-a-bad-pdf/074.png){: .popup-img }
 
     **3.4.** Open the terminal with the shortcut `Ctrl + Alt + T` and execute `ifconfig`, which displays the newly saved network setup.
 
-    ![Kali Linux ifconfig](../../images/40-2-labs/you-give-hr-a-bad-pdf/074.png){: .popup-img }
+    ![Kali Linux ifconfig](../../images/40-2-labs/you-give-hr-a-bad-pdf/075.png){: .popup-img }
 
     **3.5.** Trying to `ping` the host `10.0.0.1` would fail, because of the Firewall configuration in the Windows machine.
 
-    ![Kali Linux ping](../../images/40-2-labs/you-give-hr-a-bad-pdf/075.png){: .popup-img }
+    ![Kali Linux ping](../../images/40-2-labs/you-give-hr-a-bad-pdf/076.png){: .popup-img }
 
 4. As mentioned in step **3.5**, the Kali Linux machine cannot ping the Windows host, due to the Firewall blocks the ICMP requests by default.
 
     However, the communication can be checked through the opposite direction, from the Windows host to the Kali Linux machine, by executing `ping 10.0.0.2`
 
-    ![Ping Pong](../../images/40-2-labs/you-give-hr-a-bad-pdf/076.png){: .popup-img }
+    ![Ping Pong](../../images/40-2-labs/you-give-hr-a-bad-pdf/077.png){: .popup-img }
 
 5. Also, the Remote Desktop Protocol must be enabled in the Windows host, as there must be reverse shell capabilities for the Kali Linux machine.
 
     Go to the Windows settings, then on `System` and find `Remote Desktop`.
 
-    ![Windows RDP Finding](../../images/40-2-labs/you-give-hr-a-bad-pdf/077.png){: .popup-img }
+    ![Windows RDP Finding](../../images/40-2-labs/you-give-hr-a-bad-pdf/078.png){: .popup-img }
 
     Turn on the switch and confirm the Remote Desktop enabling.
 
-    ![Windows RDP Enabling](../../images/40-2-labs/you-give-hr-a-bad-pdf/078.png){: .popup-img }
+    ![Windows RDP Enabling](../../images/40-2-labs/you-give-hr-a-bad-pdf/079.png){: .popup-img }
 
 ## Attack Execution
 A reverse shell on the Windows host will be setup, involving tools like Nmap, MSFvenom and Metasploit. This exercise follows the Cyber Kill Chain, which is a model that outlines the stages of a cyberattack.
@@ -488,11 +492,11 @@ Nmap is a free and open source utility for network mapping and security auditing
 
 1. Nmap provides a manual to guide its use and capabilities. To show it, open a terminal in Kali Linux and execute `nmap -h`.
 
-    ![Nmap Help](./images/home-lab-56.png)
+    ![Nmap Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/080.png){: .popup-img }
 
 2. Execute the following command:
 
-    ```bash
+    ```powershell
     nmap -A 10.0.0.1 -Pn
     ```
 
@@ -500,6 +504,6 @@ Nmap is a free and open source utility for network mapping and security auditing
 
     Also, `-Pn` disables host discovery, known as ping, and forcibly conducts the port scan.
 
-    ![Nmap Port Scan](./images/home-lab-56.png)
+    ![Nmap Port Scan](../../images/40-2-labs/you-give-hr-a-bad-pdf/081.png){: .popup-img }
 
 3. Nmap found port `3389` open, which corresponds to the Remote Desktop Protocol (RDP). This information will be used for the next stage.
