@@ -623,27 +623,19 @@ Since a Metasploit payload is being used, the exploitation, installation and C2 
 
     ![View Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/103.png){: .popup-img }
 
-2. Check the SHA512 hash of `Resume.pdf.exe`, as seen in the step 2 of the Splunk Setup.
+2. Check the SHA256 hash of `Resume.pdf.exe`, as seen in the step 3 of the VMware Workstation Pro Setup.
 
-    ![Malicious File Incomplete Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/104.png){: .popup-img }
-
-    The hash is cut, to display the full characters, execute the following command:
-
-    ```powershell
-    (Get-FileHash <file-name> -Algorithm SHA512).Hash
-    ```
-
-    ![Malicious File Complete Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/105.png){: .popup-img }
+    ![Malicious File Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/104.png){: .popup-img }
 
     Looking for the hash in VirusTotal, it does not find anything.
 
-    ![VirusTotal Lookup](../../images/40-2-labs/you-give-hr-a-bad-pdf/106.png){: .popup-img }
+    ![VirusTotal Lookup](../../images/40-2-labs/you-give-hr-a-bad-pdf/105.png){: .popup-img }
     
     This explains how hashes work, any minor variation made to a file, its hash changes completely, preventing detection in open-source Threat Intelligence databases.
 
 3. Now, double click on the `Resume.pdf.exe`. When the SmartScreen warning shows up, click on `Run`.
 
-    ![Malicious File Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/107.png){: .popup-img }
+    ![Malicious File Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/106.png){: .popup-img }
 
     It will execute the malware, but no signs of visible UI is shown in the Windows host.
 
@@ -652,15 +644,164 @@ This is the last stage of the Cyber Kill Chain, where the attacker can perform a
 
 1. In the Kali Linux host, there is a successful opened session with the Windows host. Type `shell`, in order to open the Windows Command Prompt.
 
-    ![Remote CMD](../../images/40-2-labs/you-give-hr-a-bad-pdf/108.png){: .popup-img }
+    ![Remote CMD](../../images/40-2-labs/you-give-hr-a-bad-pdf/107.png){: .popup-img }
 
 2. To create logs for Splunk, enter `net user`, `net localgroup` and `ipconfig`
 
-    ![Commands Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/109.png){: .popup-img }
+    ![Commands Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/108.png){: .popup-img }
 
     In this case, `net user` displays the local computer accounts, `net localgroup` shows the local groups of the device and `ipconfig` permits to visualize the TCP/IP network configuration.
 
 3. For any other particular use case, may refer to the meterpreter documentation by typing `help`
 
-    ![Meterpreter Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/110.png){: .popup-img }
+    ![Meterpreter Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/109.png){: .popup-img }
 
+## Quick Insights
+This section explores the current malware execution and the related logs within the Splunk platform. Since there are not detection rules, the process is manual and depends on the artifacts that the analyst gathers along the investigation.
+
+### Windows Findings
+
+1. The connection to the attacker machine can be reviewed in CMD as Administrator with the command `netstat -anob`.
+
+    The parameter `-a` displays all active connections and listening ports, `-n` shows addresses and ports in numeric format, `-o` retrieves the Process ID (PID) for each connection, and `-b` reveals the executable that initiated the connection.
+
+    ![CMD Netstat](../../images/40-2-labs/you-give-hr-a-bad-pdf/110.png){: .popup-img }
+
+    In this case, the malicious connection is found through a deep search, but it may be optimised via Powershell as Administrator, with the following command:
+
+    ```powershell
+    netstat -anob | Select-String "10.0.0.2" -Context 0,1
+    ```
+
+    ![Powershell Netstat](../../images/40-2-labs/you-give-hr-a-bad-pdf/111.png){: .popup-img }
+
+    Where `Select-String` looks for matches based on the provided string and `-Context 0,1` helps to output the first record (0) and the next (1), otherwise just the first line would be displayed.
+
+2. Since the previous command provided the PID, it can be searched via `Task Manager` -> `Details`, and in the upper bar type the PID, in this case `9204`
+
+    ![Task Manager Details](../../images/40-2-labs/you-give-hr-a-bad-pdf/112.png){: .popup-img }
+
+    Here it is confirmed that the malware is up and running with the `Resume.pdf.exe` process. 
+    
+    In some situations, a malicious process could spawn subprocesses to perform other desired actions, which increases the artifacts for further investigation. 
+    
+    For example, the legit Windows Defender SmartScreen background process contains two subprocesses.
+
+    ![Task Manager Processes](../../images/40-2-labs/you-give-hr-a-bad-pdf/113.png){: .popup-img }
+
+3. Also, in the logs at `Event Viewer`-> `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon` -> `Operational`, more information can be discovered, such as the activity based on the PID.
+
+    ![Event Viewer Logs](../../images/40-2-labs/you-give-hr-a-bad-pdf/114.png){: .popup-img }
+
+    To do that, go to the right panel, click on `Filter Current Log...`, then go to the `XML` tab, enable the box `Edit query manually` and modify the query as follows:
+
+    ```xml
+    <QueryList>
+        <Query Id="0" Path="Microsoft-Windows-Sysmon/Operational">
+            <Select Path="Microsoft-Windows-Sysmon/Operational">
+                *[EventData[Data="9204"]]
+            </Select>
+        </Query>
+    </QueryList>
+    ```
+
+    ![Event Viewer XML Query Setup](../../images/40-2-labs/you-give-hr-a-bad-pdf/115.png){: .popup-img }
+
+    When clicking `OK`, it will filter based on the records that contain the keyword `9204`
+    
+    ![Event Viewer XML Query Results](../../images/40-2-labs/you-give-hr-a-bad-pdf/116.png){: .popup-img }
+
+    In this case, the DLL Side-Loading technique was detected by Sysmon from the loaded image found at `C:\Users\strigoi\Downloads\Resume.pdf.exe`
+
+    However, using the Event Viewer may delay the investigation, so Splunk speeds the workflow as described in the next section.
+
+### Splunk Queries
+
+1. For a general approach, execute the query with the created index and the filename like:
+
+    ```powershell
+    index="endpoint" Resume.pdf.exe
+    ```
+
+    ![Splunk Resume Search](../../images/40-2-labs/you-give-hr-a-bad-pdf/117.png){: .popup-img }
+
+    This will return all the results, in XML format, that contain the string `Resume.pdf.exe` within the `endpoint` index.
+
+2. In the left panel, there are multiple fields that constitute the XML events data. 
+
+    Looking at the `dest` field, there is an anomaly, where the IP address `10.0.0.2` is shown with one record.
+
+    ![Splunk Dest Field](../../images/40-2-labs/you-give-hr-a-bad-pdf/118.png){: .popup-img }
+
+    When the IP is clicked, Splunk automatically filters by the `dest` field, as follows:
+
+    ![Splunk IP Filter](../../images/40-2-labs/you-give-hr-a-bad-pdf/119.png){: .popup-img }
+
+3. More information can be reviewed by expanding the record.
+
+    ![Splunk Record Expansion](../../images/40-2-labs/you-give-hr-a-bad-pdf/120.png){: .popup-img }
+
+    For example, the signature is a `Network connection` with the technique `Non-Standard Port`
+
+    The executed process is `Resume.pdf.exe`, that connected to the IP `10.0.0.2` at port `4444` and the action was `allowed`
+
+    And, an important note is the timeframe when the incident occurred. In this case, it was on `2026-02-28 01:05:01` UTC Time, which is a standard for better reference in a Security Operations Center.
+
+4. Once the analysis leads to a successful connection, the executed process needs to be reviewed for any other anomaly. For example, with the query:
+
+    ```powershell
+    index="endpoint" Resume.pdf.exe
+    | table UtcTime, EventCode, EventDescription, ParentProcessGuid, ParentImage, ProcessGuid, Image, CommandLine
+    ```
+    Here, the results will be formatted as a table displaying the selected fields. This is a query to look for all the events, the spawned processes, their parents and command lines if applicable.
+
+    ![Splunk Table Filter](../../images/40-2-labs/you-give-hr-a-bad-pdf/121.png){: .popup-img }
+
+    The Global Unique Identifiers (GUID) are also obtained, as we may see another anomaly where the `cmd.exe` process is spawned from the `Resume.pdf.exe` process. However, `cmd.exe` could be executing benign processes, so the `GUID` helps to filter for the specific process that the malware created.
+
+5. Since the `cmd.exe` process was created, this means that some command execution was delivered. Therefore, the following query shows the specific commands:
+
+    ```powershell
+    index="endpoint"
+    | where ParentProcessGuid="{a90214f8-3f89-69a2-a910-000000001f00}"
+    | table UtcTime, EventCode, EventDescription, ParentProcessGuid, ParentImage, ProcessGuid, Image, CommandLine
+    ```
+
+    The `cmd.exe` GUID was taken from the previous results and was put as the `ParentProcessGuid`, due to it is now creating other processes as follows:
+
+    ![Splunk CMD Query](../../images/40-2-labs/you-give-hr-a-bad-pdf/122.png){: .popup-img }
+
+6. The previous logs showed the executed commands `net user`, `net localgroup` and `ipconfig`, but with an extra result in a different timeframe, then to filter in a time range there are two options.
+
+    **6.1. Filtering with the UI:** First, replace the `UtcTime` field for `_time`. This is the System Time, in this case is UTC-8.
+
+    ```powershell
+    index="endpoint"
+    | where ParentProcessGuid="{a90214f8-3f89-69a2-a910-000000001f00}"
+    | table _time, EventCode, EventDescription, ParentProcessGuid, ParentImage, ProcessGuid, Image, CommandLine
+    ```
+
+    Run the query for the updated results, then click on the `Time range` tab, expand the `Date & Time Range` accordion and set the timeframe including milliseconds.
+
+    Note that the upper time boundary must be set **1 millisecond** above the target event, otherwise the `ipconfig` execution log will not be included in the results.
+
+    ![Splunk Date & Time Range Setup](../../images/40-2-labs/you-give-hr-a-bad-pdf/123.png){: .popup-img }
+
+    Click on `Apply` and the results will be shown within the specified timeframe.
+
+    ![Splunk Date & Time Range Results](../../images/40-2-labs/you-give-hr-a-bad-pdf/124.png){: .popup-img }
+
+    **6.2. Filtering with the Query:** If the `UtcTime` needs to be preserved for easier correlation in International systems, then execute the following query:
+
+    ```powershell
+    index="endpoint"
+    | where ParentProcessGuid="{a90214f8-3f89-69a2-a910-000000001f00}"
+    | eval event_time=strptime(UtcTime, "%Y-%m-%d %H:%M:%S")
+    | where event_time>=strptime("2026-02-28 01:19:59", "%Y-%m-%d %H:%M:%S") 
+    AND event_time<=strptime("2026-02-28 01:20:09", "%Y-%m-%d %H:%M:%S")
+    | table UtcTime, EventCode, EventDescription, ParentProcessGuid, ParentImage, ProcessGuid, Image, CommandLine
+    ```
+
+    In this scenario, millisecond precision is unnecessary. For larger datasets, filtering on `UtcTime` instead of `_time` may lead to reduced query performance, as `_time` is typically indexed and optimized for time-based searches.
+
+    ![Splunk Query Time Range Results](../../images/40-2-labs/you-give-hr-a-bad-pdf/125.png){: .popup-img }
