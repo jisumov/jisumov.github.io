@@ -282,21 +282,21 @@ Splunk is a Security Information and Event Management (SIEM) tool for searching,
 
     - **Windows Defender:** Based on the [Official Microsoft Defender Documentation](https://learn.microsoft.com/en-us/defender-endpoint/troubleshoot-microsoft-defender-antivirus).
 
-        - **1000**: An antimalware scan started.
-        - **1001**: An antimalware scan finished.
-        - **1002**: An antimalware scan was stopped before it finished.
-        - **1150**: The antimalware platform is running and in a healthy state.
-        - **1151**: Endpoint Protection client health report.
-        - **2000**: The antimalware definitions updated successfully.
+        - **1000:** An antimalware scan started.
+        - **1001:** An antimalware scan finished.
+        - **1002:** An antimalware scan was stopped before it finished.
+        - **1150:** The antimalware platform is running and in a healthy state.
+        - **1151:** Endpoint Protection client health report.
+        - **2000:** The antimalware definitions updated successfully.
 
     - **Powershell:** Based on [S0cm0nkey’s Security Reference Guide](https://s0cm0nkey.gitbook.io/s0cm0nkeys-security-reference-guide/blue-defense/event-detection/detection-use-cases/windows-event-id-logging-list) and [MyEventLog](https://www.myeventlog.com/find).
 
-        - **4105**: Script Block Execution start.
-        - **4106**: Script Block Execution stop.
-        - **40961**: PowerShell console is starting up.
-        - **40962**: PowerShell console is ready for user input.
+        - **4105:** Script Block Execution start.
+        - **4106:** Script Block Execution stop.
+        - **40961:** PowerShell console is starting up.
+        - **40962:** PowerShell console is ready for user input.
     
-        **Note**: Event ID **4104** refers to Script Block Logging, which leverages the hunting of suspicious Powershell commands. This is a better approach than relying on events **4105** and **4106**, that may cause noisy logs. For further reference: [Malware Archeology](https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/5ba3dc87e79c703f9bfff29a/1537465479833/Windows+PowerShell+Logging+Cheat+Sheet+ver+Sept+2018+v2.2.pdf) and [Black Hills Information Security](https://www.blackhillsinfosec.com/powershell-logging-blue-team/).
+        **Note:** Event ID **4104** refers to Script Block Logging, which leverages the hunting of suspicious Powershell commands. This is a better approach than relying on events **4105** and **4106**, that may cause noisy logs. For further reference: [Malware Archeology](https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/5ba3dc87e79c703f9bfff29a/1537465479833/Windows+PowerShell+Logging+Cheat+Sheet+ver+Sept+2018+v2.2.pdf) and [Black Hills Information Security](https://www.blackhillsinfosec.com/powershell-logging-blue-team/).
 
     After setting the mentioned configuration, restart the `Splunkd Service`, as shown in the image below.
 
@@ -412,23 +412,23 @@ To minimize security risks, the network must be segmented and isolated from the 
 
 2. The following are the steps for the Windows Host network setup:
 
-    2.1. Right click on the Internet icon and select `Network and Internet settings`.
+    **2.1.** Right click on the Internet icon and select `Network and Internet settings`.
 
     ![Windows Internet Icon](../../images/40-2-labs/you-give-hr-a-bad-pdf/065.png){: .popup-img }
 
-    2.2. Then, click on `Advanced network settings`.
+    **2.2.** Then, click on `Advanced network settings`.
 
     ![Windows Advanced Network Settings](../../images/40-2-labs/you-give-hr-a-bad-pdf/066.png){: .popup-img }
 
-    2.3. Now, click on the accordion called `Ethernet0` and then on the edit button of `More adapter options`.
+    **2.3.** Now, click on the accordion called `Ethernet0` and then on the edit button of `More adapter options`.
 
     ![Windows More Adapter Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/067.png){: .popup-img }
 
-    2.4. Find `Internet Protocol Version 4 (TCP/IPv4)` and double click it.
+    **2.4.** Find `Internet Protocol Version 4 (TCP/IPv4)` and double click it.
 
     ![Windows IPv4](../../images/40-2-labs/you-give-hr-a-bad-pdf/068.png){: .popup-img }
 
-    2.5. Below the section `Use the following IP address`, establish an IPv4 address. 
+    **2.5.** Below the section `Use the following IP address`, establish an IPv4 address. 
     
     In this case, the IP address `10.0.0.1` mimics the way workloads might be setup in any cloud provider, as it is a class A within the private IP range.
 
@@ -436,7 +436,7 @@ To minimize security risks, the network must be segmented and isolated from the 
 
     ![Windows IP and Subnet Mask](../../images/40-2-labs/you-give-hr-a-bad-pdf/069.png){: .popup-img }
 
-    2.6. Save the changes and open a CMD, where the command `ipconfig` is executed to display the network layout. It should contain the recently saved configuration.
+    **2.6.** Save the changes and open a CMD, where the command `ipconfig` is executed to display the network layout. It should contain the recently saved configuration.
 
     ![Windows ipconfig](../../images/40-2-labs/you-give-hr-a-bad-pdf/070.png){: .popup-img }
 
@@ -623,7 +623,7 @@ Since a Metasploit payload is being used, the exploitation, installation and C2 
 
     ![View Options](../../images/40-2-labs/you-give-hr-a-bad-pdf/103.png){: .popup-img }
 
-2. Check the SHA256 hash of `Resume.pdf.exe`, as seen in the step 3 of the VMware Workstation Pro Setup.
+2. Check the SHA256 hash of `Resume.pdf.exe`, as seen in the step **3** of the VMware Workstation Pro Setup.
 
     ![Malicious File Hash](../../images/40-2-labs/you-give-hr-a-bad-pdf/104.png){: .popup-img }
 

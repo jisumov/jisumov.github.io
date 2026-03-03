@@ -327,6 +327,14 @@ ol>li::marker {
   font-weight: bold;
 }
 
+li > p > strong {
+  color: lighten(#90a959, 20%);
+}
+
+li > ul > li > strong {
+  color: lighten(#90a959, 25%);
+}
+
 .popup-img {
   max-width: 650px;
   width: auto;
