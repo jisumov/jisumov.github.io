@@ -815,3 +815,15 @@ This section explores the current malware execution and the related logs within 
     In this scenario, millisecond precision is unnecessary. For larger datasets, filtering on `UtcTime` instead of `_time` may lead to reduced query performance, as `_time` is typically indexed and optimized for time-based searches.
 
     ![Splunk Query Time Range Results](../../images/40-2-labs/you-give-hr-a-bad-pdf/125.png){: .popup-img }
+
+## Lessons Learned
+
+  - **Zero Trust as a foundational principle:** Every downloaded ISO, executable and VM image was verified through cryptographic hash validation before installation. Alongside the double check on the baseline files like the `sources.list` reinforced the concept of *"never trust, always verify"*, ensuring integrity at each stage and minimizing the risk of introducing tampered software or misconfigurations that could compromise system stability and security.
+  
+  - **Security begins at architecture level:** The VMs were not deployed with default settings only. Decisions such as selecting Windows 11 Pro for `RDP` instead of the Home edition, encrypting virtual disks based on `TPM`, disabling shared folders and guest isolation in Kali Linux to avoid escape, and segmenting the network with a `/30` subnet to hold the least hosts as possible, demonstrated how security posture is directly influenced by initial design choices.
+  
+  - **Intentional telemetry and network design improve visibility:** Editing Splunk's `inputs.conf`, selectively blacklisting noisy Event IDs, and configuring a segmented LAN network isolated from the host machine, demonstrated that effective monitoring depends on controlled architecture and log quality rather than quantity. Preventing direct connectivity with the host reduced unintended traffic, while tuning log ingestion enhanced the signal-to-noise ratio.
+  
+  - **Understanding the attack lifecycle strengthens root cause analysis:** Implementing the `Cyber Kill Chain` framework provided a structured view of the simulated attack, from reconnaissance to actions on objectives. Mapping each stage to observable artifacts facilitated clearer correlation and improved analytical reasoning during the intrusion assessment. A solid understanding of the attack flow directly enables iterative refinements to detection mechanisms.
+  
+  - **Endpoint Logs Gain Value Through Centralization:** The Windows findings provided insight into how the Operating System generates and stores event logs, where they are located, and how they can be leveraged during direct access scenarios. However, raw endpoint data becomes significantly more valuable when centralized within a `SIEM` like Splunk, where correlation, indexed searches, and structured filtering boost faster investigations and incident response.
