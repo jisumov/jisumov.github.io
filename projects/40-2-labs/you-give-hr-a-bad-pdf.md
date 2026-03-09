@@ -825,3 +825,7 @@ Also, the network setup was important to get to know how these systems communica
 Furthermore, the `Cyber Kill Chain` framework was put in practice, as this is a way how an attack flow might look like. Each step from reconnaissance to actions on objectives were shaped in a form that was supported by pre-built utilities, which were not the principal subject of study, but the mindset behind each choice until getting a Remote Code Execution `(RCE)` session to blow everything up.
 
 Finally, the generated artifacts could be retrieved in different ways, like the CMD, Task Manager and Event Viewer, but efficiency was achieved with a centralized hub like a `SIEM`, in this case Splunk, where all the raw data was transformed into valuable information that helped to catch the intruder, with enough supporting evidence, in a shorter timeframe. As every investigation differs, the limit is the analyst's creativity, or... `do threat actors act the same every time, no matter the circumstance?`
+
+---
+
+_**Inspired by [MYDFIR](https://www.youtube.com/@MyDFIR)**_
