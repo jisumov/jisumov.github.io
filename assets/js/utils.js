@@ -121,6 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 5) {
+    currentItem = hierarchy[hierarchy.length - 1];
+    }
+
     if (!currentItem) return;
 
     clearStates();
