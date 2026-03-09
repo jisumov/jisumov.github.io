@@ -828,4 +828,4 @@ Finally, the generated artifacts could be retrieved in different ways, like the 
 
 ---
 
-_**Inspired by [MYDFIR](https://www.youtube.com/@MyDFIR)**_
+_**Inspired by [MyDFIR](https://www.youtube.com/@MyDFIR)**_
