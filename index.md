@@ -22,7 +22,7 @@ Hey there! I'm [José Suárez](https://www.linkedin.com/in/jisumov), a Computer 
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/40-2-labs/index.md %}">May enter this land, that is protected by polished labs</a>
+        <a class="button-link" href="{% link projects/40-2-labs/index.md %}">May enter this land, that is protected by polished labs →</a>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@ Hey there! I'm [José Suárez](https://www.linkedin.com/in/jisumov), a Computer 
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/diggy-diggy-soc/index.md %}">Face them on the SIEM, you will meet the logs</a>
+        <a class="button-link" href="{% link projects/diggy-diggy-soc/index.md %}">Face them on the SIEM, you will meet the logs →</a>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@ Hey there! I'm [José Suárez](https://www.linkedin.com/in/jisumov), a Computer 
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/kqlhauled/index.md %}">Make that alert walk the plank, with a bottle of queries</a>
+        <a class="button-link" href="{% link projects/kqlhauled/index.md %}">Make that alert walk the plank, with a bottle of queries →</a>
       </div>
     </div>
   </div>

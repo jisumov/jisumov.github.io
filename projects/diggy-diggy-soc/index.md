@@ -16,7 +16,7 @@ music_title: "Diggy Diggy Hole - Wind Rose"
         </p>
       </div>
       <div>
-        <a class="button-link" href="{{ '/projects/diggy-diggy-soc/fortunate-vpn' | relative_url }}">It ain't me</a>
+        <a class="button-link" href="{{ '/projects/diggy-diggy-soc/fortunate-vpn' | relative_url }}">It ain't me →</a>
       </div>
     </div>
   </div>
