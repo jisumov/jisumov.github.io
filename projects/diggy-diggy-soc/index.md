@@ -12,7 +12,7 @@ music_title: "Diggy Diggy Hole - Wind Rose"
       <div>
         <h3>Fortunate VPN</h3>
         <p>
-          This Let's Defend's incident was triggered from the Rule Name <b>SOC257 - VPN Connection Detected from Unauthorized Country</b>, with Event ID <b>225</b>. Suspicious signin attempts from Vietnam, were they successful?
+          This Let's Defend's alert was triggered from the Rule Name <b>SOC257 - VPN Connection Detected from Unauthorized Country</b>, with Event ID <b>225</b>. Suspicious signin attempts from Vietnam, were they successful?
         </p>
       </div>
       <div>
