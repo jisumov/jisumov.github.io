@@ -283,7 +283,7 @@ pre {
   }
 }
 
-p code {
+:not(pre) > code {
   color: #aa759f !important;
   background-color: #111 !important;
   padding: 2px 4px;
