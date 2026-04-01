@@ -129,7 +129,95 @@ After reviewing all the indicators, we may proceed with the alert verdict, which
 
 ### Containment, Eradication & Recovery
 
+Now, the playbook asks for the `Incident Type`, which is `Unauthorized Access`
+
+![Incident Type](../../images/diggy-diggy-soc/fortunate-vpn/021.png){: .popup-img }
+
+Later on, the threat actor is being requested to be defined. In this case, the behavior relates to `Multiple login failures to a computer system` and `Access to systems outside of normal business hours`
+
+![Threat Actor Definition](../../images/diggy-diggy-soc/fortunate-vpn/022.png){: .popup-img }
+
+The identified source IP is `113[.]161[.]158[.]12`
+
+![Identified Source IP](../../images/diggy-diggy-soc/fortunate-vpn/023.png){: .popup-img }
+
+The IP belongs to the `External Network`
+
+![Public IP](../../images/diggy-diggy-soc/fortunate-vpn/024.png){: .popup-img }
+
+Based on multiple open threat intelligence sources, the IP reputation is `Malicious`
+
+![IP Reputation](../../images/diggy-diggy-soc/fortunate-vpn/025.png){: .popup-img }
+
+Among the possible impacted systems there are the Monica's workstation, which was not found affected, as well as the VPN application where the attacker attempted the logins, that were not successful.
+
+Although, if the VPN service sent automated emails to Monica regarding OTP codes for starting the MFA activation, `it is likely that her first authentication method (password) was compromised`
+
+![Impacted Systems](../../images/diggy-diggy-soc/fortunate-vpn/026.png){: .popup-img }
+
+There were multiple destination ports for the targeted IP `33[.]33[.]33[.]33`. The most relevant is `443`, the default TCP port for HTTPS, where all login attempts took place with no success.
+
+![Destination Port](../../images/diggy-diggy-soc/fortunate-vpn/027.png){: .popup-img }
+
+Furthermore, `there was not any impact on critical systems`
+
+![Affected Critical Systems](../../images/diggy-diggy-soc/fortunate-vpn/028.png){: .popup-img }
+
+Additionally, `no sensitive data is at risk`
+
+**Note:** Sensitive data is any data that could cause damage if exposed. As there was no intrusion, the potential sensitive data exfiltration risk was mitigated.
+
+![Sensitive Data At Risk](../../images/diggy-diggy-soc/fortunate-vpn/029.png){: .popup-img }
+
+On the other hand, `the device did not require to be isolated`, as the threat actor could not get access to Monica's account for further infiltration.
+
+![Devise Isolation](../../images/diggy-diggy-soc/fortunate-vpn/030.png){: .popup-img }
+
+Now, among all the found evidence, the relevant indicators reside in the `network layer` and are registered in the SIEM, hence the records in the `Log Management` section should be enough for supporting the investigation.
+
+If there is any Event ID that is not ingested into the SIEM, the `.evtx` files could be retrieved from a `Live Response Session` for further analysis. 
+
+Also, the `Investigation Package` from a device could help to check any other suspicious autoruns, processes, scheduled tasks, etc. 
+
+Please see more at: [https://learn.microsoft.com/en-us/defender-endpoint/respond-machine-alerts](https://learn.microsoft.com/en-us/defender-endpoint/respond-machine-alerts)
+
+![Evidence Backup](../../images/diggy-diggy-soc/fortunate-vpn/031.png){: .popup-img }
+
+The eradication depends on the infrastructure capabilities. In this case, the platform is limited to device containment, which does not fit with the verdict.
+
+However, `Monica's password should be reset and her sessions revoked`, as it seems that the threat actor gained access to the first authentication method.
+
+Subsequently, `Monica and her manager should be informed about the incident` along with `clear instructions for recovering access to the account`
+
+In addition, `the source IP 113[.]161[.]158[.]12 should be blocked at the Firewall level`, to prevent any other `dictionary` or `password spray` attacks.
+
+**Note:** This step really depends on the organization's Standard Operating Procedures (SOPs).
+
+![Eradication](../../images/diggy-diggy-soc/fortunate-vpn/032.png){: .popup-img }
+
+Finally, the recovery phase `could consist on the support given to Monica for recovering her account`, along with `continuous monitoring of the Firewall events` in case new suspicious IPs target the VPN application.
+
+![Recovery](../../images/diggy-diggy-soc/fortunate-vpn/033.png){: .popup-img }
+
 ### Post-Incident Activity
+
+Everytime a security event occurs, whether is a True Positive or False Positive, `it should be documented for future reference`
+
+Therefore, the following questions will be answered briefly:
+
+![Lessons Learned](../../images/diggy-diggy-soc/fortunate-vpn/034.png){: .popup-img }
+
+1. **How did the cyber attack happen?** The cyber attack came from a threat actor with source IP `113[.]161[.]158[.]12` attempting to authenticate in the VPN application as `monica@letsdefend[.]io`, resulting in the generation of 3 OTP codes. The attempts failed and it is likely that Monica had her first authentication method compromised.
+
+2. **How well did staff and management perform in dealing with the incident?** The staff and management proceeded based on the `NIST 800-61 Incident Response Framework` to correctly address the issue. However, the lack of `SOPs` may delay investigations, as the scope is not defined or could rely on other teams' coordination.
+
+3. **What should the staff and management do differently the next time a similar incident occurs?** The staff and management could setup the mentioned `SOPs`, which would improve analysts' decisions. Also, the `playbook` could be reviewed in terms of adding the `Indicators Of Compromise (IOCs)` in earlier stages, to mitigate impact across other assets while the investigation proceeds.
+
+4. **What corrective actions can prevent similar incidents in the future?** The IT department could setup `Conditional Access Policies` to block any authentication attempt outside non-business hours or unauthorized countries, as the threat actor could have tricked Monica in providing the OTP code. Followed by `User Awareness Programs` to ensure employees stay tuned with the most common threats.
+
+5. **What precursors or indicators should be watched for in the future to detect similar incidents?** As stated in the `Pyramid of Pain`, the best approach is to understand the `Tactics, Techniques and Procedures (TTPs)` that threat actors may utilize. For example, in [Campaign C0032](https://attack.mitre.org/campaigns/C0032) _TEMP.Veles_ used compromised VPN accounts during a chain of different techniques to infiltrate IT environments.
+
+Also, other questions arise such as **how to ensure that the observed suspicious command-lines are benign** and **how to fix the Endpoint Detection and Response (EDR) Agent to enable Live Response capabilities**, which answers depend on the organization's established practices.
 
 ## Ticket Documentation
 
