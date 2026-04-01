@@ -77,13 +77,13 @@ Also, in `VirusTotal` the IP is reported as `Malicious` and `Phishing` by `9/94`
 
 ![VirusTotal IP Lookup](../../images/diggy-diggy-soc/fortunate-vpn/010.png){: .popup-img }
 
-When looking in `AbuseIPDB` the IP was reported `4,656` times, it is a `Fixed Line ISP` from the provider `Vietnam Posts and Telecommunications Group`
+When looking in `AbuseIPDB` the IP was reported `4,656` times and it belongs to the Fixed Line ISP `Vietnam Posts and Telecommunications Group`
 
 ![AbuseIPDB IP Lookup](../../images/diggy-diggy-soc/fortunate-vpn/011.png){: .popup-img }
 
 In Talos Intelligence, the web reputation is `Unstrusted` and the status of the block lists is `EXPIRED`, which means that in the past the IP was flagged as malicious, but currently it is not. 
 
-This aligns with the recent `Confidense of Abuse` score of `0%` from AbuseIPDB, as the massive reports happened in a time were the IP was performing malicious actions.
+This aligns with the recent `Confidence of Abuse` score of `0%` from AbuseIPDB, as the massive reports happened in a time were the IP was performing malicious actions.
 
 ![Talos Intelligence IP Lookup](../../images/diggy-diggy-soc/fortunate-vpn/012.png){: .popup-img }
 
@@ -92,6 +92,40 @@ In `IP2Location` the Proxy Data suggests that the IP is `not an Anonymous Proxy`
 Finally, the location is `Hanoi, Vietnam`, then a question arises: **Is Monica actually trying to access her account from Vietnam?**
 
 ![IP2Location IP Lookup](../../images/diggy-diggy-soc/fortunate-vpn/013.png){: .popup-img }
+
+To answer that doubt, Monica could have requested to HR an exception for working abroad. In the `Email Security` section, there are 3 emails sent by `security@letsdefend[.]io` to `monica@letsdefend[.]io` regarding One-Time Password (OTP) for completing the Multi-Factor Authentication (MFA) activation process.
+
+These emails were delivered on `02-13-2024`, between `02:01:00 [UTC]` and `02:03:00 [UTC]`
+
+![Email Security](../../images/diggy-diggy-soc/fortunate-vpn/014.png){: .popup-img }
+
+The emails' content describes the origin of the activity including the source `IP`, `OS`, `Browser`, `Location` and the Targeted `URL`. Also, the email states that **if Monica did not request to start the MFA activation process, she should contact the customer support immediately.**
+
+![Email Content](../../images/diggy-diggy-soc/fortunate-vpn/015.png){: .popup-img }
+
+There is not any email related to Monica working abroad or that may explain the detected behavior. Then, the source IP `113[.]161[.]158[.]12` could be searched through various records in the `Log Management` section as follow:
+
+![Log Management](../../images/diggy-diggy-soc/fortunate-vpn/016.png){: .popup-img }
+
+On `02-13-2024`, between `01:49:00 [UTC]` and `01:59:00 [UTC]` there were multiple Firewall events from IP `113[.]161[.]158[.]12` targeting the address `33[.]33[.]33[.]33` over different ports.
+
+However, at `02:01:00 [UTC]`, the first OTP validation happened resulting in a `FAILED` state.
+
+![Firewall Event](../../images/diggy-diggy-soc/fortunate-vpn/017.png){: .popup-img }
+
+At `02:01:01 [UTC]`, there was a Proxy record referring to a `POST` request from the account `Monica@letsdefend[.]io` into the VPN URL `hxxps[:]//vpn-letsdefend[.]io/logon[.]html`, via the Protocol `HTTP/1.0`, returning a `200` status.
+
+![Proxy Event](../../images/diggy-diggy-soc/fortunate-vpn/018.png){: .popup-img }
+
+This is a login activity, which request was processed by the server (status 200), however **it does not mean that the login attempt was successful.**
+
+There are 4 more logs with the same behavior about the `Incorrect OTP Code` message and the processed login attempts. Although, there is not any successful logon even if searching for `monica` as follow:
+
+![Monica Search](../../images/diggy-diggy-soc/fortunate-vpn/019.png){: .popup-img }
+
+After reviewing all the indicators, we may proceed with the alert verdict, which is likely a `True Positive`, due to the source IP **reputation** and **geolocation**, as well as the **repeated failed OTP code validations** during **non-business hours.**
+
+![Verdict](../../images/diggy-diggy-soc/fortunate-vpn/020.png){: .popup-img }
 
 ### Containment, Eradication & Recovery
 
