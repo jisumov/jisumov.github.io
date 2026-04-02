@@ -195,7 +195,7 @@ In addition, `the source IP 113[.]161[.]158[.]12 should be blocked at the Firewa
 
 ![Eradication](../../images/diggy-diggy-soc/fortunate-vpn/032.png){: .popup-img }
 
-Finally, the recovery phase `could consist on the support given to Monica for recovering her account`, along with `continuous monitoring of the Firewall events` in case new suspicious IPs target the VPN application.
+Finally, the recovery phase `could consist on the support given to Monica for recovering her account`, along with `continuous monitoring of the Firewall events`, in case new suspicious IPs target the VPN application.
 
 ![Recovery](../../images/diggy-diggy-soc/fortunate-vpn/033.png){: .popup-img }
 
@@ -207,19 +207,31 @@ Therefore, the following questions will be answered briefly:
 
 ![Lessons Learned](../../images/diggy-diggy-soc/fortunate-vpn/034.png){: .popup-img }
 
-1. **How did the cyber attack happen?** The cyber attack came from a threat actor with source IP `113[.]161[.]158[.]12` attempting to authenticate in the VPN application as `monica@letsdefend[.]io`, resulting in the generation of 3 OTP codes. The attempts failed and it is likely that Monica had her first authentication method compromised.
+1. **How did the cyber attack happen?** The cyber attack originated from a threat actor with source IP `113[.]161[.]158[.]12`, located in `Vietnam`, attempting to authenticate in the VPN application as `monica@letsdefend[.]io`, resulting in the generation of 3 OTP codes for MFA activation. The attempts failed and it is likely that Monica's first authentication method was compromised.
 
-2. **How well did staff and management perform in dealing with the incident?** The staff and management proceeded based on the `NIST 800-61 Incident Response Framework` to correctly address the issue. However, the lack of `SOPs` may delay investigations, as the scope is not defined or could rely on other teams' coordination.
+2. **How well did staff and management perform in dealing with the incident?** The staff and management proceeded based on the `NIST 800-61 Incident Response Framework` to correctly address the issue, based on the evidence that was available. However, the lack of `SOPs` may delay upcoming investigations, as the incident scope could not be defined or may rely on other teams' coordination.
 
 3. **What should the staff and management do differently the next time a similar incident occurs?** The staff and management could setup the mentioned `SOPs`, which would improve analysts' decisions. Also, the `playbook` could be reviewed in terms of adding the `Indicators Of Compromise (IOCs)` in earlier stages, to mitigate impact across other assets while the investigation proceeds.
 
-4. **What corrective actions can prevent similar incidents in the future?** The IT department could setup `Conditional Access Policies` to block any authentication attempt outside non-business hours or unauthorized countries, as the threat actor could have tricked Monica in providing the OTP code. Followed by `User Awareness Programs` to ensure employees stay tuned with the most common threats.
+4. **What corrective actions can prevent similar incidents in the future?** The IT department could setup `Conditional Access Policies` to block any authentication attempt outside business hours or unauthorized countries, as the threat actor could have tricked Monica in providing the OTP code. Followed by `User Awareness Programs` to ensure users stay tuned with the most common threats.
 
-5. **What precursors or indicators should be watched for in the future to detect similar incidents?** As stated in the `Pyramid of Pain`, the best approach is to understand the `Tactics, Techniques and Procedures (TTPs)` that threat actors may utilize. For example, in [Campaign C0032](https://attack.mitre.org/campaigns/C0032) _TEMP.Veles_ used compromised VPN accounts during a chain of different techniques to infiltrate IT environments.
+5. **What precursors or indicators should be watched for in the future to detect similar incidents?** As stated in the `Pyramid of Pain`, the best approach is to understand the `Tactics, Techniques and Procedures (TTPs)` that threat actors may utilize. For example, in [Campaign C0032](https://attack.mitre.org/campaigns/C0032), _TEMP.Veles_ used compromised VPN accounts during a chain of different techniques to infiltrate IT environments.
 
-Also, other questions arise such as **how to ensure that the observed suspicious command-lines are benign** and **how to fix the Endpoint Detection and Response (EDR) Agent to enable Live Response capabilities**, which answers depend on the organization's established practices.
+Also, other questions arise such as **how to ensure that the observed suspicious command-lines are benign** and **how to fix the Endpoint Detection and Response (EDR) Agent to enable Live Response capabilities**, `which answers depend on the organization's practices... unless things are handled on the fly`
 
-## Ticket Documentation
+Following the playbook, the only artifact to add is the malicious IP `113[.]161[.]158[.]12` like:
+
+![Artifacts](../../images/diggy-diggy-soc/fortunate-vpn/035.png){: .popup-img }
+
+The **Analyst Note** is filled based on the **Ticket Summary** section, where resides a template that could be used in real SOC environments.
+
+![Analyst Note](../../images/diggy-diggy-soc/fortunate-vpn/036.png){: .popup-img }
+
+Finally, the incident handling results are as follow:
+
+![Results](../../images/diggy-diggy-soc/fortunate-vpn/037.png){: .popup-img }
+
+## Ticket Summary
 
 `Case:` SOC257
 
@@ -227,20 +239,31 @@ Also, other questions arise such as **how to ensure that the observed suspicious
 
 `When:` 02-13-2024 02:04:00 [UTC]
 
-`Who:` monica@letsdefend[.]io
+`Where:`
 
-`Why:` Because...
+- VPN Application: hxxps[:]//vpn-letsdefend[.]io
+- Malicious IP: 113[.]161[.]158[.]12 (Vietnam)
+
+`Who:` 
+
+- Affected User: monica@letsdefend[.]io
+
+`Why:` In the VPN Application hxxps[:]//vpn-letsdefend[.]io, there were 3 authentication attempts for the user monica@letsdefend[.]io, originated from the malicious IP 113[.]161[.]158[.]12, which were blocked due to the threat actor could not get access to the generated OTP codes.
 
 `Additional Notes:`
 
-- bullet 1
-- bullet 2
+- The IP 113[.]161[.]158[.]12 routes to Vietnam, belongs to the Fixed Line ISP "Vietnam Posts and Telecommunications Group" and is flagged by open Threat Intelligence sources as malicious.
+- The malicious IP activity originated on 02-13-2024, between 01:49:00 [UTC] and 01:59:00 [UTC], satisfying the first authentication method since 02:01:00 [UTC].
+- Once the first authentication method passed, the VPN Application automatically sent an email to Monica regarding an OTP code for starting the MFA activation process.
+- There is no evidence of successful logins, as the threat actor could not retrieve the OTP codes.
+- Monica did not request to the organization about working abroad.
+- In Monica's workstation there were suspicious command-line executions related to techniques T1082 (System Information Discovery), T1016 (System Network Configuration Discovery) and T1087 (Account Discovery), which triggered every 15 minutes. The first event happened on 02-13-2024 08:00:00 [UTC] and there is not a clear confirmation of a system compromise.
+- The other Monica's workstation telemetry looks benign under regular business hours.
 
 `Actions taken:`
 
-- bullet 3
-- bullet 4
+- The malicious IP 113[.]161[.]158[.]12 was added as an IOC to block its execution. Also, it is being requested to be blocked at the Firewall level in TICKET01.
+- As the threat actor could trigger the generation of the OTP codes, it is likely that Monica's first authentication method was compromised, hence her password was reset and sessions revoked, as well as informed her and corresponding manager for awareness.
+- A new TICKET02 was created to investigate the suspicious command-line executions and determine whether the activity is expected or indicative of malicious behavior.
 
-`Verdict:` True Positive
-
-## Lessons Learned
+`Verdict:` True Positive, as the malicious VPN login attempts satisfied the first authentication method but failed the OTP code verification. The source IP was added as an IOC and requested to be blocked at the Firewall layer in TICKET01. Monica's password was reset and sessions revoked. Please see TICKET02 for further investigation regarding the suspicious commands in the device with IP 172[.]16[.]17[.]163.
