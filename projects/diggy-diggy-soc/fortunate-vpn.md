@@ -7,7 +7,7 @@ music_title: "Fortunate Son - Creedence Clearwater Revival"
 # Fortunate VPN
 
 ## Description
-This Let's Defend's alert was triggered from the Rule Name `SOC257 - VPN Connection Detected from Unauthorized Country`, with Event ID **225**. Suspicious signin attempts from Vietnam, were they successful?
+This Let's Defend alert was triggered from the Rule Name `SOC257 - VPN Connection Detected from Unauthorized Country`, with Event ID **225**. Suspicious signin attempts from Vietnam, were they successful?
 
 ## Case Workflow
 
