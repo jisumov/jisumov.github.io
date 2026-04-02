@@ -252,7 +252,7 @@ Finally, the incident handling results are as follow:
 
 `Additional Notes:`
 
-- The IP 113[.]161[.]158[.]12 routes to Vietnam, belongs to the Fixed Line ISP "Vietnam Posts and Telecommunications Group" and is flagged by open Threat Intelligence sources as malicious.
+- The IP 113[.]161[.]158[.]12 routes to Vietnam, belongs to the Fixed Line ISP "Vietnam Posts and Telecommunications Group" and is flagged by open threat intelligence sources as malicious.
 - The malicious IP activity originated on 02-13-2024, between 01:49:00 [UTC] and 01:59:00 [UTC], satisfying the first authentication method since 02:01:00 [UTC].
 - Once the first authentication method passed, the VPN Application automatically sent an email to Monica regarding an OTP code for starting the MFA activation process.
 - There is no evidence of successful logins, as the threat actor could not retrieve the OTP codes.
