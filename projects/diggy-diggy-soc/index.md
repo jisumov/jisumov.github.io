@@ -7,7 +7,7 @@ music_title: "Diggy Diggy Hole - Wind Rose"
 # Diggy Diggy SOC
 
 <div class="project-card">
-    <img src="{{ '../../images/diggy-diggy-soc/fortunate-vpn/cover.jpg' | relative_url }}" alt="Fortunate VPN" class="cover-square" />
+    <img src="{{ '../../images/diggy-diggy-soc/fortunate-vpn/cover.png' | relative_url }}" alt="Fortunate VPN" class="cover-square" />
     <div class="project-content">
       <div>
         <h3>Fortunate VPN</h3>
@@ -16,7 +16,7 @@ music_title: "Diggy Diggy Hole - Wind Rose"
         </p>
       </div>
       <div>
-        <a class="button-link" href="{{ '/projects/diggy-diggy-soc/fortunate-vpn' | relative_url }}">It ain't me →</a>
+        <a class="button-link" href="{{ '/projects/diggy-diggy-soc/fortunate-vpn' | relative_url }}">How much should we block? →</a>
       </div>
     </div>
   </div>
