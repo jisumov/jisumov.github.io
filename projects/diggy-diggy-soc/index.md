@@ -19,4 +19,4 @@ music_title: "Diggy Diggy Hole - Wind Rose"
         <a class="button-link" href="{{ '/projects/diggy-diggy-soc/fortunate-vpn' | relative_url }}">How much should we block? →</a>
       </div>
     </div>
-  </div>
+</div>
