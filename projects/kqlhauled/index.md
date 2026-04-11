@@ -12,7 +12,7 @@ music_title: "Keelhauled - Alestorm"
       <div>
         <h3>The Logs Aren't Alright</h3>
         <p>
-          A new social media star arises, followers interested in personal life questions, sponsorship emails rain like cats and dogs... A good demonstration of security awareness going beyond corp boundaries.
+          A new social media star arises, fans asking personal questions, sponsor emails raining like crazy... The case <b>CloutHaus: Social Media leads to Compromise</b> teaches security awareness going beyond corp boundaries.
         </p>
       </div>
       <div>

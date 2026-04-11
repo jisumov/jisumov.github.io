@@ -8,7 +8,7 @@ music_title: "The Kids Aren't Alright - The Offspring"
 
 ## Description
 
-A new social media star arises, followers interested in personal life questions, sponsorship emails rain like cats and dogs... A good demonstration of security awareness going beyond corp boundaries.
+A new social media star arises, fans asking personal questions, sponsor emails raining like crazy... The case `CloutHaus: Social Media leads to Compromise` teaches security awareness going beyond corp boundaries.
 
 ![Afomiya Instagram](../../images/kqlhauled/the-logs-arent-alright/001.jpg){: .popup-img }
 
