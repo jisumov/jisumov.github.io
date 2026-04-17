@@ -18,13 +18,13 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 1. **According to CloutHaus internal employee logs, what is Afomiya’s designated professional email?**
 
-	The table _Employees_ include all the personnel information. Here we may look for Afomiya's email.
+	The table _Employees_ includes all the personnel information. Here we may look for Afomiya's email.
 
 	<span class="alternative-label">This query will solve questions 1 to 3:</span>
 
 	```sql
-	Employees
-	| where name contains "afomiya"
+   Employees
+   | where name contains "afomiya"
 	```
 	- `Employees` sets the table to be looked at, which optimizes the searching performance.
 
@@ -59,9 +59,9 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	<span class="alternative-label">This query will solve questions 4 to 6:</span>
 
 	```sql
-	Email
-	| where recipient == "afomiya_storm@clouthaus.com"
-	| where subject contains "dior" or links contains "dior"
+   Email
+   | where recipient == "afomiya_storm@clouthaus.com"
+   | where subject contains "dior" or links contains "dior"
 	```
 
 	- `==` is the equal operator, which must match every character of the provided string.
@@ -93,8 +93,8 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	<span class="alternative-label">This query will solve questions 7 to 8:</span>
 
 	```sql
-	OutboundNetworkEvents
-	| where url contains "https://super-brand-offer.com/login"
+   OutboundNetworkEvents
+   | where url contains "https://super-brand-offer.com/login"
 	```
 
 	This is the first time Afomiya clicked the URL:
@@ -119,10 +119,10 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	
 	Every IP could have an associated domain, that's when _PassiveDNS_ table comes into play.
 
-	```sql
-	PassiveDns
-	| where domain contains "super-brand-offer.com"
-	```
+    ```sql
+   PassiveDns
+   | where domain contains "super-brand-offer.com"
+    ```
 
 	![Passive DNS](../../images/kqlhauled/the-logs-arent-alright/006.png){: .popup-img }
 
@@ -179,7 +179,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 	![Afomiya Authentication Events](../../images/kqlhauled/the-logs-arent-alright/008.png){: .popup-img }
 
-	Here, the question focuses on Afomiya's email, then correlate the **MAIL-SERVER01** with the **ip**.
+	Here, the question focuses on Afomiya's email, then correlate the **MAIL-SERVER01** with the **src_ip**.
 
 	<span class="alternative-label">Answer:</span> `182[.]45[.]67[.]89`
 
