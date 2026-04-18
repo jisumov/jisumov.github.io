@@ -32,7 +32,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 	- `name` is the field that the query is interested in, do please note that it is case-sensitive.
 	
-	- `contains` searches for strings containing the provided characters, for example the records may include _afomiya123_ or _xyzafomiya._
+	- `contains` searches for strings containing the provided characters, for example the records may include _afomiya123_ or _xyzafomiya_.
 
 	![Afomiya Employee Information](../../images/kqlhauled/the-logs-arent-alright/002.png){: .popup-img }
 
@@ -54,7 +54,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 4. **What is the sender’s email address in the email Afomiya received from "Dior"?**
 
-	Now, we're looking through the _Email_ table, then use the recipient email and do a general search with the keyword _dior._
+	Now, we're looking through the _Email_ table, then use the recipient email and do a general search with the keyword _dior_.
 
 	<span class="alternative-label">This query will solve questions 4 to 6:</span>
 
@@ -148,29 +148,11 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 	<span class="alternative-label">Answer:</span> `3`
 
-11. **How many distinct domains are linked to the suspicious IP address?**
-	
-	The previous query may be updated to search all the domains that have shared the same IP address.
-
-	```sql
-	PassiveDns
-	| where ip == "198.51.100.12"
-	| distinct domain
-	```
-
-	- `distinct` serves to display just one entry for each match, for example if there are three rows with the same domain, then the results will show that domain once.
-
-	![Distinct Domains](../../images/kqlhauled/the-logs-arent-alright/007.png){: .popup-img }
-
-	Then, the count sums 3 different domains.
-
-	<span class="alternative-label">Answer:</span> `3`
-
-12. **What IP address was used to gain access?**
+11. **What IP address was used to gain access?**
 	
 	The _AuthenticationEvents_ table may provide the information related to account access attempts.
 
-	<span class="alternative-label">This query will solve questions 12 and 14:</span>
+	<span class="alternative-label">This query will solve questions 11 and 13:</span>
 
 	```sql
 	AuthenticationEvents
@@ -183,7 +165,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 	<span class="alternative-label">Answer:</span> `182[.]45[.]67[.]89`
 
-13. **What domains are associated with this IP? (enter one)**
+12. **What domains are associated with this IP? (enter one)**
 	
 	Let's use the reliable _PassiveDNS_ table for this question.
 
@@ -199,13 +181,13 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 	<span class="alternative-label">Answer:</span> `influencer-deals[.]net`
 
-14. **What part of the User-Agent string indicates the suspicious browser and operating system? (Submit either the browser name/version or the operating system name/version.)**
+13. **What part of the User-Agent string indicates the suspicious browser and operating system? (Submit either the browser name/version or the operating system name/version.)**
 	
-	Look at the question 12 results, there is a field called **user_agent**
+	Look at the question 11 results, there is a field called **user_agent**
 
 	<span class="alternative-label">Answer:</span> `Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1)`
 
-15. **What country did the login originate from?**
+14. **What country did the login originate from?**
 	
 	Here, KC7 recommends the tool [MaxMind](https://www.maxmind.com/en/geoip-demo) to look for the IP Geolocation.
 
@@ -214,6 +196,37 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	In this case, just put the country that resides in the **Location** field.
 
 	<span class="alternative-label">Answer:</span> `China`
+
+15. **According to the attacker's web search history on the site, what were they trying to hack?**
+	
+	Let's check the _OutboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_.
+
+	```sql
+	InboundNetworkEvents
+	| where src_ip == "182.45.67.89"
+	```
+
+	![Web Search For Hack](../../images/kqlhauled/the-logs-arent-alright/011.png){: .popup-img }
+
+	Looking through the **url** records, one stands out for containing the keyword **hack** and so the target.
+
+	<span class="alternative-label">Answer:</span> `Location`
+
+16. **According to another search log, what kind of personal info were they sneakily trying to uncover (and pretending to ask “for a friend”)?**
+	
+	Let's check the _OutboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_.
+
+	```sql
+	InboundNetworkEvents
+	| where src_ip == "182.45.67.89"
+	| where url has "friend"
+	```
+
+	![Web Search For Friend](../../images/kqlhauled/the-logs-arent-alright/012.png){: .popup-img }
+
+	abc
+
+	<span class="alternative-label">Answer:</span> `Home Address`
 
 ## Raw Results
 
@@ -267,6 +280,16 @@ This is a space for saving the query results in text format, useful whenever a v
 "url": https://super-brand-offer.com/login?username=afstorm&password=**********
 ```
 
+```bash
+"timestamp": 2025-04-03T14:23:21.000Z,
+"method": GET,
+"src_ip": 182.45.67.89,
+"user_agent": Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1),
+"url": https://clouthaus.com/search=How+to+hack+an+influencer’s+location+from+their+Instagram+story,
+"referrer": https:clouthaus.com/search,
+"status_code": 200
+```
+
 ### PassiveDNS
 
 ```bash
@@ -306,7 +329,7 @@ influencer-deals.net
 
 - `name` is the field that the query is interested in, do please note that it is case-sensitive.
 	
-- `contains` searches for strings containing the provided characters, for example if the keyword is "afomiya", then the records may include _afomiya123_ or _xyzafomiya._
+- `contains` searches for strings containing the provided characters, for example if the keyword is "afomiya", then the records may include _afomiya123_ or _xyzafomiya_.
 
 - `==` is the equal operator, which must match every character of the provided string.
 
