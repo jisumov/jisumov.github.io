@@ -214,7 +214,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 16. **According to another search log, what kind of personal info were they sneakily trying to uncover (and pretending to ask “for a friend”)?**
 	
-	Let's check the _OutboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_.
+	Let's check the _OutboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_, with an extra filter to not get overwhelmed by the previous logs.
 
 	```sql
 	InboundNetworkEvents
@@ -222,9 +222,32 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	| where url has "friend"
 	```
 
+	- `has` hunts for a complete case-insensitive string, for example _best friend_ has _friend_ or _fRiEnD_.
+
 	![Web Search For Friend](../../images/kqlhauled/the-logs-arent-alright/012.png){: .popup-img }
 
-	abc
+	Then, the threat actor was looking for Afomiya's residence.
+
+	<span class="alternative-label">Answer:</span> `Home Address`
+
+17. **What kind of account or app does that log suggest they were targeting?** _(Note: It's about money)_.
+	
+	So, if money is involved, we may build up a list of possible keywords to get to the roots in the _OutboundNetworkEvents_ logs.
+
+	```sql
+	let keywords = dynamic(["payment", "transaction", "history"]);
+	InboundNetworkEvents
+	| where src_ip == "182.45.67.89"
+	| where url has_any (keywords)
+	```
+
+	- `let` creates a variable, which might be an expression or a function, helpful to organize our thoughts before hand.
+	- `dynamic` setups the 
+	- `;` do not skip it, as it closes the sentence to proceed with the next instruction.
+
+	![Web Search For Friend](../../images/kqlhauled/the-logs-arent-alright/012.png){: .popup-img }
+
+	Then, the threat actor was looking for Afomiya's residence.
 
 	<span class="alternative-label">Answer:</span> `Home Address`
 
@@ -336,3 +359,5 @@ influencer-deals.net
 - `or` unites two conditions, if one of them are satisfied, then it returns the matched row.
 
 - `distinct` serves to display just one entry for each match, for example if there are three rows with the same domain, then the results will show that domain once.
+
+- `has` hunts for a complete case-insensitive string, for example _best friend_ has _friend_ or _fRiEnD_.
