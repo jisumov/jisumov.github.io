@@ -199,7 +199,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 15. **According to the attacker's web search history on the site, what were they trying to hack?**
 	
-	Let's check the _OutboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_.
+	Let's check the _InboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_.
 
 	```sql
 	InboundNetworkEvents
@@ -214,7 +214,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 16. **According to another search log, what kind of personal info were they sneakily trying to uncover (and pretending to ask “for a friend”)?**
 	
-	Let's check the _OutboundNetworkEvents_ activity from the ip _182[.]45[.]67[.]89_, with an extra filter to not get overwhelmed by the previous logs.
+	Now, add another filter to the previous _InboundNetworkEvents_ table, to reduce the logs noise.
 
 	```sql
 	InboundNetworkEvents
@@ -232,7 +232,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 17. **What kind of account or app does that log suggest they were targeting?** _(Note: It's about money)_.
 	
-	So, if money is involved, we may build up a list of possible keywords to get to the roots in the _OutboundNetworkEvents_ logs.
+	So, if money is involved, we may build up a list of possible keywords to get to the roots in the _InboundNetworkEvents_ logs.
 
 	```sql
 	let keywords = dynamic(["payment", "transaction", "history"]);
@@ -241,15 +241,16 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	| where url has_any (keywords)
 	```
 
-	- `let` creates a variable, which might be an expression or a function, helpful to organize our thoughts before hand.
-	- `dynamic` setups the 
+	- `let` creates a variable, like an expression or a function, great for reusing along the query.
+	- `dynamic` sets up a flexible data type going from key-value structures to a list of values.
 	- `;` do not skip it, as it closes the sentence to proceed with the next instruction.
+	- `has_any` is the evolution of _has_, compares with a predefined array of elements.
 
-	![Web Search For Friend](../../images/kqlhauled/the-logs-arent-alright/012.png){: .popup-img }
+	![Web Search For Money](../../images/kqlhauled/the-logs-arent-alright/013.png){: .popup-img }
 
-	Then, the threat actor was looking for Afomiya's residence.
+	In the URL path segment there is a reference to a known payment service.
 
-	<span class="alternative-label">Answer:</span> `Home Address`
+	<span class="alternative-label">Answer:</span> `Venmo`
 
 ## Raw Results
 
@@ -303,16 +304,6 @@ This is a space for saving the query results in text format, useful whenever a v
 "url": https://super-brand-offer.com/login?username=afstorm&password=**********
 ```
 
-```bash
-"timestamp": 2025-04-03T14:23:21.000Z,
-"method": GET,
-"src_ip": 182.45.67.89,
-"user_agent": Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1),
-"url": https://clouthaus.com/search=How+to+hack+an+influencer’s+location+from+their+Instagram+story,
-"referrer": https:clouthaus.com/search,
-"status_code": 200
-```
-
 ### PassiveDNS
 
 ```bash
@@ -346,6 +337,38 @@ influencer-deals.net
 "description": User successfully logged into their email account.
 ```
 
+### InboundNetworkEvents
+
+```bash
+"timestamp": 2025-04-03T14:23:21.000Z,
+"method": GET,
+"src_ip": 182.45.67.89,
+"user_agent": Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1),
+"url": https://clouthaus.com/search=How+to+hack+an+influencer’s+location+from+their+Instagram+story,
+"referrer": https:clouthaus.com/search,
+"status_code": 200
+```
+
+```bash
+"timestamp": 2025-04-03T00:00:00.000Z,
+"method": GET,
+"src_ip": 182.45.67.89,
+"user_agent": Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1),
+"url": https://clouthaus.com/search=Afomiya+Storm+home+address??+(asking+for+a+friend),
+"referrer": https:clouthaus.com/search,
+"status_code": 200
+```
+
+```bash
+"timestamp": 2025-04-04T14:21:29.000Z,
+"method": GET,
+"src_ip": 182.45.67.89,
+"user_agent": Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1),
+"url": https://clouthaus.com/search=Afomiya’s+Venmo+history+–+is+that+public??,
+"referrer": https:clouthaus.com/search,
+"status_code": 200
+```
+
 ## Cheat Sheet
 
 - `where` shows results based on satisfied conditions to extract the relevant logs from noise.
@@ -361,3 +384,9 @@ influencer-deals.net
 - `distinct` serves to display just one entry for each match, for example if there are three rows with the same domain, then the results will show that domain once.
 
 - `has` hunts for a complete case-insensitive string, for example _best friend_ has _friend_ or _fRiEnD_.
+
+- `let` creates a variable, like an expression or a function, great for reusing along the query.
+
+- `dynamic` sets up a flexible data type going from key-value structures to a list of values.
+
+- `;` do not skip it, as it closes the sentence to proceed with the next instruction.
