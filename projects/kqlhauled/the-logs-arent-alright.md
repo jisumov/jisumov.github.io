@@ -8,7 +8,7 @@ music_title: "The Kids Aren't Alright - The Offspring"
 
 ## Description
 
-A new social media star arises, fans asking personal questions, sponsor emails raining like crazy... The case `CloutHaus: Social Media leads to Compromise` teaches security awareness going beyond corp boundaries.
+A new social media star arises, fans asking personal questions, sponsor emails raining like crazy. The case `CloutHaus: Social Media leads to Compromise` teaches security awareness going beyond corp boundaries.
 
 ![Afomiya Instagram](../../images/kqlhauled/the-logs-arent-alright/001.jpg){: .popup-img }
 
@@ -183,7 +183,7 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 
 13. **What part of the User-Agent string indicates the suspicious browser and operating system? (Submit either the browser name/version or the operating system name/version.)**
 	
-	Look at the question 11 results, there is a field called **user_agent**
+	Look at the question 11 results, there is a field called **user_agent**.
 
 	<span class="alternative-label">Answer:</span> `Mozilla/5.0 (compatible; MSIE 5.0; Windows NT 5.2; Trident/4.1)`
 
@@ -242,15 +242,117 @@ A new social media star arises, fans asking personal questions, sponsor emails r
 	```
 
 	- `let` creates a variable, like an expression or a function, great for reusing along the query.
-	- `dynamic` sets up a flexible data type going from key-value structures to a list of values.
+	- `dynamic` sets up a flexible data type going from key-value structures to a list of elements.
 	- `;` do not skip it, as it closes the sentence to proceed with the next instruction.
-	- `has_any` is the evolution of _has_, compares with a predefined array of elements.
+	- `has_any` is the evolution of _has_, compares with a predefined array of values.
 
 	![Web Search For Money](../../images/kqlhauled/the-logs-arent-alright/013.png){: .popup-img }
 
-	In the URL path segment there is a reference to a known payment service.
+	In the **url** path segment there is a reference to a known payment service.
 
 	<span class="alternative-label">Answer:</span> `Venmo`
+
+18. **Based on another search, what shady and fake event were they pretending to plan as a way to lure Afomiya?**
+	
+	Within the _InboundNetworkEvents_ table, we may globally search for the asked keyword.
+
+	```sql
+	InboundNetworkEvents
+	| where src_ip == "182.45.67.89"
+	| search "fake"
+	| distinct url
+	```
+
+	- `search` looks for any match no matter the case sensitiveness nor the fields, then it's costly.
+
+	![Web Search For Fake](../../images/kqlhauled/the-logs-arent-alright/014.png){: .popup-img }
+
+	As the question needs an event, choose the one that is closer.
+
+	<span class="alternative-label">Answer:</span> `Birthday Party`
+
+19. **What external email address received messages forwarded from Afomiya’s account?**
+	
+	It's an exfiltration technique, where the threat actor sets a forward rule in the victim's _Email_.
+
+	```sql
+	Email
+	| where sender == "afomiya_storm@clouthaus.com"
+	| where subject has "forward"
+	```
+
+	![Email Forwarding](../../images/kqlhauled/the-logs-arent-alright/015.png){: .popup-img }
+
+	So, we may confirm that there is a established forwarding rule pointing to a particular **recipient**.
+
+	<span class="alternative-label">Answer:</span> `noreply@influencer-deals[.]net`
+
+20. **Which forwarded email contained Afomiya’s payment details or direct deposit form?**
+	
+	We may take advantage of the previous _Email_ query, with an extra sauce.
+
+	```sql
+	Email
+	| where sender == "afomiya_storm@clouthaus.com"
+	| where subject has_all ("forward", "deposit")
+	```
+
+	- `has_all` requires that every keyword in the provided list be present in the target field.
+
+	![Email Direct Deposit](../../images/kqlhauled/the-logs-arent-alright/016.png){: .popup-img }
+
+	The **subject** provides the exact information that we're looking for.
+
+	<span class="alternative-label">Answer:</span> `[EXTERNAL] [FORWARD] Afomiya's payment details – direct deposit form`
+
+21. **What forwarded email subject included a passport scan?**
+	
+	What if the keywords are defined as a list, before searching in the _Email_ table.
+
+	```sql
+	let keywords = dynamic(["forward", "passport"]);
+	Email
+	| where sender == "afomiya_storm@clouthaus.com"
+	| where subject has_all (keywords)
+	```
+
+	![Email Passport Scan](../../images/kqlhauled/the-logs-arent-alright/017.png){: .popup-img }
+
+	Now we're in the mood, getting to the same solution in different ways. Take out the **subject**.
+
+	<span class="alternative-label">Answer:</span> `[EXTERNAL] [FORWARD] Afomiya's passport scan – confidential`
+
+22. **Which forwarded email subject contained either Afomiya’s bank statement or year-end tax documents?**
+	
+	What if the keywords are defined as a list, before searching in the _Email_ table.
+
+	```sql
+	let keywords = dynamic(["bank", "tax"]);
+	Email
+	| where sender == "afomiya_storm@clouthaus.com"
+	| where subject has "forward" and subject has_any (keywords)
+	| distinct subject
+	```
+
+	- `and` combines two conditions which both must be true, in order to return the matched row.
+
+	![Email Financial Information](../../images/kqlhauled/the-logs-arent-alright/018.png){: .popup-img }
+
+	And this is how we can build up more complex queries overtime. Go ahead with any **subject**.
+
+	<span class="alternative-label">Answer:</span> `[EXTERNAL] [FORWARD] Re: Re: Re: Afomiya's bank statement – confidential`
+
+23. **Based on everything you’ve discovered, what do you think the attacker’s true objective was?**
+
+	This investigation involved a multi-stage attack, starting from a _phishing_ email targeting Afomiya's CloutHaus account, which got the keys to the castle stolen. 
+	
+	It led to the setting of a forwarding rule for constant _data exfiltration_ to the threat actor's email. Along with the _data harvesting_ technique, trying to know everything about the victim's _Personally Identifiable Information (PII)_ within the Clouthaus website. 
+	
+	Then, the answer should consider all the observed _attack vectors_ and malicious intentions.
+	
+	![Conclusion](../../images/kqlhauled/the-logs-arent-alright/019.png){: .popup-img }
+
+<span class="alternative-label">Final Thoughts:</span> **Who knows what may come next after this initial breach, but once the detection and analysis are done, this incident should proceed with the containment, eradication and recovery of Afomiya's account, finishing with a due care and diligent post-incident activity which strengthens the security posture of Clouthaus' identity management. `Think twice, click once, otherwise get zeroed`**
 
 ## Raw Results
 
@@ -286,6 +388,50 @@ This is a space for saving the query results in text format, useful whenever a v
 "attachments": 
 ```
 
+```bash
+"timestamp": 2025-04-08T15:59:54.000Z,
+"sender": afomiya_storm@clouthaus.com,
+"reply_to": afomiya_storm@clouthaus.com,
+"recipient": noreply@influencer-deals.net,
+"subject": [EXTERNAL] [FORWARD] Re: Re: Afomiya’s dog photos – VERY DEMURE, VERY CUTE,
+"verdict": CLEAN,
+"links": [
+	""
+],
+"attachments": 
+```
+
+```bash
+"timestamp": 2025-04-08T15:55:21.000Z,
+"sender": afomiya_storm@clouthaus.com,
+"reply_to": afomiya_storm@clouthaus.com,
+"recipient": noreply@influencer-deals.net,
+"subject": [EXTERNAL] [FORWARD] Afomiya’s payment details – direct deposit form,
+"verdict": CLEAN,
+"links": [
+	""
+],
+"attachments":
+```
+
+```bash
+"timestamp": 2025-04-08T15:56:38.000Z,
+"sender": afomiya_storm@clouthaus.com,
+"reply_to": afomiya_storm@clouthaus.com,
+"recipient": noreply@influencer-deals.net,
+"subject": [EXTERNAL] [FORWARD] Afomiya’s passport scan – confidential,
+"verdict": CLEAN,
+"links": [
+	""
+],
+"attachments":
+```
+
+```bash
+[EXTERNAL] [FORWARD] Re: Re: Re: Afomiya’s bank statement – confidential
+[EXTERNAL] [FORWARD] Re: Tax documents – year-end summary
+```
+
 ### OutboundNetworkEvents
 
 ```bash
@@ -305,12 +451,6 @@ This is a space for saving the query results in text format, useful whenever a v
 ```
 
 ### PassiveDNS
-
-```bash
-"timestamp": 2025-03-31T10:20:34.000Z,
-"ip": 198.51.100.12,
-"domain": super-brand-offer.com
-```
 
 ```bash
 "timestamp": 2025-04-01T10:20:34.000Z,
@@ -369,6 +509,11 @@ influencer-deals.net
 "status_code": 200
 ```
 
+```bash
+https://clouthaus.com/search=How+to+fake+an+influencer+friendship+online+(no+judgment)
+https://clouthaus.com/search=How+much+would+it+cost+to+hire+Afomiya+for+a+fake+birthday+party?
+```
+
 ## Cheat Sheet
 
 - `where` shows results based on satisfied conditions to extract the relevant logs from noise.
@@ -387,6 +532,14 @@ influencer-deals.net
 
 - `let` creates a variable, like an expression or a function, great for reusing along the query.
 
-- `dynamic` sets up a flexible data type going from key-value structures to a list of values.
+- `dynamic` sets up a flexible data type going from key-value structures to a list of elements.
 
 - `;` do not skip it, as it closes the sentence to proceed with the next instruction.
+
+- `has_any` is the evolution of _has_, compares with a predefined array of values.
+
+- `search` looks for any match no matter the case sensitiveness nor the fields, then it's costly.
+
+- `has_all` requires that every keyword in the provided list be present in the target field.
+
+- `and` combines two conditions which both must be true, in order to return the matched row.

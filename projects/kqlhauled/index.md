@@ -12,11 +12,11 @@ music_title: "Keelhauled - Alestorm"
       <div>
         <h3>The Logs Aren't Alright</h3>
         <p>
-          A new social media star arises, fans asking personal questions, sponsor emails raining like crazy... The case <b>CloutHaus: Social Media leads to Compromise</b> teaches security awareness going beyond corp boundaries.
+          A new social media star arises, fans asking personal questions, sponsor emails raining like crazy. The case <b>CloutHaus: Social Media leads to Compromise</b> teaches security awareness going beyond corp boundaries.
         </p>
       </div>
       <div>
-        <a class="button-link" href="{{ '/projects/kqlhauled/the-logs-arent-alright' | relative_url }}">How can one little phish swallow so many lives? →</a>
+        <a class="button-link" href="{{ '/projects/kqlhauled/the-logs-arent-alright' | relative_url }}">How can one little phish swallow so many files? →</a>
       </div>
     </div>
 </div>
