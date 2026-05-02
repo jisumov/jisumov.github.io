@@ -7,7 +7,7 @@ music_title: "Keelhauled - Alestorm"
 # KQLHauled
 
 <div class="project-card">
-    <img src="{{ '../../images/kqhauled/the-logs-arent-alright/cover.png' | relative_url }}" alt="The Logs Aren't Alright" class="cover-square" />
+    <img src="{{ '../../images/kqlhauled/the-logs-arent-alright/cover.png' | relative_url }}" alt="The Logs Aren't Alright" class="cover-square" />
     <div class="project-content">
       <div>
         <h3>The Logs Aren't Alright</h3>
@@ -16,7 +16,7 @@ music_title: "Keelhauled - Alestorm"
         </p>
       </div>
       <div>
-        <a class="button-link" href="{{ '/projects/kqlhauled/the-logs-arent-alright' | relative_url }}">How can one little phish swallow so many files? →</a>
+        <a class="button-link" href="{{ '/projects/kqlhauled/the-logs-arent-alright' | relative_url }}">How can one little phish exfiltrate so many files? →</a>
       </div>
     </div>
 </div>
