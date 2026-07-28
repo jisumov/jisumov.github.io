@@ -1,7 +1,7 @@
 ---
 layout: default
-youtube_id: 0CNPR2qNzxk
-music_title: "Welcome to the Jungle - Guns N' Roses"
+youtube_id: w1TWhBwM7iM
+music_title: "Armata Strigoi - Powerwolf"
 ---
 
 # Who Am I
