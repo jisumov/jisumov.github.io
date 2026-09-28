@@ -209,7 +209,9 @@ code {
 }
 
 #main_content .project-content a.button-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   padding: 8px 14px;
   background: transparent;
   color: $conifer;
@@ -223,6 +225,28 @@ code {
   background: $conifer;
   color: $cod-grey;
   box-shadow: 0 0 10px rgba($conifer, 0.5);
+}
+
+#main_content .project-content a.button-link .btn-icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+  transition: filter 0.15s ease;
+}
+
+#main_content .project-content a.button-link:hover .btn-icon {
+  filter: brightness(0);
+}
+
+#main_content .project-content a.button-link .btn-icon-mask {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+}
+
+#main_content .project-content a.button-link:hover .btn-icon-mask {
+  filter: none;
 }
 
 #main_content h1 {

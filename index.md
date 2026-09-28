@@ -5,60 +5,65 @@ music_title: "Welcome to the Jungle - Guns N' Roses"
 ---
 
 # Who Am I
-Hey there! I'm [José Suárez](https://www.linkedin.com/in/jisumov), a Computer Systems Engineer with **1+ years** of experience in Cybersecurity. Actions speak louder than words, take a look below!
+Hey there! I'm [José Suárez](https://www.linkedin.com/in/jisumov), a Computer Systems Engineer with **1+ years** of experience in Cybersecurity. Actions speak louder than words, take a look below and check out my <a href="{{ '/assets/cv/Jose_Ignacio_Suarez_Montiel_CV.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">CV</a>!
 
 # Projects
 
 <div class="projects-grid">
 
   <div class="project-card">
-    <img src="{{ '/images/40-2-labs/cover.png' | relative_url }}" alt="40:2 Labs" class="cover-square" />
+    <img src="{{ '/images/socio/cover.png' | relative_url }}" alt="SOC I/O" class="cover-square" />
     <div class="project-content">
       <div>
-        <h3>40:2 Labs</h3>
+        <h3>SOC I/O</h3>
         <p>
-          An initiative to build and document cybersecurity environments from the ground up.
-          Each lab focuses on deploying defensive infrastructure to simulate real-world security operations.
+          Growing toolbox of Python OSINT scripts refined to accelerate investigations, triaging IOCs/IOAs and enriching observables (e.g., IPs, URLs, domains, hashes) based on enterprise log sources and open threat-intelligence APIs.
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/40-2-labs/index.md %}">May enter this land, that is protected by polished labs →</a>
+        <a class="button-link" href="https://pypi.org/project/socio">
+          <span class="btn-icon btn-icon-mask" style="--icon: url('{{ '/images/icons/pypi.svg' | relative_url }}')"></span>PyPI
+        </a>
+        <a class="button-link" href="https://github.com/jisumov/socio">
+          <span class="btn-icon btn-icon-mask" style="--icon: url('{{ '/images/icons/github.svg' | relative_url }}')"></span>GitHub
+        </a>
       </div>
     </div>
   </div>
 
   <div class="project-card">
-    <img src="{{ '/images/diggy-diggy-soc/cover.png' | relative_url }}" alt="Diggy Diggy SOC" class="cover-square" />
+    <img src="{{ '/images/bluequeries/cover.png' | relative_url }}" alt="BlueQueries" class="cover-square" />
     <div class="project-content">
       <div>
-        <h3>Diggy Diggy SOC</h3>
+        <h3>BlueQueries</h3>
         <p>
-          Various series of walkthroughs focused on analyzing and resolving Security Operations Center (SOC) incidents from platforms like LetsDefend, TryHackMe and Hack The Box.
+          Field-tested queries for Microsoft Sentinel, Splunk, CrowdStrike Falcon and Cortex XDR, ranging from adaptable detections that unveil malicious behavior to&nbsp;utility searches which clarify alert scoping and further investigation.
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/diggy-diggy-soc/index.md %}">Face them on the SIEM, you will meet the logs →</a>
+        <a class="button-link" href="https://detections.ai/user/jisumov">
+          <span class="btn-icon btn-icon-mask" style="--icon: url('{{ '/images/icons/detections-ai.svg' | relative_url }}')"></span>Detections.ai
+        </a>
+        <a class="button-link" href="https://github.com/jisumov/bluequeries">
+          <span class="btn-icon btn-icon-mask" style="--icon: url('{{ '/images/icons/github.svg' | relative_url }}')"></span>GitHub
+        </a>
       </div>
     </div>
   </div>
 
   <div class="project-card">
-    <img src="{{ '/images/kqlhauled/cover.png' | relative_url }}" alt="KQLhauled" class="cover-square" />
+    <img src="{{ '/images/archive/cover.png' | relative_url }}" alt="Archive" class="cover-square" />
     <div class="project-content">
       <div>
-        <h3>KQLhauled</h3>
+        <h3>Archive</h3>
         <p>
-          KC7-based journey that solves cybersecurity challenges using Kusto Query Language (KQL) to investigate simulated incidents and uncover malicious activity from raw data.
+          Decommissioned experiments, kept intact for reference.
         </p>
       </div>
       <div>
-        <a class="button-link" href="{% link projects/kqlhauled/index.md %}">Make that alert walk the plank, with a bottle of queries →</a>
+        <a class="button-link" href="{% link projects/archive/index.md %}">Press F to Pay Respects →</a>
       </div>
     </div>
   </div>
 
 </div>
-
----
-
-_**Inspired by [Hacker Theme](https://github.com/pages-themes/hacker)**_

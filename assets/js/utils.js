@@ -142,15 +142,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const leftMenu = document.getElementById("left-menu");
 
   const siteSections = [
-    { title: "Home", href: "/" },
+    { title: "Home", href: "/"},
     {
       title: "Projects", href: "/#projects", subsections: [
-        { title: "40:2 Labs", href: "/projects/40-2-labs" },
-        { title: "Diggy Diggy SOC", href: "/projects/diggy-diggy-soc" },
-        { title: "KQLhauled", href: "/projects/kqlhauled" }
+        { title: "SOC I/O", href: "https://pypi.org/project/socio", target: "_blank" },
+        { title: "BlueQueries", href: "https://detections.ai/user/jisumov", target: "_blank" },
+        { title: "Archive", href: "/projects/archive" }
       ]
     }
   ];
+
+  const applyTarget = (a, item) => {
+    if (item.target) {
+      a.target = item.target;
+      if (item.target === "_blank") {
+        a.rel = "noopener noreferrer";
+      }
+    }
+  };
 
   const ul = document.createElement("ul");
   ul.classList.add("left-menu-list");
@@ -161,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const a = document.createElement("a");
     a.href = section.href;
     a.textContent = section.title;
+    applyTarget(a, section);
     li.appendChild(a);
 
     if (section.subsections && section.subsections.length) {
@@ -172,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const subA = document.createElement("a");
         subA.href = sub.href;
         subA.textContent = sub.title;
+        applyTarget(subA, sub);
         subLi.appendChild(subA);
         subUl.appendChild(subLi);
       });

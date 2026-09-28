@@ -1,0 +1,8 @@
+<script>
+  document.addEventListener("keydown", (e) => {
+    if (e.key.toLowerCase() !== "f" || e.ctrlKey || e.metaKey || e.altKey || e.repeat) return;
+    const t = e.target;
+    if (t.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(t.tagName)) return;
+    window.location.href = "{{ site.archive }}";
+  });
+</script>
